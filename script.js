@@ -9,7 +9,8 @@ if (year) {
   Chrome Web Store link.
 */
 
-const chromeWebStoreUrl = "#";
+const chromeWebStoreUrl =
+  "https://chromewebstore.google.com/detail/trading-island/gccchgbcmjkkabhdimacgijmgdmklgaf";
 
 const chromeButton = document.querySelector("#chromeButton");
 const chromeButtonBottom =
