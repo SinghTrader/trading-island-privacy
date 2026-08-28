@@ -4,109 +4,432 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Trading Island Privacy Policy</title>
+  <title>Trading Island</title>
+  <meta
+    name="description"
+    content="Trading Island is a floating market dashboard for Chrome with live market prices, watchlists and personal P&L tracking."
+  >
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 60px auto;
-      padding: 0 24px;
-      line-height: 1.7;
-      color: #222;
-    }
-
-    h1 {
-      margin-bottom: 5px;
-    }
-
-    h2 {
-      margin-top: 35px;
-    }
-
-    .date {
-      color: #666;
-      margin-bottom: 40px;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <h1>Trading Island Privacy Policy</h1>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="/" class="brand">
+        <span class="brand-dot"></span>
+        Trading Island
+      </a>
 
-  <p class="date">
-    Last updated: August 25, 2026
-  </p>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#privacy">Privacy</a>
+      </nav>
+    </div>
+  </header>
 
-  <p>
-    Trading Island is a Chrome extension designed to provide
-    financial market information, personal watchlists, and
-    trading profit and loss tracking.
-  </p>
+  <main>
 
-  <h2>Data Stored Locally</h2>
+    <section class="hero">
+      <div class="hero-glow"></div>
 
-  <p>
-    Trading Island stores information such as watchlist
-    selections, P&amp;L calendar entries, interface position,
-    size, and preferences locally in the user's browser using
-    Chrome storage.
-  </p>
+      <div class="container hero-content">
 
-  <h2>Market Data Requests</h2>
+        <div class="hero-text">
+          <div class="eyebrow">
+            Chrome trading dashboard
+          </div>
 
-  <p>
-    When Trading Island retrieves market information, the
-    requested financial instrument symbol is sent to the
-    Trading Island backend service hosted using Supabase.
-    The backend may communicate with third-party market-data
-    providers to retrieve the requested market information.
-  </p>
+          <h1>
+            Your market.<br>
+            Always in view.
+          </h1>
 
-  <p>
-    Infrastructure providers may process technical information
-    necessary to operate, secure, and protect the service,
-    such as request metadata.
-  </p>
+          <p class="hero-subtitle">
+            Trading Island brings your watchlist, live market prices
+            and personal P&amp;L tracking directly into your browser.
+          </p>
 
-  <h2>P&amp;L Information</h2>
+          <div class="hero-actions">
+            <a
+              href="#"
+              class="button button-primary"
+              id="chromeButton"
+            >
+              Add to Chrome
+            </a>
 
-  <p>
-    Profit and loss entries entered into the Trading Island
-    calendar are stored locally in the user's browser and are
-    not intentionally transmitted to the Trading Island
-    market-data backend.
-  </p>
+            <a href="#features" class="button button-secondary">
+              Explore features
+            </a>
+          </div>
 
-  <h2>Sale of Personal Data</h2>
+          <p class="small-note">
+            Built for traders who want market information without
+            constantly switching tabs.
+          </p>
+        </div>
 
-  <p>
-    Trading Island does not sell users' personal information.
-  </p>
+        <div class="hero-demo">
 
-  <h2>Financial Disclaimer</h2>
+          <div class="browser-window">
 
-  <p>
-    Trading Island provides market information for
-    informational purposes only. Nothing provided by Trading
-    Island constitutes financial or investment advice.
-  </p>
+            <div class="browser-top">
+              <div class="browser-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
 
-  <h2>Changes to This Privacy Policy</h2>
+              <div class="browser-address">
+                tradingview.com
+              </div>
+            </div>
 
-  <p>
-    This Privacy Policy may be updated as Trading Island
-    develops and introduces new features. Updates will be
-    published on this page.
-  </p>
+            <div class="browser-content">
 
-  <h2>Contact</h2>
+              <div class="chart-lines">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
 
-  <p>
-    For privacy-related questions, contact:
-    supporttraderisland@gmail.com
-  </p>
+              <div class="island">
+
+                <div class="island-top">
+                  <div>
+                    <span class="island-label">
+                      Trading Island
+                    </span>
+                  </div>
+
+                  <span class="live-indicator">
+                    <span></span>
+                    LIVE
+                  </span>
+                </div>
+
+                <div class="market-row">
+                  <div>
+                    <strong>BTC/USD</strong>
+                    <small>Bitcoin</small>
+                  </div>
+
+                  <div class="market-price">
+                    <strong>$64,281.20</strong>
+                    <span class="positive">+2.31%</span>
+                  </div>
+                </div>
+
+                <div class="market-row">
+                  <div>
+                    <strong>NVDA</strong>
+                    <small>NVIDIA</small>
+                  </div>
+
+                  <div class="market-price">
+                    <strong>$129.44</strong>
+                    <span class="positive">+1.18%</span>
+                  </div>
+                </div>
+
+                <div class="market-row">
+                  <div>
+                    <strong>EUR/USD</strong>
+                    <small>Forex</small>
+                  </div>
+
+                  <div class="market-price">
+                    <strong>1.0842</strong>
+                    <span class="negative">-0.22%</span>
+                  </div>
+                </div>
+
+                <div class="pnl-card">
+                  <span>Monthly P&amp;L</span>
+                  <strong>+$2,480</strong>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="container stats-grid">
+
+        <div>
+          <strong>Live</strong>
+          <span>Market data</span>
+        </div>
+
+        <div>
+          <strong>6</strong>
+          <span>Watchlist symbols</span>
+        </div>
+
+        <div>
+          <strong>24/7</strong>
+          <span>Browser access</span>
+        </div>
+
+        <div>
+          <strong>Local</strong>
+          <span>P&amp;L storage</span>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section" id="features">
+
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="eyebrow">Features</span>
+
+          <h2>
+            Everything you need.
+            Nothing you don't.
+          </h2>
+
+          <p>
+            Trading Island is designed to stay out of your way while
+            keeping the information you care about close.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+
+          <article class="feature-card">
+            <div class="feature-icon">↗</div>
+
+            <h3>Market prices</h3>
+
+            <p>
+              Monitor crypto, stocks and forex from a compact floating
+              dashboard while browsing.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">★</div>
+
+            <h3>Personal watchlist</h3>
+
+            <p>
+              Choose the financial instruments that matter to you and
+              keep them visible throughout your browser session.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">+</div>
+
+            <h3>P&amp;L calendar</h3>
+
+            <p>
+              Record daily profits and losses and keep track of your
+              trading performance over time.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">↔</div>
+
+            <h3>Move &amp; resize</h3>
+
+            <p>
+              Position Trading Island wherever you want and resize the
+              interface to fit your workspace.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">◉</div>
+
+            <h3>Always available</h3>
+
+            <p>
+              Keep your market dashboard available while you move
+              between websites and trading tools.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">⌁</div>
+
+            <h3>Clean &amp; lightweight</h3>
+
+            <p>
+              Built around a focused interface without unnecessary
+              distractions or complicated menus.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section dark-section" id="how-it-works">
+
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="eyebrow">Getting started</span>
+
+          <h2>
+            Start in minutes.
+          </h2>
+        </div>
+
+        <div class="steps">
+
+          <div class="step">
+            <span class="step-number">01</span>
+
+            <div>
+              <h3>Install Trading Island</h3>
+
+              <p>
+                Add the extension to Google Chrome through the
+                Chrome Web Store.
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <span class="step-number">02</span>
+
+            <div>
+              <h3>Create your watchlist</h3>
+
+              <p>
+                Select the crypto, stock and forex symbols you want
+                to follow.
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <span class="step-number">03</span>
+
+            <div>
+              <h3>Keep trading</h3>
+
+              <p>
+                Trading Island stays available while you browse,
+                research and analyze markets.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section privacy-section" id="privacy">
+
+      <div class="container privacy-box">
+
+        <div>
+          <span class="eyebrow">Privacy</span>
+
+          <h2>
+            Your trading journal stays yours.
+          </h2>
+
+          <p>
+            Watchlist preferences, P&amp;L entries and interface
+            preferences are stored locally in Chrome.
+          </p>
+        </div>
+
+        <a href="/privacy/" class="button button-secondary">
+          Read Privacy Policy
+        </a>
+
+      </div>
+
+    </section>
+
+    <section class="cta-section">
+
+      <div class="container">
+
+        <div class="cta-box">
+          <span class="eyebrow">Trading Island</span>
+
+          <h2>
+            Markets don't stop.<br>
+            Neither should your overview.
+          </h2>
+
+          <p>
+            Keep your essential market information one glance away.
+          </p>
+
+          <a
+            href="#"
+            class="button button-primary"
+            id="chromeButtonBottom"
+          >
+            Add to Chrome
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <div>
+        <div class="brand">
+          <span class="brand-dot"></span>
+          Trading Island
+        </div>
+
+        <p>
+          A floating trading dashboard for Chrome.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="mailto:supporttraderisland@gmail.com">Support</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <span>
+        © <span id="year"></span> Trading Island
+      </span>
+
+      <span>
+        Market information is for informational purposes only.
+      </span>
+    </div>
+
+  </footer>
+
+  <script src="script.js"></script>
 
 </body>
 </html>
