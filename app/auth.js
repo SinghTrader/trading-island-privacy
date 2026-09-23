@@ -5,14 +5,19 @@
 
 
 /* =========================================================
-   1. SUPABASE CONFIG
-   VERVANG ALLEEN DEZE TWEE WAARDEN
+   1. CHECK CONFIG
    ========================================================= */
 
-const SUPABASE_URL = "https://bgcwhlyxldyqlojduexk.supabase.co";
+if (!window.TRADING_ISLAND_CONFIG) {
+  throw new Error(
+    "Trading Island configuration could not be loaded."
+  );
+}
 
-const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_u_bwfijbu_9AOMoHiFMX7g_WTRXnHqK";
+const {
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+} = window.TRADING_ISLAND_CONFIG;
 
 
 /* =========================================================
@@ -81,7 +86,7 @@ const signupButton =
 
 
 /* =========================================================
-   4. SWITCH LOGIN / SIGNUP
+   4. LOGIN / SIGNUP VIEW
    ========================================================= */
 
 function showLoginView() {
@@ -121,9 +126,7 @@ function showMessage(
   type = "error"
 ) {
   element.textContent = message;
-
-  element.className =
-    `message show ${type}`;
+  element.className = `message show ${type}`;
 }
 
 function clearMessage(element) {
@@ -137,41 +140,37 @@ function clearMessage(element) {
    ========================================================= */
 
 const passwordToggleButtons =
-  document.querySelectorAll(
-    ".password-toggle"
-  );
+  document.querySelectorAll(".password-toggle");
 
-passwordToggleButtons.forEach(
-  (button) => {
+passwordToggleButtons.forEach((button) => {
 
-    button.addEventListener(
-      "click",
-      () => {
+  button.addEventListener("click", () => {
 
-        const targetId =
-          button.dataset.target;
+    const targetId =
+      button.dataset.target;
 
-        const input =
-          document.getElementById(
-            targetId
-          );
+    const input =
+      document.getElementById(targetId);
 
-        if (!input) {
-          return;
-        }
+    if (!input) {
+      return;
+    }
 
-        if (input.type === "password") {
-          input.type = "text";
-          button.textContent = "Hide";
-        } else {
-          input.type = "password";
-          button.textContent = "Show";
-        }
-      }
-    );
+    if (input.type === "password") {
 
-  }
-);
+      input.type = "text";
+      button.textContent = "Hide";
+
+    } else {
+
+      input.type = "password";
+      button.textContent = "Show";
+
+    }
+
+  });
+
+});
 
 
 /* =========================================================
@@ -202,6 +201,7 @@ signupForm.addEventListener(
 
 
     if (!name) {
+
       showMessage(
         signupMessage,
         "Please enter your name."
@@ -212,6 +212,7 @@ signupForm.addEventListener(
 
 
     if (password.length < 6) {
+
       showMessage(
         signupMessage,
         "Your password must contain at least 6 characters."
@@ -221,10 +222,8 @@ signupForm.addEventListener(
     }
 
 
-    if (
-      password !==
-      passwordConfirmation
-    ) {
+    if (password !== passwordConfirmation) {
+
       showMessage(
         signupMessage,
         "The passwords do not match."
@@ -244,20 +243,22 @@ signupForm.addEventListener(
       const {
         data,
         error
-      } =
-        await supabaseClient.auth.signUp({
-          email,
-          password,
+      } = await supabaseClient.auth.signUp({
 
-          options: {
-            data: {
-              name: name
-            },
+        email,
+        password,
 
-            emailRedirectTo:
-              `${window.location.origin}/app/`
-          }
-        });
+        options: {
+
+          data: {
+            name: name
+          },
+
+          emailRedirectTo:
+            `${window.location.origin}/app/`
+        }
+
+      });
 
 
       if (error) {
@@ -265,9 +266,7 @@ signupForm.addEventListener(
       }
 
 
-      if (
-        data.session
-      ) {
+      if (data.session) {
 
         window.location.href =
           "/app/";
@@ -282,8 +281,8 @@ signupForm.addEventListener(
         "success"
       );
 
-
       signupForm.reset();
+
 
     } catch (error) {
 
@@ -298,13 +297,15 @@ signupForm.addEventListener(
           "Could not create your account."
       );
 
+
     } finally {
 
       signupButton.disabled = false;
-
       signupButton.textContent =
         "Create account";
+
     }
+
   }
 );
 
@@ -331,7 +332,6 @@ loginForm.addEventListener(
 
 
     loginButton.disabled = true;
-
     loginButton.textContent =
       "Logging in...";
 
@@ -355,9 +355,11 @@ loginForm.addEventListener(
 
 
       if (!data.session) {
+
         throw new Error(
           "Could not start your session."
         );
+
       }
 
 
@@ -378,19 +380,21 @@ loginForm.addEventListener(
           "Could not log in."
       );
 
+
     } finally {
 
       loginButton.disabled = false;
-
       loginButton.textContent =
         "Log in";
+
     }
+
   }
 );
 
 
 /* =========================================================
-   9. REDIRECT USER IF ALREADY LOGGED IN
+   9. EXISTING SESSION
    ========================================================= */
 
 async function checkExistingSession() {
@@ -406,6 +410,7 @@ async function checkExistingSession() {
 
 
     if (error) {
+
       console.error(
         "Session check error:",
         error
@@ -419,7 +424,9 @@ async function checkExistingSession() {
 
       window.location.href =
         "/app/";
+
     }
+
 
   } catch (error) {
 
@@ -427,7 +434,9 @@ async function checkExistingSession() {
       "Session check failed:",
       error
     );
+
   }
+
 }
 
 
