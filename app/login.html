@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Log in or create your Trading Island account."
+  >
+
+  <title>Login | Trading Island</title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/favicon.png"
+  >
+
+  <link
+    rel="stylesheet"
+    href="auth.css"
+  >
+</head>
+
+<body>
+
+  <main class="auth-page">
+
+    <!-- LEFT SIDE -->
+    <section class="auth-brand">
+
+      <a href="/" class="brand">
+        <span class="brand-dot"></span>
+        <span>Trading Island</span>
+      </a>
+
+      <div class="brand-content">
+
+        <div class="mini-label">
+          YOUR TRADING WORKSPACE
+        </div>
+
+        <h1>
+          Trade smarter.<br>
+          Learn from every trade.
+        </h1>
+
+        <p>
+          Journal your trades, analyse your performance
+          and build better trading habits in one place.
+        </p>
+
+        <div class="feature-list">
+
+          <div class="feature">
+            <span>✓</span>
+            Track every trade
+          </div>
+
+          <div class="feature">
+            <span>✓</span>
+            Analyse your performance
+          </div>
+
+          <div class="feature">
+            <span>✓</span>
+            Discover your best strategies
+          </div>
+
+          <div class="feature">
+            <span>✓</span>
+            Access your journal anywhere
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="brand-footer">
+        Trading Island
+      </div>
+
+    </section>
+
+
+    <!-- RIGHT SIDE -->
+    <section class="auth-section">
+
+      <div class="auth-container">
+
+        <div class="mobile-brand">
+          <span class="brand-dot"></span>
+          Trading Island
+        </div>
+
+
+        <!-- LOGIN -->
+        <div
+          class="auth-view active"
+          id="loginView"
+        >
+
+          <div class="auth-heading">
+
+            <p class="eyebrow">
+              WELCOME BACK
+            </p>
+
+            <h2>
+              Log in to Trading Island
+            </h2>
+
+            <p>
+              Continue to your trading dashboard.
+            </p>
+
+          </div>
+
+
+          <form id="loginForm">
+
+            <div class="form-group">
+
+              <label for="loginEmail">
+                Email
+              </label>
+
+              <input
+                id="loginEmail"
+                type="email"
+                autocomplete="email"
+                placeholder="you@example.com"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <div class="label-row">
+
+                <label for="loginPassword">
+                  Password
+                </label>
+
+              </div>
+
+              <div class="password-field">
+
+                <input
+                  id="loginPassword"
+                  type="password"
+                  autocomplete="current-password"
+                  placeholder="Enter your password"
+                  minlength="6"
+                  required
+                >
+
+                <button
+                  type="button"
+                  class="password-toggle"
+                  data-target="loginPassword"
+                >
+                  Show
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div
+              class="message"
+              id="loginMessage"
+            ></div>
+
+
+            <button
+              type="submit"
+              class="primary-button"
+              id="loginButton"
+            >
+              Log in
+            </button>
+
+          </form>
+
+
+          <div class="auth-switch">
+
+            <span>
+              New to Trading Island?
+            </span>
+
+            <button
+              type="button"
+              id="showSignup"
+            >
+              Create account
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- SIGN UP -->
+        <div
+          class="auth-view"
+          id="signupView"
+        >
+
+          <div class="auth-heading">
+
+            <p class="eyebrow">
+              GET STARTED
+            </p>
+
+            <h2>
+              Create your account
+            </h2>
+
+            <p>
+              Start building your trading journal.
+            </p>
+
+          </div>
+
+
+          <form id="signupForm">
+
+            <div class="form-group">
+
+              <label for="signupName">
+                Name
+              </label>
+
+              <input
+                id="signupName"
+                type="text"
+                autocomplete="name"
+                placeholder="Your name"
+                maxlength="50"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="signupEmail">
+                Email
+              </label>
+
+              <input
+                id="signupEmail"
+                type="email"
+                autocomplete="email"
+                placeholder="you@example.com"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="signupPassword">
+                Password
+              </label>
+
+              <div class="password-field">
+
+                <input
+                  id="signupPassword"
+                  type="password"
+                  autocomplete="new-password"
+                  placeholder="At least 6 characters"
+                  minlength="6"
+                  required
+                >
+
+                <button
+                  type="button"
+                  class="password-toggle"
+                  data-target="signupPassword"
+                >
+                  Show
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="confirmPassword">
+                Confirm password
+              </label>
+
+              <div class="password-field">
+
+                <input
+                  id="confirmPassword"
+                  type="password"
+                  autocomplete="new-password"
+                  placeholder="Repeat your password"
+                  minlength="6"
+                  required
+                >
+
+                <button
+                  type="button"
+                  class="password-toggle"
+                  data-target="confirmPassword"
+                >
+                  Show
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div
+              class="message"
+              id="signupMessage"
+            ></div>
+
+
+            <button
+              type="submit"
+              class="primary-button"
+              id="signupButton"
+            >
+              Create account
+            </button>
+
+          </form>
+
+
+          <div class="auth-switch">
+
+            <span>
+              Already have an account?
+            </span>
+
+            <button
+              type="button"
+              id="showLogin"
+            >
+              Log in
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- Supabase JavaScript library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="auth.js"></script>
+
+</body>
+</html>
