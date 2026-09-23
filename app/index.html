@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Trading Island - Your personal trading dashboard, journal and analytics platform."
+  >
+
+  <title>Dashboard | Trading Island</title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/favicon.png"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+</head>
+
+<body>
+
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sidebar-top">
+
+        <a href="/" class="brand">
+          <span class="brand-dot"></span>
+          <span>Trading Island</span>
+        </a>
+
+        <nav class="sidebar-nav">
+
+          <a href="#" class="nav-item active">
+            <span class="nav-icon">⌂</span>
+            Dashboard
+          </a>
+
+          <a href="#" class="nav-item">
+            <span class="nav-icon">↗</span>
+            Journal
+          </a>
+
+          <a href="#" class="nav-item">
+            <span class="nav-icon">▦</span>
+            Calendar
+          </a>
+
+          <a href="#" class="nav-item">
+            <span class="nav-icon">⌁</span>
+            Analytics
+          </a>
+
+          <a href="#" class="nav-item">
+            <span class="nav-icon">★</span>
+            Watchlist
+          </a>
+
+          <a href="#" class="nav-item">
+            <span class="nav-icon">%</span>
+            Risk Calculator
+          </a>
+
+          <div class="nav-label">
+            TRADING
+          </div>
+
+          <a href="#" class="nav-item">
+            <span class="nav-icon">◎</span>
+            Strategies
+          </a>
+
+          <a href="#" class="nav-item">
+            <span class="nav-icon">◫</span>
+            Trade Review
+          </a>
+
+        </nav>
+
+      </div>
+
+      <div class="sidebar-bottom">
+
+        <a href="#" class="nav-item">
+          <span class="nav-icon">⚙</span>
+          Settings
+        </a>
+
+        <div class="profile-card">
+
+          <div class="profile-avatar">
+            T
+          </div>
+
+          <div class="profile-info">
+            <strong>Trader</strong>
+            <span>Free account</span>
+          </div>
+
+          <button class="profile-menu">
+            •••
+          </button>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+      <!-- TOPBAR -->
+      <header class="topbar">
+
+        <div>
+          <p class="eyebrow">
+            OVERVIEW
+          </p>
+
+          <h1>
+            Dashboard
+          </h1>
+        </div>
+
+        <div class="topbar-actions">
+
+          <button
+            class="secondary-button"
+            id="dateButton"
+          >
+            This month
+          </button>
+
+          <button
+            class="primary-button"
+            id="addTradeButton"
+          >
+            <span>+</span>
+            Add trade
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- WELCOME -->
+      <section class="welcome-section">
+
+        <div>
+
+          <h2>
+            Welcome back, Trader.
+          </h2>
+
+          <p>
+            Here's how your trading performance is looking.
+          </p>
+
+        </div>
+
+        <div class="market-status">
+
+          <span class="status-dot"></span>
+
+          Markets online
+
+        </div>
+
+      </section>
+
+
+      <!-- STAT CARDS -->
+      <section class="stats-grid">
+
+        <article class="stat-card">
+
+          <div class="stat-header">
+            <span>Total P&amp;L</span>
+            <span class="stat-icon">€</span>
+          </div>
+
+          <h3 class="positive">
+            +€1,284.50
+          </h3>
+
+          <p>
+            <span class="positive">
+              +12.4%
+            </span>
+            this month
+          </p>
+
+        </article>
+
+
+        <article class="stat-card">
+
+          <div class="stat-header">
+            <span>Win rate</span>
+            <span class="stat-icon">%</span>
+          </div>
+
+          <h3>
+            64.2%
+          </h3>
+
+          <p>
+            18 wins · 10 losses
+          </p>
+
+        </article>
+
+
+        <article class="stat-card">
+
+          <div class="stat-header">
+            <span>Profit factor</span>
+            <span class="stat-icon">↗</span>
+          </div>
+
+          <h3>
+            2.14
+          </h3>
+
+          <p>
+            Gross profit / loss
+          </p>
+
+        </article>
+
+
+        <article class="stat-card">
+
+          <div class="stat-header">
+            <span>Total trades</span>
+            <span class="stat-icon">#</span>
+          </div>
+
+          <h3>
+            28
+          </h3>
+
+          <p>
+            This month
+          </p>
+
+        </article>
+
+      </section>
+
+
+      <!-- CHART + PERFORMANCE -->
+      <section class="dashboard-grid">
+
+        <article class="panel chart-panel">
+
+          <div class="panel-header">
+
+            <div>
+              <h3>
+                Trading performance
+              </h3>
+
+              <p>
+                Cumulative P&amp;L
+              </p>
+            </div>
+
+            <div class="chart-tabs">
+
+              <button class="chart-tab">
+                7D
+              </button>
+
+              <button class="chart-tab active">
+                1M
+              </button>
+
+              <button class="chart-tab">
+                3M
+              </button>
+
+              <button class="chart-tab">
+                1Y
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="chart">
+
+            <div class="chart-value">
+              <span>Current</span>
+              <strong>€1,284.50</strong>
+            </div>
+
+            <svg
+              viewBox="0 0 800 280"
+              preserveAspectRatio="none"
+              aria-label="Trading performance chart"
+            >
+
+              <defs>
+
+                <linearGradient
+                  id="chartGradient"
+                  x1="0"
+                  x2="0"
+                  y1="0"
+                  y2="1"
+                >
+
+                  <stop
+                    offset="0%"
+                    stop-color="#22c55e"
+                    stop-opacity="0.28"
+                  />
+
+                  <stop
+                    offset="100%"
+                    stop-color="#22c55e"
+                    stop-opacity="0"
+                  />
+
+                </linearGradient>
+
+              </defs>
+
+
+              <path
+                class="chart-area"
+                d="
+                  M0 230
+                  C60 215, 85 235, 130 200
+                  S200 160, 245 178
+                  S310 210, 350 145
+                  S420 120, 455 138
+                  S520 95, 560 110
+                  S625 55, 665 80
+                  S730 40, 800 35
+                  L800 280
+                  L0 280
+                  Z
+                "
+              />
+
+
+              <path
+                class="chart-line"
+                d="
+                  M0 230
+                  C60 215, 85 235, 130 200
+                  S200 160, 245 178
+                  S310 210, 350 145
+                  S420 120, 455 138
+                  S520 95, 560 110
+                  S625 55, 665 80
+                  S730 40, 800 35
+                "
+              />
+
+            </svg>
+
+            <div class="chart-labels">
+              <span>Sep 1</span>
+              <span>Sep 8</span>
+              <span>Sep 15</span>
+              <span>Sep 22</span>
+              <span>Sep 30</span>
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- STATS -->
+        <article class="panel performance-panel">
+
+          <div class="panel-header">
+
+            <div>
+              <h3>
+                Performance
+              </h3>
+
+              <p>
+                This month
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="performance-list">
+
+            <div class="performance-row">
+              <span>Average win</span>
+              <strong class="positive">
+                +€124.80
+              </strong>
+            </div>
+
+            <div class="performance-row">
+              <span>Average loss</span>
+              <strong class="negative">
+                -€61.20
+              </strong>
+            </div>
+
+            <div class="performance-row">
+              <span>Best trade</span>
+              <strong class="positive">
+                +€382.40
+              </strong>
+            </div>
+
+            <div class="performance-row">
+              <span>Worst trade</span>
+              <strong class="negative">
+                -€142.80
+              </strong>
+            </div>
+
+            <div class="performance-row">
+              <span>Avg. risk / reward</span>
+              <strong>
+                1 : 2.3
+              </strong>
+            </div>
+
+          </div>
+
+        </article>
+
+      </section>
+
+
+      <!-- RECENT TRADES -->
+      <section class="panel trades-panel">
+
+        <div class="panel-header">
+
+          <div>
+            <h3>
+              Recent trades
+            </h3>
+
+            <p>
+              Your latest trading activity
+            </p>
+          </div>
+
+          <button class="text-button">
+            View journal →
+          </button>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>MARKET</th>
+                <th>DIRECTION</th>
+                <th>STRATEGY</th>
+                <th>DATE</th>
+                <th>RESULT</th>
+                <th>P&amp;L</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+
+                <td>
+
+                  <div class="market-cell">
+
+                    <div class="asset-icon">
+                      ₿
+                    </div>
+
+                    <div>
+                      <strong>BTC/USD</strong>
+                      <span>Bitcoin</span>
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  <span class="badge long">
+                    LONG
+                  </span>
+                </td>
+
+                <td>
+                  Breakout
+                </td>
+
+                <td>
+                  Sep 22, 2026
+                </td>
+
+                <td>
+                  <span class="result win">
+                    WIN
+                  </span>
+                </td>
+
+                <td class="positive">
+                  +€214.50
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+
+                  <div class="market-cell">
+
+                    <div class="asset-icon">
+                      €
+                    </div>
+
+                    <div>
+                      <strong>EUR/USD</strong>
+                      <span>Forex</span>
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  <span class="badge short">
+                    SHORT
+                  </span>
+                </td>
+
+                <td>
+                  Reversal
+                </td>
+
+                <td>
+                  Sep 21, 2026
+                </td>
+
+                <td>
+                  <span class="result loss">
+                    LOSS
+                  </span>
+                </td>
+
+                <td class="negative">
+                  -€72.20
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+
+                  <div class="market-cell">
+
+                    <div class="asset-icon">
+                      N
+                    </div>
+
+                    <div>
+                      <strong>NVDA</strong>
+                      <span>NVIDIA</span>
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  <span class="badge long">
+                    LONG
+                  </span>
+                </td>
+
+                <td>
+                  Momentum
+                </td>
+
+                <td>
+                  Sep 20, 2026
+                </td>
+
+                <td>
+                  <span class="result win">
+                    WIN
+                  </span>
+                </td>
+
+                <td class="positive">
+                  +€186.30
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+
+                  <div class="market-cell">
+
+                    <div class="asset-icon">
+                      E
+                    </div>
+
+                    <div>
+                      <strong>ETH/USD</strong>
+                      <span>Ethereum</span>
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  <span class="badge long">
+                    LONG
+                  </span>
+                </td>
+
+                <td>
+                  Support Bounce
+                </td>
+
+                <td>
+                  Sep 18, 2026
+                </td>
+
+                <td>
+                  <span class="result win">
+                    WIN
+                  </span>
+                </td>
+
+                <td class="positive">
+                  +€94.80
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- ADD TRADE MODAL -->
+  <div
+    class="modal-overlay"
+    id="tradeModal"
+  >
+
+    <div class="modal">
+
+      <div class="modal-header">
+
+        <div>
+          <h2>
+            Add trade
+          </h2>
+
+          <p>
+            Record a new trade in your journal.
+          </p>
+        </div>
+
+        <button
+          class="modal-close"
+          id="closeModal"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="tradeForm">
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label for="market">
+              Market
+            </label>
+
+            <input
+              type="text"
+              id="market"
+              placeholder="BTC/USD"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="direction">
+              Direction
+            </label>
+
+            <select id="direction">
+
+              <option value="Long">
+                Long
+              </option>
+
+              <option value="Short">
+                Short
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="entry">
+              Entry price
+            </label>
+
+            <input
+              type="number"
+              id="entry"
+              step="any"
+              placeholder="0.00"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="exit">
+              Exit price
+            </label>
+
+            <input
+              type="number"
+              id="exit"
+              step="any"
+              placeholder="0.00"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="pnl">
+              P&amp;L
+            </label>
+
+            <input
+              type="number"
+              id="pnl"
+              step="any"
+              placeholder="0.00"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="strategy">
+              Strategy
+            </label>
+
+            <input
+              type="text"
+              id="strategy"
+              placeholder="Breakout"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group full">
+
+          <label for="notes">
+            Notes
+          </label>
+
+          <textarea
+            id="notes"
+            placeholder="What happened during this trade?"
+          ></textarea>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+          <button
+            type="button"
+            class="secondary-button"
+            id="cancelTrade"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="primary-button"
+          >
+            Save trade
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
