@@ -15,7 +15,7 @@
 
   <meta
     name="description"
-    content="Trading Island personal trading dashboard and journal."
+    content="Trading Island personal trading dashboard, journal and trading calendar."
   >
 
   <title>Trading Island</title>
@@ -52,7 +52,6 @@
           <span>Trading Island</span>
         </a>
 
-
         <nav class="sidebar-nav">
 
           <button
@@ -64,7 +63,6 @@
             <span>Dashboard</span>
           </button>
 
-
           <button
             class="nav-item"
             data-page="journal"
@@ -73,7 +71,6 @@
             <span class="nav-icon">▤</span>
             <span>Journal</span>
           </button>
-
 
           <button
             class="nav-item"
@@ -84,7 +81,6 @@
             <span>Calendar</span>
           </button>
 
-
           <button
             class="nav-item"
             data-page="analytics"
@@ -93,7 +89,6 @@
             <span class="nav-icon">↗</span>
             <span>Analytics</span>
           </button>
-
 
           <button
             class="nav-item"
@@ -104,9 +99,7 @@
             <span>Watchlist</span>
           </button>
 
-
           <div class="nav-divider"></div>
-
 
           <button
             class="nav-item"
@@ -117,7 +110,6 @@
             <span>Risk Calculator</span>
           </button>
 
-
           <button
             class="nav-item"
             data-page="strategies"
@@ -126,7 +118,6 @@
             <span class="nav-icon">◇</span>
             <span>Strategies</span>
           </button>
-
 
           <button
             class="nav-item"
@@ -137,9 +128,7 @@
             <span>Trade Review</span>
           </button>
 
-
           <div class="nav-divider"></div>
-
 
           <button
             class="nav-item"
@@ -160,9 +149,7 @@
       <div class="sidebar-user">
 
         <div class="user-avatar">
-          <span id="userInitial">
-            T
-          </span>
+          <span id="userInitial">T</span>
         </div>
 
         <div class="user-info">
@@ -197,8 +184,9 @@
 
     <main class="main-content">
 
+
       <!-- ===================================================
-           DASHBOARD VIEW
+           DASHBOARD
            =================================================== -->
 
       <div
@@ -219,7 +207,6 @@
             </h1>
 
           </div>
-
 
           <div class="topbar-actions">
 
@@ -244,8 +231,6 @@
         </header>
 
 
-        <!-- WELCOME -->
-
         <section class="welcome-section">
 
           <div>
@@ -266,7 +251,7 @@
         </section>
 
 
-        <!-- STATS -->
+        <!-- DASHBOARD STATS -->
 
         <section class="stats-grid">
 
@@ -344,7 +329,7 @@
         </section>
 
 
-        <!-- CHART + PERFORMANCE -->
+        <!-- DASHBOARD CHART -->
 
         <section class="dashboard-grid">
 
@@ -363,7 +348,6 @@
                 </h3>
 
               </div>
-
 
               <div class="chart-tabs">
 
@@ -451,7 +435,6 @@
 
                   </defs>
 
-
                   <path
                     d="
                       M0 190
@@ -467,7 +450,6 @@
                     "
                     fill="url(#chartGradient)"
                   ></path>
-
 
                   <path
                     d="
@@ -575,7 +557,6 @@
 
             </div>
 
-
             <button
               class="text-button"
               id="openJournalButton"
@@ -608,14 +589,12 @@
               <tbody id="tradesTableBody">
 
                 <tr>
-
                   <td
                     colspan="7"
                     class="empty-table"
                   >
                     Loading your trades...
                   </td>
-
                 </tr>
 
               </tbody>
@@ -630,7 +609,7 @@
 
 
       <!-- ===================================================
-           JOURNAL VIEW
+           JOURNAL
            =================================================== -->
 
       <div
@@ -730,7 +709,7 @@
         </section>
 
 
-        <!-- FILTER BAR -->
+        <!-- JOURNAL FILTERS -->
 
         <section class="journal-toolbar">
 
@@ -862,7 +841,6 @@
 
               </thead>
 
-
               <tbody id="journalTableBody">
 
                 <tr>
@@ -881,6 +859,404 @@
             </table>
 
           </div>
+
+        </section>
+
+      </div>
+
+
+      <!-- ===================================================
+           CALENDAR
+           =================================================== -->
+
+      <div
+        class="app-view"
+        id="calendarView"
+      >
+
+        <header class="topbar calendar-topbar">
+
+          <div>
+
+            <p class="topbar-label">
+              PERFORMANCE CALENDAR
+            </p>
+
+            <h1>
+              Calendar
+            </h1>
+
+            <p class="page-description">
+              See your trading performance day by day.
+            </p>
+
+          </div>
+
+
+          <div class="topbar-actions">
+
+            <button
+              class="add-trade-button open-trade-modal"
+              id="calendarAddTradeButton"
+              type="button"
+            >
+              <span>+</span>
+              Add trade
+            </button>
+
+          </div>
+
+        </header>
+
+
+        <!-- CALENDAR STATS -->
+
+        <section class="calendar-stats">
+
+          <article class="calendar-stat-card">
+
+            <div class="calendar-stat-heading">
+
+              <span>
+                MONTH P&amp;L
+              </span>
+
+              <span class="calendar-stat-icon">
+                ↗
+              </span>
+
+            </div>
+
+            <strong id="calendarMonthPnl">
+              €0.00
+            </strong>
+
+            <small id="calendarMonthPnlSubtext">
+              No trades this month
+            </small>
+
+          </article>
+
+
+          <article class="calendar-stat-card">
+
+            <div class="calendar-stat-heading">
+
+              <span>
+                TRADES
+              </span>
+
+              <span class="calendar-stat-icon">
+                ▤
+              </span>
+
+            </div>
+
+            <strong id="calendarMonthTrades">
+              0
+            </strong>
+
+            <small>
+              This month
+            </small>
+
+          </article>
+
+
+          <article class="calendar-stat-card">
+
+            <div class="calendar-stat-heading">
+
+              <span>
+                WIN RATE
+              </span>
+
+              <span class="calendar-stat-icon">
+                %
+              </span>
+
+            </div>
+
+            <strong id="calendarMonthWinRate">
+              0%
+            </strong>
+
+            <small id="calendarWinRateSubtext">
+              0 wins
+            </small>
+
+          </article>
+
+
+          <article class="calendar-stat-card">
+
+            <div class="calendar-stat-heading">
+
+              <span>
+                PROFITABLE DAYS
+              </span>
+
+              <span class="calendar-stat-icon">
+                ◇
+              </span>
+
+            </div>
+
+            <strong id="calendarProfitableDays">
+              0
+            </strong>
+
+            <small id="calendarProfitableDaysSubtext">
+              0 trading days
+            </small>
+
+          </article>
+
+        </section>
+
+
+        <!-- CALENDAR MAIN -->
+
+        <section class="calendar-layout">
+
+          <article class="panel calendar-panel">
+
+            <!-- CALENDAR HEADER -->
+
+            <div class="calendar-header">
+
+              <div>
+
+                <span class="panel-label">
+                  TRADING DAYS
+                </span>
+
+                <h2 id="calendarMonthTitle">
+                  September 2026
+                </h2>
+
+              </div>
+
+
+              <div class="calendar-navigation">
+
+                <button
+                  id="calendarTodayButton"
+                  class="calendar-today-button"
+                  type="button"
+                >
+                  Today
+                </button>
+
+                <button
+                  id="previousMonthButton"
+                  class="calendar-nav-button"
+                  type="button"
+                  aria-label="Previous month"
+                >
+                  ←
+                </button>
+
+                <button
+                  id="nextMonthButton"
+                  class="calendar-nav-button"
+                  type="button"
+                  aria-label="Next month"
+                >
+                  →
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <!-- WEEK DAYS -->
+
+            <div class="calendar-weekdays">
+
+              <div>MON</div>
+              <div>TUE</div>
+              <div>WED</div>
+              <div>THU</div>
+              <div>FRI</div>
+              <div>SAT</div>
+              <div>SUN</div>
+
+            </div>
+
+
+            <!-- DAYS GENERATED BY JS -->
+
+            <div
+              class="calendar-grid"
+              id="calendarGrid"
+            >
+
+              <div class="calendar-loading">
+                Loading calendar...
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- SELECTED DAY -->
+
+          <aside class="panel calendar-day-panel">
+
+            <div class="calendar-day-header">
+
+              <div>
+
+                <span class="panel-label">
+                  SELECTED DAY
+                </span>
+
+                <h3 id="selectedDayTitle">
+                  Select a day
+                </h3>
+
+              </div>
+
+            </div>
+
+
+            <div
+              class="selected-day-empty"
+              id="selectedDayEmpty"
+            >
+
+              <div class="selected-day-empty-icon">
+                □
+              </div>
+
+              <strong>
+                No day selected
+              </strong>
+
+              <p>
+                Select a day in the calendar to view its trades.
+              </p>
+
+            </div>
+
+
+            <div
+              class="selected-day-content"
+              id="selectedDayContent"
+              hidden
+            >
+
+              <!-- DAY SUMMARY -->
+
+              <div class="selected-day-summary">
+
+                <div>
+
+                  <span>
+                    Daily P&amp;L
+                  </span>
+
+                  <strong id="selectedDayPnl">
+                    €0.00
+                  </strong>
+
+                </div>
+
+                <div>
+
+                  <span>
+                    Trades
+                  </span>
+
+                  <strong id="selectedDayTradeCount">
+                    0
+                  </strong>
+
+                </div>
+
+              </div>
+
+
+              <!-- TRADES -->
+
+              <div
+                class="selected-day-trades"
+                id="selectedDayTrades"
+              ></div>
+
+
+              <button
+                id="addTradeSelectedDayButton"
+                class="calendar-day-add-button"
+                type="button"
+              >
+                <span>+</span>
+                Add trade on this day
+              </button>
+
+            </div>
+
+          </aside>
+
+        </section>
+
+
+        <!-- MONTH SUMMARY -->
+
+        <section class="calendar-month-summary">
+
+          <article class="panel calendar-summary-card">
+
+            <span class="panel-label">
+              BEST DAY
+            </span>
+
+            <strong id="calendarBestDayPnl">
+              —
+            </strong>
+
+            <p id="calendarBestDayDate">
+              No trading data
+            </p>
+
+          </article>
+
+
+          <article class="panel calendar-summary-card">
+
+            <span class="panel-label">
+              WORST DAY
+            </span>
+
+            <strong id="calendarWorstDayPnl">
+              —
+            </strong>
+
+            <p id="calendarWorstDayDate">
+              No trading data
+            </p>
+
+          </article>
+
+
+          <article class="panel calendar-summary-card">
+
+            <span class="panel-label">
+              AVG. DAILY P&amp;L
+            </span>
+
+            <strong id="calendarAverageDailyPnl">
+              €0.00
+            </strong>
+
+            <p>
+              Across trading days
+            </p>
+
+          </article>
 
         </section>
 
@@ -939,8 +1315,6 @@
 
         <div class="form-grid">
 
-          <!-- MARKET -->
-
           <div class="form-group">
 
             <label for="market">
@@ -957,8 +1331,6 @@
 
           </div>
 
-
-          <!-- DIRECTION -->
 
           <div class="form-group">
 
@@ -984,8 +1356,6 @@
           </div>
 
 
-          <!-- ENTRY -->
-
           <div class="form-group">
 
             <label for="entry">
@@ -1001,8 +1371,6 @@
 
           </div>
 
-
-          <!-- EXIT -->
 
           <div class="form-group">
 
@@ -1020,8 +1388,6 @@
           </div>
 
 
-          <!-- STOP LOSS -->
-
           <div class="form-group">
 
             <label for="stopLoss">
@@ -1038,8 +1404,6 @@
           </div>
 
 
-          <!-- TAKE PROFIT -->
-
           <div class="form-group">
 
             <label for="takeProfit">
@@ -1055,8 +1419,6 @@
 
           </div>
 
-
-          <!-- RISK -->
 
           <div class="form-group">
 
@@ -1075,8 +1437,6 @@
           </div>
 
 
-          <!-- R:R -->
-
           <div class="form-group">
 
             <label for="riskReward">
@@ -1093,8 +1453,6 @@
 
           </div>
 
-
-          <!-- PNL -->
 
           <div class="form-group">
 
@@ -1113,8 +1471,6 @@
           </div>
 
 
-          <!-- STRATEGY -->
-
           <div class="form-group">
 
             <label for="strategy">
@@ -1131,8 +1487,6 @@
           </div>
 
 
-          <!-- DATE -->
-
           <div class="form-group full-width">
 
             <label for="tradeDate">
@@ -1147,8 +1501,6 @@
 
           </div>
 
-
-          <!-- NOTES -->
 
           <div class="form-group full-width">
 
@@ -1316,7 +1668,6 @@
           Delete trade
         </button>
 
-
         <button
           type="button"
           class="secondary-button"
@@ -1391,7 +1742,6 @@
   ></script>
 
   <script src="config.js"></script>
-
   <script src="script.js"></script>
 
 </body>
