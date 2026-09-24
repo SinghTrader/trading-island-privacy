@@ -36,9 +36,7 @@
 
   <div class="app-layout">
 
-    <!-- =====================================================
-         SIDEBAR
-         ===================================================== -->
+    <!-- SIDEBAR -->
 
     <aside class="sidebar">
 
@@ -58,84 +56,83 @@
           <button
             class="nav-item active"
             data-page="dashboard"
+            type="button"
           >
             <span class="nav-icon">⌂</span>
             <span>Dashboard</span>
           </button>
 
-
           <button
             class="nav-item"
             data-page="journal"
+            type="button"
           >
             <span class="nav-icon">▤</span>
             <span>Journal</span>
           </button>
 
-
           <button
             class="nav-item"
             data-page="calendar"
+            type="button"
           >
             <span class="nav-icon">□</span>
             <span>Calendar</span>
           </button>
 
-
           <button
             class="nav-item"
             data-page="analytics"
+            type="button"
           >
             <span class="nav-icon">↗</span>
             <span>Analytics</span>
           </button>
 
-
           <button
             class="nav-item"
             data-page="watchlist"
+            type="button"
           >
             <span class="nav-icon">☆</span>
             <span>Watchlist</span>
           </button>
 
-
           <div class="nav-divider"></div>
-
 
           <button
             class="nav-item"
             data-page="risk"
+            type="button"
           >
             <span class="nav-icon">%</span>
             <span>Risk Calculator</span>
           </button>
 
-
           <button
             class="nav-item"
             data-page="strategies"
+            type="button"
           >
             <span class="nav-icon">◇</span>
             <span>Strategies</span>
           </button>
 
-
           <button
             class="nav-item"
             data-page="review"
+            type="button"
           >
             <span class="nav-icon">◉</span>
             <span>Trade Review</span>
           </button>
 
-
           <div class="nav-divider"></div>
-
 
           <button
             class="nav-item"
             data-page="settings"
+            type="button"
           >
             <span class="nav-icon">⚙</span>
             <span>Settings</span>
@@ -151,9 +148,7 @@
       <div class="sidebar-user">
 
         <div class="user-avatar">
-          <span id="userInitial">
-            T
-          </span>
+          <span id="userInitial">T</span>
         </div>
 
         <div class="user-info">
@@ -182,13 +177,9 @@
     </aside>
 
 
-    <!-- =====================================================
-         MAIN
-         ===================================================== -->
+    <!-- MAIN -->
 
     <main class="main-content">
-
-      <!-- TOPBAR -->
 
       <header class="topbar">
 
@@ -251,9 +242,7 @@
       </section>
 
 
-      <!-- =====================================================
-           STATS
-           ===================================================== -->
+      <!-- STATS -->
 
       <section class="stats-grid">
 
@@ -331,13 +320,9 @@
       </section>
 
 
-      <!-- =====================================================
-           CHART + PERFORMANCE
-           ===================================================== -->
+      <!-- CHART + PERFORMANCE -->
 
       <section class="dashboard-grid">
-
-        <!-- CHART -->
 
         <article class="panel chart-panel">
 
@@ -483,8 +468,6 @@
         </article>
 
 
-        <!-- PERFORMANCE -->
-
         <article class="panel performance-panel">
 
           <div class="panel-header">
@@ -548,9 +531,7 @@
       </section>
 
 
-      <!-- =====================================================
-           RECENT TRADES
-           ===================================================== -->
+      <!-- RECENT TRADES -->
 
       <section class="panel trades-panel">
 
@@ -592,14 +573,12 @@
             <tbody id="tradesTableBody">
 
               <tr>
-
                 <td
                   colspan="7"
                   class="empty-table"
                 >
                   Loading your trades...
                 </td>
-
               </tr>
 
             </tbody>
@@ -615,9 +594,7 @@
   </div>
 
 
-  <!-- =======================================================
-       ADD TRADE MODAL
-       ======================================================= -->
+  <!-- ADD TRADE MODAL -->
 
   <div
     class="modal-overlay"
@@ -827,12 +804,18 @@
   </div>
 
 
-  <!-- Supabase -->
- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- IMPORTANT:
+       Dashboard loads script.js.
+       It does NOT load auth.js.
+  -->
 
-<script src="config.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
 
-<script src="auth.js"></script>
-  
+  <script src="config.js"></script>
+
+  <script src="script.js"></script>
+
 </body>
 </html>
