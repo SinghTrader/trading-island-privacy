@@ -4220,3 +4220,446 @@ html[data-theme="light"] input[type="date"] {
   }
 
 }
+/* =========================================================
+   SETTINGS UI FIX
+   Dark navigation + professional inputs
+   ========================================================= */
+
+
+/* =========================
+   LEFT SETTINGS MENU
+   ========================= */
+
+.settings-nav {
+  position: sticky;
+  top: 24px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  padding: 8px;
+
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  background: #0b100d;
+
+  overflow: hidden;
+}
+
+.settings-nav-item {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 100%;
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 9px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 9px;
+
+  outline: none;
+
+  background: transparent;
+
+  color: var(--text-muted);
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  box-shadow: none;
+
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.settings-nav-item:hover {
+  background: rgba(255, 255, 255, 0.035);
+
+  border-color: rgba(255, 255, 255, 0.035);
+
+  color: var(--text);
+}
+
+.settings-nav-item.active {
+  background: rgba(34, 197, 94, 0.08);
+
+  border-color: rgba(34, 197, 94, 0.18);
+
+  color: #e9fff0;
+}
+
+.settings-nav-item:focus {
+  outline: none;
+}
+
+.settings-nav-item:focus-visible {
+  border-color: rgba(34, 197, 94, 0.38);
+
+  box-shadow:
+    0 0 0 3px rgba(34, 197, 94, 0.06);
+}
+
+.settings-nav-item > span:first-child {
+  width: 22px;
+  height: 22px;
+
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #6f7b73;
+
+  font-size: 13px;
+}
+
+.settings-nav-item.active > span:first-child {
+  color: var(--green);
+}
+
+
+/* Text inside navigation */
+
+.settings-nav-item strong {
+  color: inherit;
+
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.settings-nav-item small {
+  color: var(--text-muted);
+
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.settings-nav-item.active small {
+  color: #829087;
+}
+
+
+/* =========================
+   SETTINGS FORMS
+   ========================= */
+
+#settingsView input,
+#settingsView select,
+#settingsView textarea {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 100%;
+
+  border: 1px solid #202b24;
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #090d0b;
+
+  color: #f4f7f5;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 450;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.015);
+
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+
+/* Normal input height */
+
+#settingsView input,
+#settingsView select {
+  height: 43px;
+
+  padding: 0 13px;
+}
+
+
+/* Textarea */
+
+#settingsView textarea {
+  min-height: 110px;
+
+  padding: 12px 13px;
+
+  line-height: 1.6;
+
+  resize: vertical;
+}
+
+
+/* Hover */
+
+#settingsView input:hover,
+#settingsView select:hover,
+#settingsView textarea:hover {
+  border-color: #2b3930;
+
+  background: #0a0f0c;
+}
+
+
+/* Focus */
+
+#settingsView input:focus,
+#settingsView select:focus,
+#settingsView textarea:focus {
+  border-color: rgba(34, 197, 94, 0.55);
+
+  background: #0b110e;
+
+  box-shadow:
+    0 0 0 3px rgba(34, 197, 94, 0.065),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+
+/* Placeholder */
+
+#settingsView input::placeholder,
+#settingsView textarea::placeholder {
+  color: #4f5a53;
+
+  opacity: 1;
+}
+
+
+/* Disabled fields */
+
+#settingsView input:disabled,
+#settingsView select:disabled,
+#settingsView textarea:disabled {
+  border-color: #18211c;
+
+  background: #080b09;
+
+  color: #657068;
+
+  cursor: not-allowed;
+
+  opacity: 1;
+}
+
+
+/* =========================
+   LABELS
+   ========================= */
+
+#settingsView label {
+  color: #aeb7b1;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 0.1px;
+}
+
+#settingsView .form-group label,
+#settingsView .settings-form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+}
+
+
+/* =========================
+   PASSWORD SECTION
+   ========================= */
+
+#passwordSettingsForm {
+  padding: 20px;
+}
+
+#passwordSettingsForm .form-grid {
+  gap: 16px;
+}
+
+#passwordSettingsForm input {
+  height: 44px;
+}
+
+
+/* =========================
+   PROFESSIONAL SELECT
+   ========================= */
+
+#settingsView select {
+  padding-right: 38px;
+
+  cursor: pointer;
+
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent 50%,
+      #69756d 50%
+    ),
+    linear-gradient(
+      135deg,
+      #69756d 50%,
+      transparent 50%
+    );
+
+  background-position:
+    calc(100% - 17px) 18px,
+    calc(100% - 12px) 18px;
+
+  background-size:
+    5px 5px,
+    5px 5px;
+
+  background-repeat: no-repeat;
+}
+
+#settingsView select:focus {
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent 50%,
+      var(--green) 50%
+    ),
+    linear-gradient(
+      135deg,
+      var(--green) 50%,
+      transparent 50%
+    );
+}
+
+
+/* =========================
+   NUMBER INPUTS
+   ========================= */
+
+#settingsView input[type="number"] {
+  font-variant-numeric: tabular-nums;
+}
+
+#settingsView input[type="number"]::-webkit-inner-spin-button,
+#settingsView input[type="number"]::-webkit-outer-spin-button {
+  opacity: 0.35;
+}
+
+
+/* =========================
+   PASSWORD PLACEHOLDER
+   ========================= */
+
+#settingsNewPassword,
+#settingsConfirmPassword {
+  letter-spacing: 0.1px;
+}
+
+#settingsNewPassword::placeholder,
+#settingsConfirmPassword::placeholder {
+  letter-spacing: 0;
+}
+
+
+/* =========================
+   SETTINGS BUTTONS
+   ========================= */
+
+#settingsView .add-trade-button,
+#settingsView .secondary-button,
+#settingsView .danger-button {
+  min-height: 40px;
+
+  border-radius: 8px;
+
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+/* =========================
+   SETTINGS PANELS
+   ========================= */
+
+#settingsView .panel {
+  border-color: #1b2820;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.012),
+      transparent 45%
+    ),
+    #0c120f;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 850px) {
+
+  .settings-nav {
+    position: static;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
+    gap: 5px;
+  }
+
+  .settings-nav-item {
+    justify-content: center;
+
+    min-height: 43px;
+
+    padding: 7px;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .settings-nav {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  #settingsView input,
+  #settingsView select {
+    height: 44px;
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .settings-nav {
+    grid-template-columns: 1fr;
+  }
+
+}
