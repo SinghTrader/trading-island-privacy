@@ -15,10 +15,10 @@
 
   <meta
     name="description"
-    content="Trading Island personal trading dashboard."
+    content="Trading Island personal trading dashboard and journal."
   >
 
-  <title>Dashboard | Trading Island</title>
+  <title>Trading Island</title>
 
   <link
     rel="icon"
@@ -36,7 +36,9 @@
 
   <div class="app-layout">
 
-    <!-- SIDEBAR -->
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
 
     <aside class="sidebar">
 
@@ -62,6 +64,7 @@
             <span>Dashboard</span>
           </button>
 
+
           <button
             class="nav-item"
             data-page="journal"
@@ -70,6 +73,7 @@
             <span class="nav-icon">▤</span>
             <span>Journal</span>
           </button>
+
 
           <button
             class="nav-item"
@@ -80,6 +84,7 @@
             <span>Calendar</span>
           </button>
 
+
           <button
             class="nav-item"
             data-page="analytics"
@@ -88,6 +93,7 @@
             <span class="nav-icon">↗</span>
             <span>Analytics</span>
           </button>
+
 
           <button
             class="nav-item"
@@ -98,7 +104,9 @@
             <span>Watchlist</span>
           </button>
 
+
           <div class="nav-divider"></div>
+
 
           <button
             class="nav-item"
@@ -109,6 +117,7 @@
             <span>Risk Calculator</span>
           </button>
 
+
           <button
             class="nav-item"
             data-page="strategies"
@@ -117,6 +126,7 @@
             <span class="nav-icon">◇</span>
             <span>Strategies</span>
           </button>
+
 
           <button
             class="nav-item"
@@ -127,7 +137,9 @@
             <span>Trade Review</span>
           </button>
 
+
           <div class="nav-divider"></div>
+
 
           <button
             class="nav-item"
@@ -148,7 +160,9 @@
       <div class="sidebar-user">
 
         <div class="user-avatar">
-          <span id="userInitial">T</span>
+          <span id="userInitial">
+            T
+          </span>
         </div>
 
         <div class="user-info">
@@ -177,441 +191,726 @@
     </aside>
 
 
-    <!-- MAIN -->
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
 
     <main class="main-content">
 
-      <header class="topbar">
-
-        <div>
-
-          <p class="topbar-label">
-            TRADING OVERVIEW
-          </p>
-
-          <h1>
-            Dashboard
-          </h1>
-
-        </div>
-
-
-        <div class="topbar-actions">
-
-          <button
-            class="date-button"
-            id="dateButton"
-            type="button"
-          >
-            Today
-          </button>
-
-          <button
-            class="add-trade-button"
-            id="addTradeButton"
-            type="button"
-          >
-            <span>+</span>
-            Add trade
-          </button>
-
-        </div>
-
-      </header>
-
-
-      <!-- WELCOME -->
-
-      <section class="welcome-section">
-
-        <div>
-
-          <h2>
-            Welcome back,
-            <span id="welcomeName">
-              Trader
-            </span>.
-          </h2>
-
-          <p>
-            Here's an overview of your trading performance.
-          </p>
-
-        </div>
-
-      </section>
-
-
-      <!-- STATS -->
-
-      <section class="stats-grid">
-
-        <article class="stat-card">
-
-          <div class="stat-header">
-            <span>Total P&amp;L</span>
-            <span class="stat-icon">↗</span>
-          </div>
-
-          <strong id="totalPnl">
-            €0.00
-          </strong>
-
-          <small id="pnlSubtext">
-            No trades yet
-          </small>
-
-        </article>
-
-
-        <article class="stat-card">
-
-          <div class="stat-header">
-            <span>Win rate</span>
-            <span class="stat-icon">%</span>
-          </div>
-
-          <strong id="winRate">
-            0%
-          </strong>
-
-          <small id="winRateSubtext">
-            0 wins
-          </small>
-
-        </article>
-
-
-        <article class="stat-card">
-
-          <div class="stat-header">
-            <span>Profit factor</span>
-            <span class="stat-icon">◎</span>
-          </div>
-
-          <strong id="profitFactor">
-            0.00
-          </strong>
-
-          <small>
-            Gross profit / loss
-          </small>
-
-        </article>
-
-
-        <article class="stat-card">
-
-          <div class="stat-header">
-            <span>Total trades</span>
-            <span class="stat-icon">▤</span>
-          </div>
-
-          <strong id="totalTrades">
-            0
-          </strong>
-
-          <small id="tradeSubtext">
-            Your journal
-          </small>
-
-        </article>
-
-      </section>
-
-
-      <!-- CHART + PERFORMANCE -->
-
-      <section class="dashboard-grid">
-
-        <article class="panel chart-panel">
-
-          <div class="panel-header">
-
-            <div>
-
-              <span class="panel-label">
-                PERFORMANCE
-              </span>
-
-              <h3>
-                P&amp;L overview
-              </h3>
-
-            </div>
-
-
-            <div class="chart-tabs">
-
-              <button
-                class="chart-tab active"
-                type="button"
-              >
-                7D
-              </button>
-
-              <button
-                class="chart-tab"
-                type="button"
-              >
-                1M
-              </button>
-
-              <button
-                class="chart-tab"
-                type="button"
-              >
-                3M
-              </button>
-
-              <button
-                class="chart-tab"
-                type="button"
-              >
-                1Y
-              </button>
-
-            </div>
-
-          </div>
-
-
-          <div class="chart-area">
-
-            <div class="chart-y-labels">
-              <span>+400</span>
-              <span>+300</span>
-              <span>+200</span>
-              <span>+100</span>
-              <span>0</span>
-            </div>
-
-
-            <div class="chart-visual">
-
-              <div class="grid-line line-1"></div>
-              <div class="grid-line line-2"></div>
-              <div class="grid-line line-3"></div>
-              <div class="grid-line line-4"></div>
-              <div class="grid-line line-5"></div>
-
-              <svg
-                viewBox="0 0 700 220"
-                preserveAspectRatio="none"
-                class="chart-svg"
-              >
-
-                <defs>
-
-                  <linearGradient
-                    id="chartGradient"
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="1"
-                  >
-                    <stop
-                      offset="0%"
-                      stop-color="#22c55e"
-                      stop-opacity="0.18"
-                    />
-
-                    <stop
-                      offset="100%"
-                      stop-color="#22c55e"
-                      stop-opacity="0"
-                    />
-                  </linearGradient>
-
-                </defs>
-
-
-                <path
-                  d="
-                    M0 190
-                    C60 180 85 155 130 160
-                    C175 165 190 120 240 125
-                    C290 130 300 100 345 105
-                    C395 110 405 75 455 80
-                    C500 85 525 50 565 60
-                    C610 70 645 35 700 40
-                    L700 220
-                    L0 220
-                    Z
-                  "
-                  fill="url(#chartGradient)"
-                ></path>
-
-
-                <path
-                  d="
-                    M0 190
-                    C60 180 85 155 130 160
-                    C175 165 190 120 240 125
-                    C290 130 300 100 345 105
-                    C395 110 405 75 455 80
-                    C500 85 525 50 565 60
-                    C610 70 645 35 700 40
-                  "
-                  fill="none"
-                  stroke="#22c55e"
-                  stroke-width="2"
-                  vector-effect="non-scaling-stroke"
-                ></path>
-
-              </svg>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <article class="panel performance-panel">
-
-          <div class="panel-header">
-
-            <div>
-
-              <span class="panel-label">
-                STATISTICS
-              </span>
-
-              <h3>
-                Performance
-              </h3>
-
-            </div>
-
-          </div>
-
-
-          <div class="performance-list">
-
-            <div class="performance-row">
-              <span>Average win</span>
-              <strong id="averageWin">
-                €0.00
-              </strong>
-            </div>
-
-            <div class="performance-row">
-              <span>Average loss</span>
-              <strong id="averageLoss">
-                €0.00
-              </strong>
-            </div>
-
-            <div class="performance-row">
-              <span>Best trade</span>
-              <strong id="bestTrade">
-                €0.00
-              </strong>
-            </div>
-
-            <div class="performance-row">
-              <span>Worst trade</span>
-              <strong id="worstTrade">
-                €0.00
-              </strong>
-            </div>
-
-            <div class="performance-row">
-              <span>Avg risk/reward</span>
-              <strong id="averageRR">
-                —
-              </strong>
-            </div>
-
-          </div>
-
-        </article>
-
-      </section>
-
-
-      <!-- RECENT TRADES -->
-
-      <section class="panel trades-panel">
-
-        <div class="panel-header">
+      <!-- ===================================================
+           DASHBOARD VIEW
+           =================================================== -->
+
+      <div
+        class="app-view active"
+        id="dashboardView"
+      >
+
+        <header class="topbar">
 
           <div>
 
-            <span class="panel-label">
-              JOURNAL
-            </span>
+            <p class="topbar-label">
+              TRADING OVERVIEW
+            </p>
 
-            <h3>
-              Recent trades
-            </h3>
+            <h1>
+              Dashboard
+            </h1>
 
           </div>
 
-        </div>
+
+          <div class="topbar-actions">
+
+            <button
+              class="date-button"
+              id="dateButton"
+              type="button"
+            >
+              Today
+            </button>
+
+            <button
+              class="add-trade-button open-trade-modal"
+              type="button"
+            >
+              <span>+</span>
+              Add trade
+            </button>
+
+          </div>
+
+        </header>
 
 
-        <div class="table-wrapper">
+        <!-- WELCOME -->
 
-          <table>
+        <section class="welcome-section">
 
-            <thead>
+          <div>
 
-              <tr>
-                <th>Market</th>
-                <th>Direction</th>
-                <th>Entry</th>
-                <th>Exit</th>
-                <th>Strategy</th>
-                <th>Date</th>
-                <th>P&amp;L</th>
-              </tr>
+            <h2>
+              Welcome back,
+              <span id="welcomeName">
+                Trader
+              </span>.
+            </h2>
 
-            </thead>
+            <p>
+              Here's an overview of your trading performance.
+            </p>
 
-            <tbody id="tradesTableBody">
+          </div>
 
-              <tr>
-                <td
-                  colspan="7"
-                  class="empty-table"
+        </section>
+
+
+        <!-- STATS -->
+
+        <section class="stats-grid">
+
+          <article class="stat-card">
+
+            <div class="stat-header">
+              <span>Total P&amp;L</span>
+              <span class="stat-icon">↗</span>
+            </div>
+
+            <strong id="totalPnl">
+              €0.00
+            </strong>
+
+            <small id="pnlSubtext">
+              No trades yet
+            </small>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-header">
+              <span>Win rate</span>
+              <span class="stat-icon">%</span>
+            </div>
+
+            <strong id="winRate">
+              0%
+            </strong>
+
+            <small id="winRateSubtext">
+              0 wins
+            </small>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-header">
+              <span>Profit factor</span>
+              <span class="stat-icon">◎</span>
+            </div>
+
+            <strong id="profitFactor">
+              0.00
+            </strong>
+
+            <small>
+              Gross profit / loss
+            </small>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-header">
+              <span>Total trades</span>
+              <span class="stat-icon">▤</span>
+            </div>
+
+            <strong id="totalTrades">
+              0
+            </strong>
+
+            <small id="tradeSubtext">
+              Your journal
+            </small>
+
+          </article>
+
+        </section>
+
+
+        <!-- CHART + PERFORMANCE -->
+
+        <section class="dashboard-grid">
+
+          <article class="panel chart-panel">
+
+            <div class="panel-header">
+
+              <div>
+
+                <span class="panel-label">
+                  PERFORMANCE
+                </span>
+
+                <h3>
+                  P&amp;L overview
+                </h3>
+
+              </div>
+
+
+              <div class="chart-tabs">
+
+                <button
+                  class="chart-tab active"
+                  type="button"
                 >
-                  Loading your trades...
-                </td>
-              </tr>
+                  7D
+                </button>
 
-            </tbody>
+                <button
+                  class="chart-tab"
+                  type="button"
+                >
+                  1M
+                </button>
 
-          </table>
+                <button
+                  class="chart-tab"
+                  type="button"
+                >
+                  3M
+                </button>
 
-        </div>
+                <button
+                  class="chart-tab"
+                  type="button"
+                >
+                  1Y
+                </button>
 
-      </section>
+              </div>
+
+            </div>
+
+
+            <div class="chart-area">
+
+              <div class="chart-y-labels">
+                <span>+400</span>
+                <span>+300</span>
+                <span>+200</span>
+                <span>+100</span>
+                <span>0</span>
+              </div>
+
+
+              <div class="chart-visual">
+
+                <div class="grid-line line-1"></div>
+                <div class="grid-line line-2"></div>
+                <div class="grid-line line-3"></div>
+                <div class="grid-line line-4"></div>
+                <div class="grid-line line-5"></div>
+
+                <svg
+                  viewBox="0 0 700 220"
+                  preserveAspectRatio="none"
+                  class="chart-svg"
+                >
+
+                  <defs>
+
+                    <linearGradient
+                      id="chartGradient"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+
+                      <stop
+                        offset="0%"
+                        stop-color="#22c55e"
+                        stop-opacity="0.18"
+                      />
+
+                      <stop
+                        offset="100%"
+                        stop-color="#22c55e"
+                        stop-opacity="0"
+                      />
+
+                    </linearGradient>
+
+                  </defs>
+
+
+                  <path
+                    d="
+                      M0 190
+                      C60 180 85 155 130 160
+                      C175 165 190 120 240 125
+                      C290 130 300 100 345 105
+                      C395 110 405 75 455 80
+                      C500 85 525 50 565 60
+                      C610 70 645 35 700 40
+                      L700 220
+                      L0 220
+                      Z
+                    "
+                    fill="url(#chartGradient)"
+                  ></path>
+
+
+                  <path
+                    d="
+                      M0 190
+                      C60 180 85 155 130 160
+                      C175 165 190 120 240 125
+                      C290 130 300 100 345 105
+                      C395 110 405 75 455 80
+                      C500 85 525 50 565 60
+                      C610 70 645 35 700 40
+                    "
+                    fill="none"
+                    stroke="#22c55e"
+                    stroke-width="2"
+                    vector-effect="non-scaling-stroke"
+                  ></path>
+
+                </svg>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <article class="panel performance-panel">
+
+            <div class="panel-header">
+
+              <div>
+
+                <span class="panel-label">
+                  STATISTICS
+                </span>
+
+                <h3>
+                  Performance
+                </h3>
+
+              </div>
+
+            </div>
+
+
+            <div class="performance-list">
+
+              <div class="performance-row">
+                <span>Average win</span>
+                <strong id="averageWin">
+                  €0.00
+                </strong>
+              </div>
+
+              <div class="performance-row">
+                <span>Average loss</span>
+                <strong id="averageLoss">
+                  €0.00
+                </strong>
+              </div>
+
+              <div class="performance-row">
+                <span>Best trade</span>
+                <strong id="bestTrade">
+                  €0.00
+                </strong>
+              </div>
+
+              <div class="performance-row">
+                <span>Worst trade</span>
+                <strong id="worstTrade">
+                  €0.00
+                </strong>
+              </div>
+
+              <div class="performance-row">
+                <span>Avg risk/reward</span>
+                <strong id="averageRR">
+                  —
+                </strong>
+              </div>
+
+            </div>
+
+          </article>
+
+        </section>
+
+
+        <!-- RECENT TRADES -->
+
+        <section class="panel trades-panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <span class="panel-label">
+                JOURNAL
+              </span>
+
+              <h3>
+                Recent trades
+              </h3>
+
+            </div>
+
+
+            <button
+              class="text-button"
+              id="openJournalButton"
+              type="button"
+            >
+              View journal →
+            </button>
+
+          </div>
+
+
+          <div class="table-wrapper">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>Market</th>
+                  <th>Direction</th>
+                  <th>Entry</th>
+                  <th>Exit</th>
+                  <th>Strategy</th>
+                  <th>Date</th>
+                  <th>P&amp;L</th>
+                </tr>
+
+              </thead>
+
+              <tbody id="tradesTableBody">
+
+                <tr>
+
+                  <td
+                    colspan="7"
+                    class="empty-table"
+                  >
+                    Loading your trades...
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </section>
+
+      </div>
+
+
+      <!-- ===================================================
+           JOURNAL VIEW
+           =================================================== -->
+
+      <div
+        class="app-view"
+        id="journalView"
+      >
+
+        <header class="topbar journal-topbar">
+
+          <div>
+
+            <p class="topbar-label">
+              TRADING JOURNAL
+            </p>
+
+            <h1>
+              Journal
+            </h1>
+
+            <p class="page-description">
+              Review every trade and learn from your execution.
+            </p>
+
+          </div>
+
+
+          <div class="topbar-actions">
+
+            <button
+              class="add-trade-button open-trade-modal"
+              type="button"
+            >
+              <span>+</span>
+              Add trade
+            </button>
+
+          </div>
+
+        </header>
+
+
+        <!-- JOURNAL STATS -->
+
+        <section class="journal-stats">
+
+          <article class="journal-stat">
+
+            <span>
+              Total trades
+            </span>
+
+            <strong id="journalTotalTrades">
+              0
+            </strong>
+
+          </article>
+
+
+          <article class="journal-stat">
+
+            <span>
+              Net P&amp;L
+            </span>
+
+            <strong id="journalTotalPnl">
+              €0.00
+            </strong>
+
+          </article>
+
+
+          <article class="journal-stat">
+
+            <span>
+              Win rate
+            </span>
+
+            <strong id="journalWinRate">
+              0%
+            </strong>
+
+          </article>
+
+
+          <article class="journal-stat">
+
+            <span>
+              Avg. R:R
+            </span>
+
+            <strong id="journalAverageRR">
+              —
+            </strong>
+
+          </article>
+
+        </section>
+
+
+        <!-- FILTER BAR -->
+
+        <section class="journal-toolbar">
+
+          <div class="journal-search">
+
+            <span class="search-icon">
+              ⌕
+            </span>
+
+            <input
+              id="journalSearch"
+              type="search"
+              placeholder="Search market or strategy..."
+              autocomplete="off"
+            >
+
+          </div>
+
+
+          <div class="journal-filters">
+
+            <select id="directionFilter">
+
+              <option value="all">
+                All directions
+              </option>
+
+              <option value="Long">
+                Long
+              </option>
+
+              <option value="Short">
+                Short
+              </option>
+
+            </select>
+
+
+            <select id="resultFilter">
+
+              <option value="all">
+                All results
+              </option>
+
+              <option value="win">
+                Winners
+              </option>
+
+              <option value="loss">
+                Losers
+              </option>
+
+              <option value="breakeven">
+                Breakeven
+              </option>
+
+            </select>
+
+
+            <select id="strategyFilter">
+
+              <option value="all">
+                All strategies
+              </option>
+
+            </select>
+
+
+            <button
+              id="clearFiltersButton"
+              class="secondary-button filter-reset"
+              type="button"
+            >
+              Clear
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- JOURNAL TABLE -->
+
+        <section class="panel journal-panel">
+
+          <div class="journal-table-header">
+
+            <div>
+
+              <span class="panel-label">
+                ALL TRADES
+              </span>
+
+              <h3>
+                Trade history
+              </h3>
+
+            </div>
+
+            <span
+              class="trade-count"
+              id="journalTradeCount"
+            >
+              0 trades
+            </span>
+
+          </div>
+
+
+          <div class="table-wrapper">
+
+            <table class="journal-table">
+
+              <thead>
+
+                <tr>
+                  <th>Date</th>
+                  <th>Market</th>
+                  <th>Direction</th>
+                  <th>Entry</th>
+                  <th>Exit</th>
+                  <th>Stop loss</th>
+                  <th>Take profit</th>
+                  <th>Strategy</th>
+                  <th>R:R</th>
+                  <th>P&amp;L</th>
+                  <th></th>
+                </tr>
+
+              </thead>
+
+
+              <tbody id="journalTableBody">
+
+                <tr>
+
+                  <td
+                    colspan="11"
+                    class="empty-table"
+                  >
+                    Loading your journal...
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </section>
+
+      </div>
 
     </main>
 
   </div>
 
 
-  <!-- ADD TRADE MODAL -->
+  <!-- =======================================================
+       ADD / EDIT TRADE MODAL
+       ======================================================= -->
 
   <div
     class="modal-overlay"
     id="tradeModal"
   >
 
-    <div class="trade-modal">
+    <div class="trade-modal journal-trade-modal">
 
       <div class="modal-header">
 
         <div>
 
           <span class="panel-label">
-            JOURNAL
+            TRADING JOURNAL
           </span>
 
-          <h2>
+          <h2 id="tradeModalTitle">
             Add trade
           </h2>
 
@@ -621,6 +920,7 @@
           class="modal-close"
           id="closeModal"
           type="button"
+          aria-label="Close"
         >
           ×
         </button>
@@ -630,7 +930,16 @@
 
       <form id="tradeForm">
 
+        <input
+          type="hidden"
+          id="editingTradeId"
+          value=""
+        >
+
+
         <div class="form-grid">
+
+          <!-- MARKET -->
 
           <div class="form-group">
 
@@ -648,6 +957,8 @@
 
           </div>
 
+
+          <!-- DIRECTION -->
 
           <div class="form-group">
 
@@ -673,6 +984,8 @@
           </div>
 
 
+          <!-- ENTRY -->
+
           <div class="form-group">
 
             <label for="entry">
@@ -688,6 +1001,8 @@
 
           </div>
 
+
+          <!-- EXIT -->
 
           <div class="form-group">
 
@@ -705,10 +1020,86 @@
           </div>
 
 
+          <!-- STOP LOSS -->
+
+          <div class="form-group">
+
+            <label for="stopLoss">
+              Stop loss
+            </label>
+
+            <input
+              id="stopLoss"
+              type="number"
+              step="any"
+              placeholder="0.00"
+            >
+
+          </div>
+
+
+          <!-- TAKE PROFIT -->
+
+          <div class="form-group">
+
+            <label for="takeProfit">
+              Take profit
+            </label>
+
+            <input
+              id="takeProfit"
+              type="number"
+              step="any"
+              placeholder="0.00"
+            >
+
+          </div>
+
+
+          <!-- RISK -->
+
+          <div class="form-group">
+
+            <label for="riskAmount">
+              Risk amount (€)
+            </label>
+
+            <input
+              id="riskAmount"
+              type="number"
+              step="0.01"
+              min="0"
+              placeholder="50.00"
+            >
+
+          </div>
+
+
+          <!-- R:R -->
+
+          <div class="form-group">
+
+            <label for="riskReward">
+              Risk / Reward
+            </label>
+
+            <input
+              id="riskReward"
+              type="number"
+              step="0.01"
+              min="0"
+              placeholder="2.00"
+            >
+
+          </div>
+
+
+          <!-- PNL -->
+
           <div class="form-group">
 
             <label for="pnl">
-              P&amp;L
+              P&amp;L (€)
             </label>
 
             <input
@@ -721,6 +1112,8 @@
 
           </div>
 
+
+          <!-- STRATEGY -->
 
           <div class="form-group">
 
@@ -738,6 +1131,8 @@
           </div>
 
 
+          <!-- DATE -->
+
           <div class="form-group full-width">
 
             <label for="tradeDate">
@@ -753,17 +1148,19 @@
           </div>
 
 
+          <!-- NOTES -->
+
           <div class="form-group full-width">
 
             <label for="notes">
-              Notes
+              Trade notes
             </label>
 
             <textarea
               id="notes"
-              rows="4"
-              maxlength="1000"
-              placeholder="What happened during this trade?"
+              rows="5"
+              maxlength="2000"
+              placeholder="Why did you enter? What went well? What would you change?"
             ></textarea>
 
           </div>
@@ -804,10 +1201,190 @@
   </div>
 
 
-  <!-- IMPORTANT:
-       Dashboard loads script.js.
-       It does NOT load auth.js.
-  -->
+  <!-- =======================================================
+       TRADE DETAILS MODAL
+       ======================================================= -->
+
+  <div
+    class="modal-overlay"
+    id="tradeDetailsModal"
+  >
+
+    <div class="trade-modal trade-details-modal">
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="panel-label">
+            TRADE REVIEW
+          </span>
+
+          <h2 id="detailsMarket">
+            Trade
+          </h2>
+
+        </div>
+
+        <button
+          class="modal-close"
+          id="closeDetailsModal"
+          type="button"
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="trade-details-grid">
+
+        <div class="detail-item">
+          <span>Date</span>
+          <strong id="detailsDate">—</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Direction</span>
+          <strong id="detailsDirection">—</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Entry</span>
+          <strong id="detailsEntry">—</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Exit</span>
+          <strong id="detailsExit">—</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Stop loss</span>
+          <strong id="detailsStopLoss">—</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Take profit</span>
+          <strong id="detailsTakeProfit">—</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Risk</span>
+          <strong id="detailsRisk">—</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Risk / Reward</span>
+          <strong id="detailsRR">—</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Strategy</span>
+          <strong id="detailsStrategy">—</strong>
+        </div>
+
+        <div class="detail-item">
+          <span>P&amp;L</span>
+          <strong id="detailsPnl">—</strong>
+        </div>
+
+      </div>
+
+
+      <div class="details-notes">
+
+        <span>
+          NOTES
+        </span>
+
+        <p id="detailsNotes">
+          No notes for this trade.
+        </p>
+
+      </div>
+
+
+      <div class="details-actions">
+
+        <button
+          type="button"
+          class="danger-button"
+          id="deleteTradeButton"
+        >
+          Delete trade
+        </button>
+
+
+        <button
+          type="button"
+          class="secondary-button"
+          id="editTradeButton"
+        >
+          Edit trade
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       DELETE CONFIRMATION
+       ======================================================= -->
+
+  <div
+    class="modal-overlay"
+    id="deleteModal"
+  >
+
+    <div class="confirm-modal">
+
+      <div class="confirm-icon">
+        !
+      </div>
+
+      <h2>
+        Delete trade?
+      </h2>
+
+      <p>
+        This trade will be permanently removed from your
+        journal. This action cannot be undone.
+      </p>
+
+
+      <div class="confirm-actions">
+
+        <button
+          type="button"
+          class="secondary-button"
+          id="cancelDeleteButton"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="danger-button"
+          id="confirmDeleteButton"
+        >
+          Delete trade
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+       ======================================================= -->
 
   <script
     src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
