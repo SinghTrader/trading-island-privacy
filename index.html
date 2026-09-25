@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
   <link rel="icon" type="image/png" href="/favicon.png">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Trading Island</title>
+
   <meta
     name="description"
-    content="Trading Island is a floating market dashboard for Chrome with live market prices, watchlists and personal P&L tracking."
+    content="Trading Island is your trading workspace with a trading journal, performance dashboard, calendar and Chrome market dashboard."
   >
 
   <link rel="stylesheet" href="style.css">
@@ -16,68 +18,108 @@
 
 <body>
 
+  <!-- NAVBAR -->
   <header class="navbar">
     <div class="container nav-inner">
+
       <a href="/" class="brand">
         <span class="brand-dot"></span>
         Trading Island
       </a>
 
-      <nav>
-        <a href="#features">Features</a>
-        <a href="#how-it-works">How it works</a>
-        <a href="#privacy">Privacy</a>
-      </nav>
+      <div class="nav-right">
+
+        <nav>
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How it works</a>
+          <a href="#privacy">Privacy</a>
+        </nav>
+
+        <div class="nav-account">
+
+          <a
+            href="/app/login.html"
+            class="nav-login"
+            id="navLoginButton"
+          >
+            Log in
+          </a>
+
+          <a
+            href="/app/"
+            class="nav-dashboard-button"
+            id="navDashboardButton"
+          >
+            Open Dashboard
+          </a>
+
+        </div>
+
+      </div>
+
     </div>
   </header>
 
+
   <main>
 
+    <!-- HERO -->
     <section class="hero">
+
       <div class="hero-glow"></div>
 
       <div class="container hero-content">
 
         <div class="hero-text">
+
           <div class="eyebrow">
-            Chrome trading dashboard
+            Your trading workspace
           </div>
 
           <h1>
-            Your market.<br>
-            Always in view.
+            Trade smarter.<br>
+            Track everything.
           </h1>
 
           <p class="hero-subtitle">
-            Trading Island brings your watchlist, live market prices
-            and personal P&amp;L tracking directly into your browser.
+            Journal your trades, analyze your performance and keep
+            your markets close with Trading Island.
           </p>
 
           <div class="hero-actions">
+
             <a
-              href="#"
+              href="/app/login.html"
               class="button button-primary"
-              id="chromeButton"
+              id="heroDashboardButton"
             >
-              Add to Chrome
+              Start for free
             </a>
 
-            <a href="#features" class="button button-secondary">
+            <a
+              href="#features"
+              class="button button-secondary"
+            >
               Explore features
             </a>
+
           </div>
 
           <p class="small-note">
-            Built for traders who want market information without
-            constantly switching tabs.
+            Free trading journal and dashboard built for traders who
+            want a clear view of their performance.
           </p>
+
         </div>
 
+
+        <!-- DEMO -->
         <div class="hero-demo">
 
           <div class="browser-window">
 
             <div class="browser-top">
+
               <div class="browser-dots">
                 <span></span>
                 <span></span>
@@ -85,8 +127,9 @@
               </div>
 
               <div class="browser-address">
-                tradingview.com
+                tradingisland.net/app
               </div>
+
             </div>
 
             <div class="browser-content">
@@ -102,6 +145,7 @@
               <div class="island">
 
                 <div class="island-top">
+
                   <div>
                     <span class="island-label">
                       Trading Island
@@ -112,9 +156,12 @@
                     <span></span>
                     LIVE
                   </span>
+
                 </div>
 
+
                 <div class="market-row">
+
                   <div>
                     <strong>BTC/USD</strong>
                     <small>Bitcoin</small>
@@ -122,11 +169,16 @@
 
                   <div class="market-price">
                     <strong>$64,281.20</strong>
-                    <span class="positive">+2.31%</span>
+                    <span class="positive">
+                      +2.31%
+                    </span>
                   </div>
+
                 </div>
 
+
                 <div class="market-row">
+
                   <div>
                     <strong>NVDA</strong>
                     <small>NVIDIA</small>
@@ -134,11 +186,16 @@
 
                   <div class="market-price">
                     <strong>$129.44</strong>
-                    <span class="positive">+1.18%</span>
+                    <span class="positive">
+                      +1.18%
+                    </span>
                   </div>
+
                 </div>
 
+
                 <div class="market-row">
+
                   <div>
                     <strong>EUR/USD</strong>
                     <small>Forex</small>
@@ -146,9 +203,13 @@
 
                   <div class="market-price">
                     <strong>1.0842</strong>
-                    <span class="negative">-0.22%</span>
+                    <span class="negative">
+                      -0.22%
+                    </span>
                   </div>
+
                 </div>
+
 
                 <div class="pnl-card">
                   <span>Monthly P&amp;L</span>
@@ -156,6 +217,7 @@
                 </div>
 
               </div>
+
             </div>
 
           </div>
@@ -163,201 +225,342 @@
         </div>
 
       </div>
+
     </section>
 
+
+    <!-- STATS -->
     <section class="stats-section">
+
       <div class="container stats-grid">
 
         <div>
-          <strong>Live</strong>
-          <span>Market data</span>
+          <strong>Journal</strong>
+          <span>Track every trade</span>
         </div>
 
         <div>
-          <strong>6</strong>
-          <span>Watchlist symbols</span>
+          <strong>Analytics</strong>
+          <span>Understand performance</span>
         </div>
 
         <div>
-          <strong>24/7</strong>
-          <span>Browser access</span>
+          <strong>Calendar</strong>
+          <span>See your trading history</span>
         </div>
 
         <div>
-          <strong>Local</strong>
-          <span>P&amp;L storage</span>
+          <strong>Free</strong>
+          <span>Create your account</span>
         </div>
 
       </div>
+
     </section>
 
-    <section class="section" id="features">
+
+    <!-- FEATURES -->
+    <section
+      class="section"
+      id="features"
+    >
 
       <div class="container">
 
         <div class="section-heading">
-          <span class="eyebrow">Features</span>
+
+          <span class="eyebrow">
+            Features
+          </span>
 
           <h2>
-            Everything you need.
-            Nothing you don't.
+            Your trading.
+            One workspace.
           </h2>
 
           <p>
-            Trading Island is designed to stay out of your way while
-            keeping the information you care about close.
+            Trading Island gives you the tools to journal your trades,
+            understand your performance and build better trading habits.
           </p>
+
         </div>
+
 
         <div class="feature-grid">
 
           <article class="feature-card">
-            <div class="feature-icon">↗</div>
 
-            <h3>Market prices</h3>
+            <div class="feature-icon">
+              ↗
+            </div>
+
+            <h3>
+              Trading Dashboard
+            </h3>
 
             <p>
-              Monitor crypto, stocks and forex from a compact floating
-              dashboard while browsing.
+              See your most important trading statistics in one clean
+              dashboard.
             </p>
+
           </article>
 
-          <article class="feature-card">
-            <div class="feature-icon">★</div>
 
-            <h3>Personal watchlist</h3>
+          <article class="feature-card">
+
+            <div class="feature-icon">
+              ≡
+            </div>
+
+            <h3>
+              Trade Journal
+            </h3>
 
             <p>
-              Choose the financial instruments that matter to you and
-              keep them visible throughout your browser session.
+              Record your trades, strategies, risk, entries, exits and
+              notes in one place.
             </p>
+
           </article>
 
-          <article class="feature-card">
-            <div class="feature-icon">+</div>
 
-            <h3>P&amp;L calendar</h3>
+          <article class="feature-card">
+
+            <div class="feature-icon">
+              □
+            </div>
+
+            <h3>
+              P&amp;L Calendar
+            </h3>
 
             <p>
-              Record daily profits and losses and keep track of your
-              trading performance over time.
+              See profitable and losing days and understand how your
+              performance develops over time.
             </p>
+
           </article>
 
-          <article class="feature-card">
-            <div class="feature-icon">↔</div>
 
-            <h3>Move &amp; resize</h3>
+          <article class="feature-card">
+
+            <div class="feature-icon">
+              %
+            </div>
+
+            <h3>
+              Performance Analytics
+            </h3>
 
             <p>
-              Position Trading Island wherever you want and resize the
-              interface to fit your workspace.
+              Track metrics such as win rate, profit factor and
+              risk-to-reward.
             </p>
+
           </article>
 
-          <article class="feature-card">
-            <div class="feature-icon">◉</div>
 
-            <h3>Always available</h3>
+          <article class="feature-card">
+
+            <div class="feature-icon">
+              ◉
+            </div>
+
+            <h3>
+              Personal Account
+            </h3>
 
             <p>
-              Keep your market dashboard available while you move
-              between websites and trading tools.
+              Your journal and settings are connected securely to your
+              own Trading Island account.
             </p>
+
           </article>
 
-          <article class="feature-card">
-            <div class="feature-icon">⌁</div>
 
-            <h3>Clean &amp; lightweight</h3>
+          <article class="feature-card">
+
+            <div class="feature-icon">
+              ⌁
+            </div>
+
+            <h3>
+              Chrome Extension
+            </h3>
 
             <p>
-              Built around a focused interface without unnecessary
-              distractions or complicated menus.
+              Keep crypto, stocks and forex prices visible while you
+              browse and analyze markets.
             </p>
+
           </article>
 
         </div>
 
       </div>
+
     </section>
 
-    <section class="section dark-section" id="how-it-works">
+
+    <!-- HOW IT WORKS -->
+    <section
+      class="section dark-section"
+      id="how-it-works"
+    >
 
       <div class="container">
 
         <div class="section-heading">
-          <span class="eyebrow">Getting started</span>
+
+          <span class="eyebrow">
+            Getting started
+          </span>
 
           <h2>
             Start in minutes.
           </h2>
+
         </div>
+
 
         <div class="steps">
 
           <div class="step">
-            <span class="step-number">01</span>
+
+            <span class="step-number">
+              01
+            </span>
 
             <div>
-              <h3>Install Trading Island</h3>
+
+              <h3>
+                Create your free account
+              </h3>
 
               <p>
-                Add the extension to Google Chrome through the
-                Chrome Web Store.
+                Sign up for Trading Island and open your personal
+                trading dashboard.
               </p>
+
             </div>
+
           </div>
 
+
           <div class="step">
-            <span class="step-number">02</span>
+
+            <span class="step-number">
+              02
+            </span>
 
             <div>
-              <h3>Create your watchlist</h3>
+
+              <h3>
+                Add your trades
+              </h3>
 
               <p>
-                Select the crypto, stock and forex symbols you want
-                to follow.
+                Record your trades, strategy, risk, entry, exit and
+                trading notes.
               </p>
+
             </div>
+
           </div>
 
+
           <div class="step">
-            <span class="step-number">03</span>
+
+            <span class="step-number">
+              03
+            </span>
 
             <div>
-              <h3>Keep trading</h3>
+
+              <h3>
+                Improve your process
+              </h3>
 
               <p>
-                Trading Island stays available while you browse,
-                research and analyze markets.
+                Use your dashboard, journal and calendar to understand
+                your results and trading habits.
               </p>
+
             </div>
+
           </div>
 
         </div>
 
       </div>
+
     </section>
 
-    <section class="section privacy-section" id="privacy">
+
+    <!-- CHROME EXTENSION -->
+    <section class="section">
 
       <div class="container privacy-box">
 
         <div>
-          <span class="eyebrow">Privacy</span>
+
+          <span class="eyebrow">
+            Chrome Extension
+          </span>
 
           <h2>
-            Your trading journal stays yours.
+            Keep the market in view.
           </h2>
 
           <p>
-            Watchlist preferences, P&amp;L entries and interface
-            preferences are stored locally in Chrome.
+            Add the Trading Island Chrome extension and keep your
+            watchlist, market prices and P&amp;L close while browsing.
           </p>
+
         </div>
 
-        <a href="/privacy/" class="button button-secondary">
+        <a
+          href="#"
+          class="button button-secondary"
+          id="chromeButton"
+        >
+          Add to Chrome
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- PRIVACY -->
+    <section
+      class="section privacy-section"
+      id="privacy"
+    >
+
+      <div class="container privacy-box">
+
+        <div>
+
+          <span class="eyebrow">
+            Privacy
+          </span>
+
+          <h2>
+            Your trading data stays yours.
+          </h2>
+
+          <p>
+            Trading Island is designed around personal trading
+            journals and private account data.
+          </p>
+
+        </div>
+
+        <a
+          href="/privacy/"
+          class="button button-secondary"
+        >
           Read Privacy Policy
         </a>
 
@@ -365,29 +568,36 @@
 
     </section>
 
+
+    <!-- CTA -->
     <section class="cta-section">
 
       <div class="container">
 
         <div class="cta-box">
-          <span class="eyebrow">Trading Island</span>
+
+          <span class="eyebrow">
+            Trading Island
+          </span>
 
           <h2>
-            Markets don't stop.<br>
-            Neither should your overview.
+            Build a better<br>
+            trading process.
           </h2>
 
           <p>
-            Keep your essential market information one glance away.
+            Start tracking your trades and understanding your
+            performance today.
           </p>
 
           <a
-            href="#"
+            href="/app/login.html"
             class="button button-primary"
-            id="chromeButtonBottom"
+            id="bottomDashboardButton"
           >
-            Add to Chrome
+            Create free account
           </a>
+
         </div>
 
       </div>
@@ -396,29 +606,47 @@
 
   </main>
 
+
+  <!-- FOOTER -->
   <footer>
 
     <div class="container footer-inner">
 
       <div>
+
         <div class="brand">
           <span class="brand-dot"></span>
           Trading Island
         </div>
 
         <p>
-          A floating trading dashboard for Chrome.
+          Your personal trading workspace.
         </p>
+
       </div>
 
+
       <div class="footer-links">
-        <a href="/privacy/">Privacy Policy</a>
-        <a href="mailto:supporttraderisland@gmail.com">Support</a>
+
+        <a href="/app/login.html">
+          Log in
+        </a>
+
+        <a href="/privacy/">
+          Privacy Policy
+        </a>
+
+        <a href="mailto:supporttraderisland@gmail.com">
+          Support
+        </a>
+
       </div>
 
     </div>
 
+
     <div class="container footer-bottom">
+
       <span>
         © <span id="year"></span> Trading Island
       </span>
@@ -426,9 +654,15 @@
       <span>
         Market information is for informational purposes only.
       </span>
+
     </div>
 
   </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="/app/config.js"></script>
 
   <script src="script.js"></script>
 
