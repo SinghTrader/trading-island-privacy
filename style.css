@@ -45,12 +45,22 @@ a {
   text-decoration: none;
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
 .container {
   width: min(var(--max-width), calc(100% - 48px));
   margin: 0 auto;
 }
 
-/* NAVBAR */
+
+/* =========================================
+   NAVBAR
+========================================= */
 
 .navbar {
   position: sticky;
@@ -61,6 +71,7 @@ a {
 
   background: rgba(7, 9, 9, 0.82);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .nav-inner {
@@ -69,12 +80,16 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  gap: 30px;
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 10px;
+
+  flex-shrink: 0;
 
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -84,30 +99,128 @@ a {
   width: 13px;
   height: 13px;
 
+  flex-shrink: 0;
+
   border-radius: 50%;
 
   background: var(--green);
-  box-shadow: 0 0 20px rgba(124, 255, 178, 0.65);
+
+  box-shadow:
+    0 0 20px rgba(124, 255, 178, 0.65);
+}
+
+
+/* RIGHT SIDE NAVIGATION */
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 34px;
 }
 
 nav {
   display: flex;
+  align-items: center;
   gap: 30px;
 }
 
 nav a {
+  position: relative;
+
   color: var(--muted);
 
   font-size: 14px;
+  font-weight: 500;
 
-  transition: 0.2s;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 nav a:hover {
   color: var(--text);
 }
 
-/* HERO */
+
+/* ACCOUNT BUTTONS */
+
+.nav-account {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-login {
+  height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 16px;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  color: #c3cbc7;
+
+  font-size: 13px;
+  font-weight: 650;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav-login:hover {
+  color: var(--text);
+
+  background: rgba(255, 255, 255, 0.045);
+  border-color: var(--border);
+}
+
+.nav-dashboard-button {
+  min-height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 17px;
+
+  border: 1px solid rgba(124, 255, 178, 0.22);
+  border-radius: 10px;
+
+  background: var(--green);
+  color: #07100a;
+
+  box-shadow:
+    0 0 0 rgba(124, 255, 178, 0);
+
+  font-size: 13px;
+  font-weight: 750;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.nav-dashboard-button:hover {
+  transform: translateY(-1px);
+
+  background: #9affc4;
+
+  box-shadow:
+    0 8px 30px rgba(124, 255, 178, 0.12);
+}
+
+
+/* =========================================
+   HERO
+========================================= */
 
 .hero {
   position: relative;
@@ -192,6 +305,11 @@ nav a:hover {
   margin-top: 36px;
 }
 
+
+/* =========================================
+   BUTTONS
+========================================= */
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -207,10 +325,13 @@ nav a:hover {
   font-size: 14px;
   font-weight: 700;
 
+  cursor: pointer;
+
   transition:
     transform 0.2s,
     background 0.2s,
-    border 0.2s;
+    border 0.2s,
+    box-shadow 0.2s;
 }
 
 .button:hover {
@@ -220,10 +341,16 @@ nav a:hover {
 .button-primary {
   background: var(--green);
   color: #07100a;
+
+  box-shadow:
+    0 10px 35px rgba(124, 255, 178, 0.08);
 }
 
 .button-primary:hover {
   background: #9affc4;
+
+  box-shadow:
+    0 14px 40px rgba(124, 255, 178, 0.14);
 }
 
 .button-secondary {
@@ -244,7 +371,10 @@ nav a:hover {
   font-size: 13px;
 }
 
-/* FAKE BROWSER */
+
+/* =========================================
+   FAKE BROWSER
+========================================= */
 
 .browser-window {
   overflow: hidden;
@@ -354,25 +484,32 @@ nav a:hover {
 
 .chart-lines span:nth-child(2) {
   top: 55%;
+
   transform: rotate(6deg);
 }
 
 .chart-lines span:nth-child(3) {
   top: 67%;
+
   transform: rotate(-14deg);
 }
 
 .chart-lines span:nth-child(4) {
   top: 48%;
+
   transform: rotate(11deg);
 }
 
 .chart-lines span:nth-child(5) {
   top: 73%;
+
   transform: rotate(-4deg);
 }
 
-/* ISLAND */
+
+/* =========================================
+   ISLAND
+========================================= */
 
 .island {
   position: relative;
@@ -424,7 +561,8 @@ nav a:hover {
 
   background: var(--green);
 
-  box-shadow: 0 0 10px var(--green);
+  box-shadow:
+    0 0 10px var(--green);
 }
 
 .market-row {
@@ -502,7 +640,10 @@ nav a:hover {
   color: var(--green);
 }
 
-/* STATS */
+
+/* =========================================
+   STATS
+========================================= */
 
 .stats-section {
   border-top: 1px solid var(--border);
@@ -544,7 +685,10 @@ nav a:hover {
   font-size: 12px;
 }
 
-/* SECTIONS */
+
+/* =========================================
+   SECTIONS
+========================================= */
 
 .section {
   padding: 120px 0;
@@ -576,7 +720,10 @@ nav a:hover {
   font-size: 17px;
 }
 
-/* FEATURES */
+
+/* =========================================
+   FEATURES
+========================================= */
 
 .feature-grid {
   display: grid;
@@ -598,7 +745,8 @@ nav a:hover {
   transition:
     transform 0.25s,
     background 0.25s,
-    border 0.25s;
+    border 0.25s,
+    box-shadow 0.25s;
 }
 
 .feature-card:hover {
@@ -607,6 +755,9 @@ nav a:hover {
   border-color: var(--border-strong);
 
   background: var(--card-hover);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.18);
 }
 
 .feature-icon {
@@ -643,7 +794,10 @@ nav a:hover {
   font-size: 14px;
 }
 
-/* HOW IT WORKS */
+
+/* =========================================
+   HOW IT WORKS
+========================================= */
 
 .dark-section {
   border-top: 1px solid var(--border);
@@ -685,7 +839,10 @@ nav a:hover {
   color: var(--muted);
 }
 
-/* PRIVACY */
+
+/* =========================================
+   PRIVACY / EXTENSION BOX
+========================================= */
 
 .privacy-box {
   display: flex;
@@ -706,7 +863,10 @@ nav a:hover {
   max-width: 700px;
 }
 
-/* CTA */
+
+/* =========================================
+   CTA
+========================================= */
 
 .cta-section {
   padding: 0 0 120px;
@@ -731,11 +891,37 @@ nav a:hover {
     var(--card);
 }
 
+.cta-box::after {
+  content: "";
+
+  position: absolute;
+
+  width: 400px;
+  height: 400px;
+
+  right: -200px;
+  bottom: -250px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(124, 255, 178, 0.08),
+      transparent 70%
+    );
+
+  pointer-events: none;
+}
+
 .cta-box p {
   margin-bottom: 30px;
 }
 
-/* FOOTER */
+
+/* =========================================
+   FOOTER
+========================================= */
 
 footer {
   padding: 60px 0 30px;
@@ -746,6 +932,8 @@ footer {
 .footer-inner {
   display: flex;
   justify-content: space-between;
+
+  gap: 40px;
 
   padding-bottom: 50px;
 }
@@ -765,6 +953,10 @@ footer {
   font-size: 13px;
 }
 
+.footer-links a {
+  transition: color 0.2s ease;
+}
+
 .footer-links a:hover {
   color: var(--text);
 }
@@ -772,6 +964,8 @@ footer {
 .footer-bottom {
   display: flex;
   justify-content: space-between;
+
+  gap: 30px;
 
   padding-top: 25px;
 
@@ -782,7 +976,50 @@ footer {
   font-size: 11px;
 }
 
-/* RESPONSIVE */
+
+/* =========================================
+   AUTH STATE
+========================================= */
+
+/*
+  JavaScript kan deze classes gebruiken zodra
+  Supabase heeft gecontroleerd of de gebruiker
+  is ingelogd.
+*/
+
+.auth-hidden {
+  display: none !important;
+}
+
+.auth-loading {
+  pointer-events: none;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1050px) {
+
+  .nav-right {
+    gap: 20px;
+  }
+
+  nav {
+    gap: 18px;
+  }
+
+  .nav-login {
+    padding: 0 12px;
+  }
+
+  .nav-dashboard-button {
+    padding: 0 14px;
+  }
+
+}
+
 
 @media (max-width: 900px) {
 
@@ -803,7 +1040,16 @@ footer {
     flex-direction: column;
   }
 
+  .nav-right nav {
+    display: none;
+  }
+
+  .nav-right {
+    gap: 0;
+  }
+
 }
+
 
 @media (max-width: 650px) {
 
@@ -811,16 +1057,64 @@ footer {
     width: min(100% - 30px, var(--max-width));
   }
 
+
+  /* NAVBAR MOBILE */
+
+  .nav-inner {
+    height: 66px;
+
+    gap: 12px;
+  }
+
+  .brand {
+    font-size: 14px;
+  }
+
+  .brand-dot {
+    width: 11px;
+    height: 11px;
+  }
+
   nav {
     display: none;
   }
 
+  .nav-account {
+    gap: 6px;
+  }
+
+  .nav-login {
+    height: 38px;
+
+    padding: 0 10px;
+
+    font-size: 12px;
+  }
+
+  .nav-dashboard-button {
+    min-height: 38px;
+
+    padding: 0 12px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+  }
+
+
+  /* HERO MOBILE */
+
   .hero {
     padding-top: 75px;
+    padding-bottom: 90px;
   }
 
   .hero h1 {
     font-size: 54px;
+  }
+
+  .hero-subtitle {
+    font-size: 17px;
   }
 
   .hero-actions {
@@ -828,9 +1122,19 @@ footer {
     flex-direction: column;
   }
 
+  .hero-actions .button {
+    width: 100%;
+  }
+
+
+  /* FEATURES */
+
   .feature-grid {
     grid-template-columns: 1fr;
   }
+
+
+  /* STATS */
 
   .stats-grid {
     grid-template-columns: 1fr 1fr;
@@ -840,6 +1144,17 @@ footer {
     padding: 23px 10px;
   }
 
+  .stats-grid div:nth-child(2) {
+    border-right: none;
+  }
+
+  .stats-grid div:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--border);
+  }
+
+
+  /* DEMO */
+
   .island {
     width: calc(100% - 30px);
   }
@@ -848,23 +1163,84 @@ footer {
     min-height: 430px;
   }
 
+
+  /* STEPS */
+
   .step {
     grid-template-columns: 55px 1fr;
   }
+
+
+  /* PRIVACY */
 
   .privacy-box {
     padding: 30px;
   }
 
+  .privacy-box .button {
+    width: 100%;
+  }
+
+
+  /* CTA */
+
   .cta-box {
     padding: 45px 28px;
   }
+
+
+  /* FOOTER */
 
   .footer-inner,
   .footer-bottom {
     flex-direction: column;
 
     gap: 25px;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+
+    gap: 18px 25px;
+  }
+
+}
+
+
+@media (max-width: 460px) {
+
+  .nav-login {
+    display: none;
+  }
+
+  .nav-dashboard-button {
+    padding: 0 11px;
+
+    font-size: 11px;
+  }
+
+  .hero h1 {
+    font-size: 47px;
+  }
+
+  .hero {
+    padding-top: 62px;
+  }
+
+  .browser-address {
+    margin-left: 18px;
+  }
+
+  .section {
+    padding: 90px 0;
+  }
+
+  .section-heading {
+    margin-bottom: 40px;
+  }
+
+  .stats-grid strong {
+    font-size: 19px;
   }
 
 }
