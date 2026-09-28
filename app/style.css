@@ -4830,3 +4830,11 @@ html[data-theme="light"] input[type="date"] {
     font-size: 19px;
   }
 }
+.sidebar-brand-logo {
+  width: 36px;
+  height: 36px;
+  display: block;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
