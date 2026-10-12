@@ -2,34 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="robots"
-    content="noindex,nofollow"
-  >
-
-  <meta
-    name="description"
-    content="Log in or create your Trading Island account."
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Log in or create your Trading Island account.">
 
   <title>Login | Trading Island</title>
 
-  <link
-    rel="icon"
-    type="image/png"
-    href="/favicon.png"
-  >
-
-  <link
-    rel="stylesheet"
-    href="auth.css"
-  >
+  <link rel="icon" type="image/png" href="/logo2.png">
+  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="magic-link.css">
 </head>
 
 <body>
@@ -39,7 +20,7 @@
     <section class="auth-brand">
 
       <a href="/" class="brand">
-        <span class="brand-dot"></span>
+        <img src="/logo2.png" alt="Trading Island" class="auth-brand-logo">
         <span>Trading Island</span>
       </a>
 
@@ -60,27 +41,10 @@
         </p>
 
         <div class="feature-list">
-
-          <div class="feature">
-            <span>✓</span>
-            Track every trade
-          </div>
-
-          <div class="feature">
-            <span>✓</span>
-            Analyse your performance
-          </div>
-
-          <div class="feature">
-            <span>✓</span>
-            Discover your best strategies
-          </div>
-
-          <div class="feature">
-            <span>✓</span>
-            Access your journal anywhere
-          </div>
-
+          <div class="feature"><span>✓</span>Track every trade</div>
+          <div class="feature"><span>✓</span>Analyse your performance</div>
+          <div class="feature"><span>✓</span>Discover your best strategies</div>
+          <div class="feature"><span>✓</span>Access your journal anywhere</div>
         </div>
 
       </div>
@@ -91,48 +55,29 @@
 
     </section>
 
-
     <section class="auth-section">
 
       <div class="auth-container">
 
         <div class="mobile-brand">
-          <span class="brand-dot"></span>
+          <img src="/logo2.png" alt="" class="auth-brand-logo">
           Trading Island
         </div>
 
-
         <!-- LOGIN -->
 
-        <div
-          class="auth-view active"
-          id="loginView"
-        >
+        <div class="auth-view active" id="loginView">
 
           <div class="auth-heading">
-
-            <p class="eyebrow">
-              WELCOME BACK
-            </p>
-
-            <h2>
-              Log in to Trading Island
-            </h2>
-
-            <p>
-              Continue to your trading dashboard.
-            </p>
-
+            <p class="eyebrow">WELCOME BACK</p>
+            <h2>Log in to Trading Island</h2>
+            <p>Continue to your trading dashboard.</p>
           </div>
-
 
           <form id="loginForm">
 
             <div class="form-group">
-
-              <label for="loginEmail">
-                Email
-              </label>
+              <label for="loginEmail">Email</label>
 
               <input
                 id="loginEmail"
@@ -141,15 +86,10 @@
                 placeholder="you@example.com"
                 required
               >
-
             </div>
 
-
             <div class="form-group">
-
-              <label for="loginPassword">
-                Password
-              </label>
+              <label for="loginPassword">Password</label>
 
               <div class="password-field">
 
@@ -171,15 +111,14 @@
                 </button>
 
               </div>
-
             </div>
-
 
             <div
               class="message"
               id="loginMessage"
+              role="status"
+              aria-live="polite"
             ></div>
-
 
             <button
               type="submit"
@@ -191,17 +130,41 @@
 
           </form>
 
+          <!-- MAGIC LINK -->
 
-          <div class="auth-switch">
+          <div class="magic-link-section">
 
-            <span>
-              New to Trading Island?
-            </span>
+            <div class="magic-link-divider">
+              <span>OR</span>
+            </div>
 
             <button
               type="button"
-              id="showSignup"
+              id="magicLinkButton"
+              class="magic-link-button"
             >
+              ✉ Sign in with Magic Link
+            </button>
+
+            <p class="magic-link-description">
+              Enter your email above to receive a secure
+              sign-in link. No password needed.
+            </p>
+
+            <div
+              class="message"
+              id="magicLinkMessage"
+              role="status"
+              aria-live="polite"
+            ></div>
+
+          </div>
+
+          <div class="auth-switch">
+
+            <span>New to Trading Island?</span>
+
+            <button type="button" id="showSignup">
               Create account
             </button>
 
@@ -209,38 +172,21 @@
 
         </div>
 
-
         <!-- SIGN UP -->
 
-        <div
-          class="auth-view"
-          id="signupView"
-        >
+        <div class="auth-view" id="signupView">
 
           <div class="auth-heading">
-
-            <p class="eyebrow">
-              GET STARTED
-            </p>
-
-            <h2>
-              Create your account
-            </h2>
-
-            <p>
-              Start building your trading journal.
-            </p>
-
+            <p class="eyebrow">GET STARTED</p>
+            <h2>Create your account</h2>
+            <p>Start building your trading journal.</p>
           </div>
-
 
           <form id="signupForm">
 
             <div class="form-group">
 
-              <label for="signupName">
-                Name
-              </label>
+              <label for="signupName">Name</label>
 
               <input
                 id="signupName"
@@ -253,12 +199,9 @@
 
             </div>
 
-
             <div class="form-group">
 
-              <label for="signupEmail">
-                Email
-              </label>
+              <label for="signupEmail">Email</label>
 
               <input
                 id="signupEmail"
@@ -270,12 +213,9 @@
 
             </div>
 
-
             <div class="form-group">
 
-              <label for="signupPassword">
-                Password
-              </label>
+              <label for="signupPassword">Password</label>
 
               <div class="password-field">
 
@@ -300,12 +240,9 @@
 
             </div>
 
-
             <div class="form-group">
 
-              <label for="confirmPassword">
-                Confirm password
-              </label>
+              <label for="confirmPassword">Confirm password</label>
 
               <div class="password-field">
 
@@ -330,12 +267,12 @@
 
             </div>
 
-
             <div
               class="message"
               id="signupMessage"
+              role="status"
+              aria-live="polite"
             ></div>
-
 
             <button
               type="submit"
@@ -347,17 +284,11 @@
 
           </form>
 
-
           <div class="auth-switch">
 
-            <span>
-              Already have an account?
-            </span>
+            <span>Already have an account?</span>
 
-            <button
-              type="button"
-              id="showLogin"
-            >
+            <button type="button" id="showLogin">
               Log in
             </button>
 
@@ -367,18 +298,4 @@
 
       </div>
 
-    </section>
-
-  </main>
-
-
-  <script
-    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-  ></script>
-
-  <script src="config.js"></script>
-
-  <script src="auth.js"></script>
-
-</body>
-</html>
+    </
