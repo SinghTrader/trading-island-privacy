@@ -1,342 +1,456 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="Log in or create your Trading Island account.">
 
-  <title>Login | Trading Island</title>
+  <title>Log in | TradingIsland</title>
+  <meta name="description" content="Log in to TradingIsland or create your free trading journal account.">
 
-  <link rel="icon" type="image/png" href="/logo2.png">
-  <link rel="stylesheet" href="auth.css">
+  <style>
+    :root {
+      --bg: #070909;
+      --card: #111515;
+      --input: #0b0e0d;
+      --border: #26312c;
+      --text: #f3f7f4;
+      --muted: #96a59c;
+      --accent: #7cffb2;
+      --error: #ff8585;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .auth-container {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      background: #16251c;
+      color: var(--accent);
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 27px;
+      letter-spacing: -1px;
+    }
+
+    .brand p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .auth-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .auth-view {
+      display: none;
+    }
+
+    .auth-view.active {
+      display: block;
+    }
+
+    .auth-view h2 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      letter-spacing: -0.6px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 28px;
+      line-height: 1.6;
+    }
+
+    .form-group {
+      margin-bottom: 19px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    input {
+      width: 100%;
+      height: 47px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--input);
+      color: var(--text);
+      padding: 0 14px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+    }
+
+    input::placeholder {
+      color: #6f8075;
+    }
+
+    .password-input {
+      padding-right: 70px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      color: var(--accent);
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .captcha-container {
+      margin: 20px 0;
+      min-height: 65px;
+    }
+
+    .primary-button {
+      width: 100%;
+      height: 48px;
+      border: none;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #07120b;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .primary-button:hover {
+      background: #a2ffca;
+    }
+
+    .primary-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .switch-auth {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .switch-auth button {
+      background: none;
+      border: none;
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .message {
+      display: none;
+      margin-bottom: 18px;
+      padding: 12px;
+      border-radius: 9px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .message.show {
+      display: block;
+    }
+
+    .message.error {
+      color: var(--error);
+      background: rgba(255, 100, 100, 0.08);
+      border: 1px solid rgba(255, 100, 100, 0.2);
+    }
+
+    .message.success {
+      color: var(--accent);
+      background: rgba(124, 255, 178, 0.07);
+      border: 1px solid rgba(124, 255, 178, 0.2);
+    }
+
+    .footer {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    @media (max-width: 480px) {
+      .auth-card {
+        padding: 24px 20px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <main class="auth-page">
+  <main class="auth-container">
 
-    <section class="auth-brand">
+    <div class="brand">
+      <div class="brand-logo">TI</div>
+      <h1>TradingIsland</h1>
+      <p>Your trading journey starts here.</p>
+    </div>
 
-      <a href="/" class="brand">
-        <span class="brand-dot"></span>
-        <span>Trading Island</span>
-      </a>
+    <div class="auth-card">
 
-      <div class="brand-content">
+      <!-- LOGIN -->
+      <section id="loginView" class="auth-view active">
 
-        <div class="mini-label">
-          YOUR TRADING WORKSPACE
-        </div>
-
-        <h1>
-          Trade smarter.<br>
-          Learn from every trade.
-        </h1>
-
-        <p>
-          Journal your trades, analyse your performance
-          and build better trading habits in one place.
+        <h2>Welcome back</h2>
+        <p class="subtitle">
+          Log in to access your trading journal.
         </p>
 
-        <div class="feature-list">
+        <div id="loginMessage" class="message" role="status" aria-live="polite"></div>
 
-          <div class="feature">
-            <span>✓</span>
-            Track every trade
+        <form id="loginForm">
+
+          <div class="form-group">
+            <label for="loginEmail">Email address</label>
+            <input
+              id="loginEmail"
+              type="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            >
           </div>
 
-          <div class="feature">
-            <span>✓</span>
-            Analyse your performance
-          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
 
-          <div class="feature">
-            <span>✓</span>
-            Discover your best strategies
-          </div>
-
-          <div class="feature">
-            <span>✓</span>
-            Access your journal anywhere
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="brand-footer">
-        Trading Island
-      </div>
-
-    </section>
-
-    <section class="auth-section">
-
-      <div class="auth-container">
-
-        <div class="mobile-brand">
-          <span class="brand-dot"></span>
-          Trading Island
-        </div>
-
-        <!-- LOGIN -->
-
-        <div class="auth-view active" id="loginView">
-
-          <div class="auth-heading">
-
-            <p class="eyebrow">
-              WELCOME BACK
-            </p>
-
-            <h2>
-              Log in to Trading Island
-            </h2>
-
-            <p>
-              Continue to your trading dashboard.
-            </p>
-
-          </div>
-
-          <form id="loginForm">
-
-            <div class="form-group">
-
-              <label for="loginEmail">
-                Email
-              </label>
-
+            <div class="input-wrapper">
               <input
-                id="loginEmail"
-                type="email"
-                autocomplete="email"
-                placeholder="you@example.com"
+                id="loginPassword"
+                class="password-input"
+                type="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
                 required
               >
 
+              <button
+                type="button"
+                class="password-toggle"
+                data-target="loginPassword"
+              >
+                Show
+              </button>
             </div>
-
-            <div class="form-group">
-
-              <label for="loginPassword">
-                Password
-              </label>
-
-              <div class="password-field">
-
-                <input
-                  id="loginPassword"
-                  type="password"
-                  autocomplete="current-password"
-                  placeholder="Enter your password"
-                  minlength="6"
-                  required
-                >
-
-                <button
-                  type="button"
-                  class="password-toggle"
-                  data-target="loginPassword"
-                >
-                  Show
-                </button>
-
-              </div>
-
-            </div>
-
-            <div
-              class="message"
-              id="loginMessage"
-              role="status"
-              aria-live="polite"
-            ></div>
-
-            <button
-              type="submit"
-              class="primary-button"
-              id="loginButton"
-            >
-              Log in
-            </button>
-
-          </form>
-
-          <div class="auth-switch">
-
-            <span>
-              New to Trading Island?
-            </span>
-
-            <button
-              type="button"
-              id="showSignup"
-            >
-              Create account
-            </button>
-
           </div>
 
+          <div
+            id="loginTurnstile"
+            class="captcha-container"
+          ></div>
+
+          <button
+            id="loginButton"
+            class="primary-button"
+            type="submit"
+          >
+            Log in
+          </button>
+
+        </form>
+
+        <div class="switch-auth">
+          Don't have an account?
+          <button type="button" id="showSignup">
+            Sign up
+          </button>
         </div>
 
-        <!-- SIGN UP -->
+      </section>
 
-        <div class="auth-view" id="signupView">
+      <!-- SIGNUP -->
+      <section id="signupView" class="auth-view">
 
-          <div class="auth-heading">
+        <h2>Create your account</h2>
+        <p class="subtitle">
+          Start tracking your trades and improving your performance.
+        </p>
 
-            <p class="eyebrow">
-              GET STARTED
-            </p>
+        <div id="signupMessage" class="message" role="status" aria-live="polite"></div>
 
-            <h2>
-              Create your account
-            </h2>
+        <form id="signupForm">
 
-            <p>
-              Start building your trading journal.
-            </p>
-
+          <div class="form-group">
+            <label for="signupName">Full name</label>
+            <input
+              id="signupName"
+              type="text"
+              placeholder="Your full name"
+              autocomplete="name"
+              required
+            >
           </div>
 
-          <form id="signupForm">
+          <div class="form-group">
+            <label for="signupEmail">Email address</label>
+            <input
+              id="signupEmail"
+              type="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            >
+          </div>
 
-            <div class="form-group">
+          <div class="form-group">
+            <label for="signupPassword">Password</label>
 
-              <label for="signupName">
-                Name
-              </label>
-
+            <div class="input-wrapper">
               <input
-                id="signupName"
-                type="text"
-                autocomplete="name"
-                placeholder="Your name"
-                maxlength="50"
+                id="signupPassword"
+                class="password-input"
+                type="password"
+                placeholder="Create a password"
+                autocomplete="new-password"
+                minlength="6"
                 required
               >
 
+              <button
+                type="button"
+                class="password-toggle"
+                data-target="signupPassword"
+              >
+                Show
+              </button>
             </div>
+          </div>
 
-            <div class="form-group">
+          <div class="form-group">
+            <label for="confirmPassword">Confirm password</label>
 
-              <label for="signupEmail">
-                Email
-              </label>
-
+            <div class="input-wrapper">
               <input
-                id="signupEmail"
-                type="email"
-                autocomplete="email"
-                placeholder="you@example.com"
+                id="confirmPassword"
+                class="password-input"
+                type="password"
+                placeholder="Repeat your password"
+                autocomplete="new-password"
                 required
               >
 
+              <button
+                type="button"
+                class="password-toggle"
+                data-target="confirmPassword"
+              >
+                Show
+              </button>
             </div>
-
-            <div class="form-group">
-
-              <label for="signupPassword">
-                Password
-              </label>
-
-              <div class="password-field">
-
-                <input
-                  id="signupPassword"
-                  type="password"
-                  autocomplete="new-password"
-                  placeholder="At least 6 characters"
-                  minlength="6"
-                  required
-                >
-
-                <button
-                  type="button"
-                  class="password-toggle"
-                  data-target="signupPassword"
-                >
-                  Show
-                </button>
-
-              </div>
-
-            </div>
-
-            <div class="form-group">
-
-              <label for="confirmPassword">
-                Confirm password
-              </label>
-
-              <div class="password-field">
-
-                <input
-                  id="confirmPassword"
-                  type="password"
-                  autocomplete="new-password"
-                  placeholder="Repeat your password"
-                  minlength="6"
-                  required
-                >
-
-                <button
-                  type="button"
-                  class="password-toggle"
-                  data-target="confirmPassword"
-                >
-                  Show
-                </button>
-
-              </div>
-
-            </div>
-
-            <div
-              class="message"
-              id="signupMessage"
-              role="status"
-              aria-live="polite"
-            ></div>
-
-            <button
-              type="submit"
-              class="primary-button"
-              id="signupButton"
-            >
-              Create account
-            </button>
-
-          </form>
-
-          <div class="auth-switch">
-
-            <span>
-              Already have an account?
-            </span>
-
-            <button
-              type="button"
-              id="showLogin"
-            >
-              Log in
-            </button>
-
           </div>
 
+          <div
+            id="signupTurnstile"
+            class="captcha-container"
+          ></div>
+
+          <button
+            id="signupButton"
+            class="primary-button"
+            type="submit"
+          >
+            Create account
+          </button>
+
+        </form>
+
+        <div class="switch-auth">
+          Already have an account?
+          <button type="button" id="showLogin">
+            Log in
+          </button>
         </div>
 
-      </div>
+      </section>
 
-    </section>
+    </div>
+
+    <div class="footer">
+      <p>© 2026 TradingIsland. All rights reserved.</p>
+      <a href="/">Back to homepage</a>
+    </div>
 
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js"></script>
-  <script src="auth.js"></script>
+  <!-- SUPABASE LIBRARY -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+  <!-- YOUR EXISTING CONFIG FILE -->
+  <!-- Adjust this path if your config file is elsewhere -->
+  <script src="/app/config.js"></script>
+
+  <!-- AUTH -->
+  <script src="/app/auth.js"></script>
+
+  <!-- CLOUDFLARE TURNSTILE -->
+  <script
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTradingIslandTurnstileReady&render=explicit"
+    async
+    defer
+  ></script>
 
 </body>
 </html>
