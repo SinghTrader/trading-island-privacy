@@ -151,11 +151,6 @@
       cursor: pointer;
     }
 
-    .captcha-container {
-      margin: 20px 0;
-      min-height: 65px;
-    }
-
     .primary-button {
       width: 100%;
       height: 48px;
@@ -259,12 +254,18 @@
           Log in to access your trading journal.
         </p>
 
-        <div id="loginMessage" class="message" role="status" aria-live="polite"></div>
+        <div
+          id="loginMessage"
+          class="message"
+          role="status"
+          aria-live="polite"
+        ></div>
 
         <form id="loginForm">
 
           <div class="form-group">
             <label for="loginEmail">Email address</label>
+
             <input
               id="loginEmail"
               type="email"
@@ -278,6 +279,7 @@
             <label for="loginPassword">Password</label>
 
             <div class="input-wrapper">
+
               <input
                 id="loginPassword"
                 class="password-input"
@@ -294,13 +296,9 @@
               >
                 Show
               </button>
+
             </div>
           </div>
-
-          <div
-            id="loginTurnstile"
-            class="captcha-container"
-          ></div>
 
           <button
             id="loginButton"
@@ -314,6 +312,7 @@
 
         <div class="switch-auth">
           Don't have an account?
+
           <button type="button" id="showSignup">
             Sign up
           </button>
@@ -325,16 +324,23 @@
       <section id="signupView" class="auth-view">
 
         <h2>Create your account</h2>
+
         <p class="subtitle">
           Start tracking your trades and improving your performance.
         </p>
 
-        <div id="signupMessage" class="message" role="status" aria-live="polite"></div>
+        <div
+          id="signupMessage"
+          class="message"
+          role="status"
+          aria-live="polite"
+        ></div>
 
         <form id="signupForm">
 
           <div class="form-group">
             <label for="signupName">Full name</label>
+
             <input
               id="signupName"
               type="text"
@@ -346,6 +352,7 @@
 
           <div class="form-group">
             <label for="signupEmail">Email address</label>
+
             <input
               id="signupEmail"
               type="email"
@@ -359,6 +366,7 @@
             <label for="signupPassword">Password</label>
 
             <div class="input-wrapper">
+
               <input
                 id="signupPassword"
                 class="password-input"
@@ -376,6 +384,7 @@
               >
                 Show
               </button>
+
             </div>
           </div>
 
@@ -383,6 +392,7 @@
             <label for="confirmPassword">Confirm password</label>
 
             <div class="input-wrapper">
+
               <input
                 id="confirmPassword"
                 class="password-input"
@@ -399,13 +409,9 @@
               >
                 Show
               </button>
+
             </div>
           </div>
-
-          <div
-            id="signupTurnstile"
-            class="captcha-container"
-          ></div>
 
           <button
             id="signupButton"
@@ -419,6 +425,7 @@
 
         <div class="switch-auth">
           Already have an account?
+
           <button type="button" id="showLogin">
             Log in
           </button>
@@ -438,19 +445,11 @@
   <!-- SUPABASE LIBRARY -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
-  <!-- YOUR EXISTING CONFIG FILE -->
-  <!-- Adjust this path if your config file is elsewhere -->
+  <!-- CONFIG -->
   <script src="/app/config.js"></script>
 
   <!-- AUTH -->
   <script src="/app/auth.js"></script>
-
-  <!-- CLOUDFLARE TURNSTILE -->
-  <script
-    src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTradingIslandTurnstileReady&render=explicit"
-    async
-    defer
-  ></script>
 
 </body>
 </html>
