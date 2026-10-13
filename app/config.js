@@ -8,4 +8,6 @@ window.TRADING_ISLAND_CONFIG = {
 
   SUPABASE_PUBLISHABLE_KEY:
     "sb_publishable_u_bwfijbu_9AOMoHiFMX7g_WTRXnHqK"
+
+   TURNSTILE_SITE_KEY: "0x4AAAAAAFVsTf18QdHlBLX7"
 };
