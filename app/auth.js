@@ -2,10 +2,15 @@
 /* =========================================================
    TRADING ISLAND — AUTH
    app/auth.js
-   Supabase + Cloudflare Turnstile
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", initializeAuth);
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+    initializeAuth();
+  }
+);
+
 
 async function initializeAuth() {
 
@@ -14,54 +19,107 @@ async function initializeAuth() {
      ======================================================= */
 
   if (!window.supabase) {
-    console.error("Supabase library was not loaded.");
+    console.error(
+      "Supabase library was not loaded."
+    );
+
     return;
   }
 
+
   if (!window.TRADING_ISLAND_CONFIG) {
-    console.error("Trading Island config was not loaded.");
+    console.error(
+      "Trading Island config was not loaded."
+    );
+
     return;
   }
+
 
   const {
     SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY,
-    TURNSTILE_SITE_KEY
+    SUPABASE_PUBLISHABLE_KEY
   } = window.TRADING_ISLAND_CONFIG;
 
-  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
-    console.error("Supabase configuration is incomplete.");
+
+  if (
+    !SUPABASE_URL ||
+    !SUPABASE_PUBLISHABLE_KEY
+  ) {
+    console.error(
+      "Supabase configuration is incomplete."
+    );
+
     return;
   }
 
-  const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
 
   /* =======================================================
      ELEMENTS
      ======================================================= */
 
-  const loginView = document.querySelector("#loginView");
-  const signupView = document.querySelector("#signupView");
+  const loginView =
+    document.querySelector("#loginView");
 
-  const showSignupButton = document.querySelector("#showSignup");
-  const showLoginButton = document.querySelector("#showLogin");
+  const signupView =
+    document.querySelector("#signupView");
 
-  const loginForm = document.querySelector("#loginForm");
-  const loginEmail = document.querySelector("#loginEmail");
-  const loginPassword = document.querySelector("#loginPassword");
-  const loginMessage = document.querySelector("#loginMessage");
-  const loginButton = document.querySelector("#loginButton");
+  const showSignupButton =
+    document.querySelector("#showSignup");
 
-  const signupForm = document.querySelector("#signupForm");
-  const signupName = document.querySelector("#signupName");
-  const signupEmail = document.querySelector("#signupEmail");
-  const signupPassword = document.querySelector("#signupPassword");
-  const confirmPassword = document.querySelector("#confirmPassword");
-  const signupMessage = document.querySelector("#signupMessage");
-  const signupButton = document.querySelector("#signupButton");
+  const showLoginButton =
+    document.querySelector("#showLogin");
+
+
+  const loginForm =
+    document.querySelector("#loginForm");
+
+  const loginEmail =
+    document.querySelector("#loginEmail");
+
+  const loginPassword =
+    document.querySelector("#loginPassword");
+
+  const loginMessage =
+    document.querySelector("#loginMessage");
+
+  const loginButton =
+    document.querySelector("#loginButton");
+
+
+  const signupForm =
+    document.querySelector("#signupForm");
+
+  const signupName =
+    document.querySelector("#signupName");
+
+  const signupEmail =
+    document.querySelector("#signupEmail");
+
+  const signupPassword =
+    document.querySelector("#signupPassword");
+
+  const confirmPassword =
+    document.querySelector("#confirmPassword");
+
+  const signupMessage =
+    document.querySelector("#signupMessage");
+
+  const signupButton =
+    document.querySelector("#signupButton");
+
+
+  /*
+   * If these elements don't exist, we're not
+   * on the login page.
+   */
 
   if (
     !loginView ||
@@ -72,355 +130,430 @@ async function initializeAuth() {
     return;
   }
 
+
   /* =======================================================
      MESSAGES
      ======================================================= */
 
-  function showMessage(element, message, type = "error") {
-    if (!element) return;
+  function showMessage(
+    element,
+    message,
+    type = "error"
+  ) {
+
+    if (!element) {
+      return;
+    }
 
     element.textContent = message;
-    element.className = `message show ${type}`;
+
+    element.className =
+      `message show ${type}`;
+
   }
 
+
   function clearMessage(element) {
-    if (!element) return;
+
+    if (!element) {
+      return;
+    }
 
     element.textContent = "";
     element.className = "message";
+
   }
 
-  /* =======================================================
-     CLOUDFLARE TURNSTILE
-     ======================================================= */
-
-  const captchaTokens = {
-    login: "",
-    signup: ""
-  };
-
-  const captchaWidgets = {
-    login: null,
-    signup: null
-  };
-
-  let captchaReady = false;
-
-  function resetCaptcha(type) {
-    captchaTokens[type] = "";
-
-    if (
-      window.turnstile &&
-      captchaWidgets[type] !== null
-    ) {
-      try {
-        window.turnstile.reset(captchaWidgets[type]);
-      } catch (error) {
-        console.warn("Could not reset CAPTCHA:", error);
-      }
-    }
-  }
-
-  function renderCaptcha(type) {
-    if (!window.turnstile || !TURNSTILE_SITE_KEY) {
-      return;
-    }
-
-    if (captchaWidgets[type] !== null) {
-      return;
-    }
-
-    const container = document.getElementById(
-      `${type}Turnstile`
-    );
-
-    if (!container) return;
-
-    captchaWidgets[type] = window.turnstile.render(
-      container,
-      {
-        sitekey: TURNSTILE_SITE_KEY,
-        theme: "dark",
-
-        callback: token => {
-          captchaTokens[type] = token;
-        },
-
-        "expired-callback": () => {
-          captchaTokens[type] = "";
-        },
-
-        "error-callback": errorCode => {
-          captchaTokens[type] = "";
-          console.warn(
-            `Turnstile ${type} error:`,
-            errorCode
-          );
-        }
-      }
-    );
-  }
-
-  window.onTradingIslandTurnstileReady = () => {
-    captchaReady = true;
-    renderCaptcha("login");
-    renderCaptcha("signup");
-  };
-
-  if (window.turnstile) {
-    window.onTradingIslandTurnstileReady();
-  }
-
-  function validateCaptcha(type, messageElement) {
-    if (!TURNSTILE_SITE_KEY) {
-      showMessage(
-        messageElement,
-        "Security verification is not configured."
-      );
-      return false;
-    }
-
-    if (!captchaReady || !window.turnstile) {
-      showMessage(
-        messageElement,
-        "Security verification is loading. Please try again."
-      );
-      return false;
-    }
-
-    if (!captchaTokens[type]) {
-      showMessage(
-        messageElement,
-        "Please complete the security check."
-      );
-      return false;
-    }
-
-    return true;
-  }
 
   /* =======================================================
      SWITCH LOGIN / SIGNUP
      ======================================================= */
 
   if (showSignupButton) {
-    showSignupButton.addEventListener("click", () => {
-      loginView.classList.remove("active");
-      signupView.classList.add("active");
 
-      clearMessage(loginMessage);
-      clearMessage(signupMessage);
-    });
+    showSignupButton.addEventListener(
+      "click",
+      () => {
+
+        loginView.classList.remove(
+          "active"
+        );
+
+        signupView.classList.add(
+          "active"
+        );
+
+        clearMessage(loginMessage);
+        clearMessage(signupMessage);
+
+      }
+    );
+
   }
+
 
   if (showLoginButton) {
-    showLoginButton.addEventListener("click", () => {
-      signupView.classList.remove("active");
-      loginView.classList.add("active");
 
-      clearMessage(loginMessage);
-      clearMessage(signupMessage);
-    });
+    showLoginButton.addEventListener(
+      "click",
+      () => {
+
+        signupView.classList.remove(
+          "active"
+        );
+
+        loginView.classList.add(
+          "active"
+        );
+
+        clearMessage(loginMessage);
+        clearMessage(signupMessage);
+
+      }
+    );
+
   }
+
 
   /* =======================================================
      PASSWORD SHOW / HIDE
      ======================================================= */
 
-  document.querySelectorAll(".password-toggle")
-    .forEach(button => {
-      button.addEventListener("click", () => {
-        const targetId = button.dataset.target;
-        const input = document.getElementById(targetId);
+  const passwordToggleButtons =
+    document.querySelectorAll(
+      ".password-toggle"
+    );
 
-        if (!input) return;
 
-        if (input.type === "password") {
-          input.type = "text";
-          button.textContent = "Hide";
-        } else {
-          input.type = "password";
-          button.textContent = "Show";
+  passwordToggleButtons.forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const targetId =
+            button.dataset.target;
+
+          const input =
+            document.getElementById(
+              targetId
+            );
+
+
+          if (!input) {
+            return;
+          }
+
+
+          if (
+            input.type === "password"
+          ) {
+
+            input.type = "text";
+
+            button.textContent =
+              "Hide";
+
+          } else {
+
+            input.type = "password";
+
+            button.textContent =
+              "Show";
+
+          }
+
         }
-      });
-    });
+      );
+
+    }
+  );
+
 
   /* =======================================================
      SIGN UP
      ======================================================= */
 
-  signupForm.addEventListener("submit", async event => {
-    event.preventDefault();
+  signupForm.addEventListener(
+    "submit",
+    async event => {
 
-    if (signupButton.disabled) return;
+      event.preventDefault();
 
-    clearMessage(signupMessage);
+      clearMessage(signupMessage);
 
-    const name = signupName.value.trim();
-    const email = signupEmail.value.trim().toLowerCase();
-    const password = signupPassword.value;
-    const passwordConfirmation = confirmPassword.value;
 
-    if (!name) {
-      showMessage(
-        signupMessage,
-        "Please enter your name."
-      );
-      return;
-    }
+      const name =
+        signupName.value.trim();
 
-    if (password.length < 6) {
-      showMessage(
-        signupMessage,
-        "Your password must contain at least 6 characters."
-      );
-      return;
-    }
 
-    if (password !== passwordConfirmation) {
-      showMessage(
-        signupMessage,
-        "The passwords do not match."
-      );
-      return;
-    }
+      const email =
+        signupEmail.value
+          .trim()
+          .toLowerCase();
 
-    if (!validateCaptcha("signup", signupMessage)) {
-      return;
-    }
 
-    const captchaToken = captchaTokens.signup;
+      const password =
+        signupPassword.value;
 
-    signupButton.disabled = true;
-    signupButton.textContent = "Creating account...";
 
-    try {
-      const { data, error } =
-        await supabaseClient.auth.signUp({
-          email,
-          password,
-          options: {
-            data: {
-              name
-            },
-            emailRedirectTo:
-              `${window.location.origin}/app/`,
-            captchaToken
-          }
-        });
+      const passwordConfirmation =
+        confirmPassword.value;
 
-      if (error) {
-        throw error;
-      }
 
-      if (data.session) {
-        window.location.href = "/app/";
+      if (!name) {
+
+        showMessage(
+          signupMessage,
+          "Please enter your name."
+        );
+
         return;
+
       }
 
-      showMessage(
-        signupMessage,
-        "Account created. Check your email to confirm your account.",
-        "success"
-      );
 
-      signupForm.reset();
+      if (
+        password.length < 6
+      ) {
 
-    } catch (error) {
-      console.error("Signup error:", error);
+        showMessage(
+          signupMessage,
+          "Your password must contain at least 6 characters."
+        );
 
-      showMessage(
-        signupMessage,
-        error.message ||
-          "Could not create your account."
-      );
+        return;
 
-    } finally {
-      resetCaptcha("signup");
+      }
 
-      signupButton.disabled = false;
-      signupButton.textContent = "Create account";
+
+      if (
+        password !==
+        passwordConfirmation
+      ) {
+
+        showMessage(
+          signupMessage,
+          "The passwords do not match."
+        );
+
+        return;
+
+      }
+
+
+      signupButton.disabled = true;
+
+      signupButton.textContent =
+        "Creating account...";
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth
+            .signUp({
+
+              email: email,
+
+              password: password,
+
+              options: {
+
+                data: {
+                  name: name
+                },
+
+                emailRedirectTo:
+                  `${window.location.origin}/app/`
+
+              }
+
+            });
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        if (data.session) {
+
+          window.location.href =
+            "/app/";
+
+          return;
+
+        }
+
+
+        showMessage(
+          signupMessage,
+          "Account created. Check your email to confirm your account.",
+          "success"
+        );
+
+
+        signupForm.reset();
+
+
+      } catch (error) {
+
+        console.error(
+          "Signup error:",
+          error
+        );
+
+
+        showMessage(
+          signupMessage,
+          error.message ||
+            "Could not create your account."
+        );
+
+
+      } finally {
+
+        signupButton.disabled = false;
+
+        signupButton.textContent =
+          "Create account";
+
+      }
+
     }
-  });
+  );
+
 
   /* =======================================================
      LOGIN
      ======================================================= */
 
-  loginForm.addEventListener("submit", async event => {
-    event.preventDefault();
+  loginForm.addEventListener(
+    "submit",
+    async event => {
 
-    if (loginButton.disabled) return;
+      event.preventDefault();
 
-    clearMessage(loginMessage);
+      clearMessage(loginMessage);
 
-    const email = loginEmail.value.trim().toLowerCase();
-    const password = loginPassword.value;
 
-    if (!validateCaptcha("login", loginMessage)) {
-      return;
-    }
+      const email =
+        loginEmail.value
+          .trim()
+          .toLowerCase();
 
-    const captchaToken = captchaTokens.login;
 
-    loginButton.disabled = true;
-    loginButton.textContent = "Logging in...";
+      const password =
+        loginPassword.value;
 
-    try {
-      const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
-          email,
-          password,
-          options: {
-            captchaToken
-          }
-        });
 
-      if (error) {
-        throw error;
-      }
+      loginButton.disabled = true;
 
-      if (!data.session) {
-        throw new Error(
-          "Could not start your session."
+      loginButton.textContent =
+        "Logging in...";
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth
+            .signInWithPassword({
+
+              email: email,
+
+              password: password
+
+            });
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        if (!data.session) {
+
+          throw new Error(
+            "Could not start your session."
+          );
+
+        }
+
+
+        window.location.href =
+          "/app/";
+
+
+      } catch (error) {
+
+        console.error(
+          "Login error:",
+          error
         );
+
+
+        showMessage(
+          loginMessage,
+          error.message ||
+            "Could not log in."
+        );
+
+
+      } finally {
+
+        loginButton.disabled = false;
+
+        loginButton.textContent =
+          "Log in";
+
       }
 
-      window.location.href = "/app/";
-
-    } catch (error) {
-      console.error("Login error:", error);
-
-      showMessage(
-        loginMessage,
-        error.message || "Could not log in."
-      );
-
-    } finally {
-      resetCaptcha("login");
-
-      loginButton.disabled = false;
-      loginButton.textContent = "Log in";
     }
-  });
+  );
+
 
   /* =======================================================
      CHECK SESSION
      ======================================================= */
 
   try {
-    const { data, error } =
-      await supabaseClient.auth.getSession();
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth
+        .getSession();
+
 
     if (error) {
       throw error;
     }
 
+
     if (data.session) {
-      window.location.href = "/app/";
+
+      window.location.href =
+        "/app/";
+
     }
 
+
   } catch (error) {
-    console.error("Session check error:", error);
+
+    console.error(
+      "Session check error:",
+      error
+    );
+
   }
+
 }
