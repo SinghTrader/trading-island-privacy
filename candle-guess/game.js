@@ -1875,7 +1875,7 @@
             font-size:22px;
             font-weight:800;
           ">
-            🏆 Global Leaderboard
+             Global Leaderboard
           </h2>
 
           <p style="
