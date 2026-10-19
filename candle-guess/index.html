@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="CandleGuess: three daily candlestick predictions on Trading Island."
+  >
+
+  <title>CandleGuess | Trading Island</title>
+
+  <link rel="icon" href="/logo2.png">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/candle-guess/game.css">
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+
+      <a class="brand" href="/">
+        <img
+          class="cg-logo"
+          src="/logo2.png"
+          alt=""
+        >
+        Trading Island
+      </a>
+
+      <div class="nav-right">
+
+        <nav>
+          <a href="/#features">Features</a>
+          <a href="/learn/">Learn</a>
+          <a href="/app/">Dashboard</a>
+        </nav>
+
+        <div class="nav-account">
+          <a
+            class="nav-dashboard-button"
+            href="/app/"
+          >
+            Open Dashboard
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </header>
+
+  <main class="container cg-wrap">
+
+    <div class="cg-heading">
+
+      <div>
+        <p class="cg-eyebrow">
+          DAILY MARKET CHALLENGE · SYNTHETIC DEMO
+        </p>
+
+        <h1>CandleGuess</h1>
+
+        <p>
+          Can You Predict the Next Move?
+        </p>
+      </div>
+
+      <span id="challenge" class="cg-pill">
+        Daily Challenge
+      </span>
+
+    </div>
+
+    <!-- GAME -->
+
+    <section id="game" class="cg-panel">
+
+      <div class="cg-stats">
+
+        <div>
+          <small>ROUND</small>
+          <strong id="round">1 / 3</strong>
+        </div>
+
+        <div>
+          <small>TIME LEFT</small>
+          <strong id="timer">20s</strong>
+        </div>
+
+        <div>
+          <small>SCORE</small>
+          <strong id="score">0 / 300</strong>
+        </div>
+
+      </div>
+
+      <div class="cg-chart-heading">
+
+        <div>
+          <strong id="asset">BTC/USD</strong>
+          <span id="timeframe">
+            1H · Synthetic demo
+          </span>
+        </div>
+
+        <span class="cg-pill cg-muted">
+          Next 5 candles hidden
+        </span>
+
+      </div>
+
+      <div class="cg-chart-shell">
+
+        <div
+          id="chart"
+          role="img"
+          aria-label="Candlestick chart"
+        ></div>
+
+        <div class="cg-future" aria-hidden="true">
+          <span>?</span>
+        </div>
+
+      </div>
+
+      <div id="question">
+
+        <h2>What happens next?</h2>
+
+        <p>
+          Predict where the close will be
+          after five more candles.
+        </p>
+
+        <div class="cg-actions">
+
+          <button
+            id="long"
+            class="cg-button cg-long"
+            type="button"
+          >
+            ↑ LONG
+            <small>Price goes up</small>
+          </button>
+
+          <button
+            id="short"
+            class="cg-button cg-short"
+            type="button"
+          >
+            ↓ SHORT
+            <small>Price goes down</small>
+          </button>
+
+        </div>
+
+      </div>
+
+      <div
+        id="feedback"
+        class="cg-feedback"
+        aria-live="polite"
+      ></div>
+
+      <button
+        id="next"
+        class="cg-button cg-next"
+        type="button"
+        hidden
+      >
+        Next Round →
+      </button>
+
+    </section>
+
+    <!-- RESULTS -->
+
+    <section id="results" class="cg-panel" hidden>
+
+      <p class="cg-eyebrow">
+        CHALLENGE COMPLETE
+      </p>
+
+      <h2>Your CandleGuess results</h2>
+
+      <div
+        class="cg-big-score"
+        id="finalScore"
+      >
+        0 / 300
+      </div>
+
+      <p id="finalDetails"></p>
+
+      <div
+        id="roundResults"
+        class="cg-results"
+      ></div>
+
+      <p id="streak"></p>
+
+      <p id="countdown"></p>
+
+      <button
+        id="share"
+        class="cg-button cg-next"
+        type="button"
+      >
+        Share Score
+      </button>
+
+      <p class="cg-footnote">
+        This is a synthetic-data demo.
+        Scores are stored on this device only.
+      </p>
+
+    </section>
+
+    <p class="cg-footnote">
+      Educational prediction game only.
+      No live prices, real trading or financial advice.
+      Demo candles are generated, not historical market data.
+    </p>
+
+  </main>
+
+  <script
+    src="/candle-guess/game.js"
+    defer
+  ></script>
+
+</body>
+</html>
