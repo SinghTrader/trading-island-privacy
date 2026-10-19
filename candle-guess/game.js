@@ -1,9 +1,8 @@
 
 /* =========================================================
-   CANDLEGUESS — TRADING ISLAND
-   Daily trading prediction game
-   Supabase score integration
-   No account required
+   CANDLEGUESS V4 — TRADING ISLAND
+   Professional chart + daily challenge
+   Supabase scores + leaderboard + social sharing
    ========================================================= */
 
 (() => {
@@ -42,17 +41,15 @@
   ];
 
   // ========================================================
-  // VISITOR ID — NO ACCOUNT REQUIRED
+  // VISITOR ID
   // ========================================================
 
   function getVisitorId() {
-    let id;
+    let id = null;
 
     try {
       id = localStorage.getItem(visitorKey);
-    } catch {
-      id = null;
-    }
+    } catch {}
 
     const validUUID =
       /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -62,9 +59,7 @@
 
       try {
         localStorage.setItem(visitorKey, id);
-      } catch {
-        // Storage may be unavailable.
-      }
+      } catch {}
     }
 
     return id;
@@ -73,16 +68,10 @@
   const visitorId = getVisitorId();
 
   // ========================================================
-  // SUPABASE EDGE FUNCTION
+  // SUPABASE API
   // ========================================================
 
   async function callScoreApi(action, predictions) {
-    if (SUPABASE_URL.includes("VUL-HIER")) {
-      throw new Error(
-        "Vul eerst je Supabase Project URL in."
-      );
-    }
-
     const payload = {
       action,
       visitor_id: visitorId
@@ -94,11 +83,9 @@
 
     const response = await fetch(API_URL, {
       method: "POST",
-
       headers: {
         "Content-Type": "application/json"
       },
-
       body: JSON.stringify(payload)
     });
 
@@ -164,9 +151,7 @@
         storageKey(date),
         JSON.stringify(result)
       );
-    } catch {
-      // Storage may be unavailable.
-    }
+    } catch {}
   }
 
   function clearOldResults() {
@@ -179,19 +164,16 @@
           localStorage.removeItem(key);
         }
 
-        if (
-          key.startsWith("ti-candleguess-demo-")
-        ) {
+        if (key.startsWith("ti-candleguess-demo-")) {
           localStorage.removeItem(key);
         }
       }
-    } catch {
-      // Storage may be unavailable.
-    }
+    } catch {}
   }
 
   // ========================================================
   // RANDOM GENERATOR
+  // IMPORTANT: KEEP IDENTICAL TO SERVER SCENARIOS
   // ========================================================
 
   function seedString(value) {
@@ -210,7 +192,6 @@
   function randomGenerator(seed) {
     return () => {
       seed |= 0;
-
       seed = (seed + 0x6D2B79F5) | 0;
 
       let value = Math.imul(
@@ -233,7 +214,7 @@
   }
 
   // ========================================================
-  // GENERATE DAILY CANDLESTICK SCENARIO
+  // DAILY SCENARIOS
   // ========================================================
 
   function makeScenario(day, index) {
@@ -261,8 +242,6 @@
     const candles = [];
 
     let close = base;
-
-    // Historical candles
 
     for (let i = 0; i < 53; i++) {
       const open = close;
@@ -293,8 +272,6 @@
     const desiredDirection =
       random() > 0.5 ? 1 : -1;
 
-    // Future candles
-
     for (let i = 48; i < 53; i++) {
       const previousClose =
         candles[i - 1].close;
@@ -312,7 +289,6 @@
 
       candles[i] = {
         open: previousClose,
-
         close: nextClose,
 
         high:
@@ -336,7 +312,7 @@
   }
 
   // ========================================================
-  // DRAW CANDLESTICK CHART
+  // PROFESSIONAL CANDLESTICK CHART
   // ========================================================
 
   function drawChart() {
@@ -350,106 +326,310 @@
     if (!canvas) {
       canvas = document.createElement("canvas");
 
+      canvas.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
       canvas.style.cssText = `
-        width: 100%;
-        height: 100%;
-        display: block;
+        display:block;
+        width:100%;
+        height:100%;
       `;
 
       element.appendChild(canvas);
     }
+
+    const width = element.clientWidth;
+    const height = element.clientHeight;
+
+    if (width < 100 || height < 100) return;
 
     const dpr = Math.min(
       window.devicePixelRatio || 1,
       2
     );
 
-    const width = element.clientWidth;
-    const height = element.clientHeight;
+    canvas.width =
+      Math.round(width * dpr);
 
-    if (!width || !height) return;
+    canvas.height =
+      Math.round(height * dpr);
 
-    canvas.width = Math.round(width * dpr);
-    canvas.height = Math.round(height * dpr);
-
-    const ctx = canvas.getContext("2d");
+    const ctx =
+      canvas.getContext("2d");
 
     if (!ctx) return;
 
-    ctx.scale(dpr, dpr);
-    ctx.clearRect(0, 0, width, height);
+    ctx.setTransform(
+      dpr, 0, 0, dpr, 0, 0
+    );
 
-    const candles = scenario.candles;
+    ctx.clearRect(
+      0, 0, width, height
+    );
 
-    const visibleCount =
-      48 + revealedCandles;
+    // COLORS
 
-    const visibleCandles =
-      candles.slice(0, visibleCount);
-
-    const padding = {
-      top: 22,
-      bottom: 28,
-      left: 14,
-      right: 14
+    const C = {
+      bg: "#080f0b",
+      axisBg: "#0d1710",
+      grid: "rgba(151,190,162,0.09)",
+      axis: "#779080",
+      green: "#7cffb2",
+      red: "#ff8991",
+      muted: "#819989",
+      border: "#2b3c30"
     };
 
+    // LAYOUT
+
+    const mobile = width < 540;
+
+    const axisWidth =
+      mobile ? 64 : 86;
+
+    const left =
+      mobile ? 8 : 18;
+
+    const right =
+      width - axisWidth;
+
+    const top = 22;
+    const bottom = height - 31;
+
+    const plotWidth =
+      right - left;
+
     const plotHeight =
-      height -
-      padding.top -
-      padding.bottom;
+      bottom - top;
 
-    const lows =
-      visibleCandles.map(c => c.low);
+    const candles =
+      scenario.candles;
 
-    const highs =
-      visibleCandles.map(c => c.high);
+    const visibleCount =
+      Math.min(
+        candles.length,
+        48 + revealedCandles
+      );
 
-    const lowest = Math.min(...lows);
-    const highest = Math.max(...highs);
+    const visible =
+      candles.slice(0, visibleCount);
+
+    if (!visible.length) return;
+
+    // BACKGROUND
+
+    ctx.fillStyle = C.bg;
+
+    ctx.fillRect(
+      0, 0, width, height
+    );
+
+    const glow =
+      ctx.createLinearGradient(
+        0, 0, width, height
+      );
+
+    glow.addColorStop(
+      0,
+      "rgba(124,255,178,0.035)"
+    );
+
+    glow.addColorStop(
+      1,
+      "rgba(124,255,178,0)"
+    );
+
+    ctx.fillStyle = glow;
+
+    ctx.fillRect(
+      0, 0, right, height
+    );
+
+    // PRICE RANGE
+
+    const rawLow = Math.min(
+      ...visible.map(c => c.low)
+    );
+
+    const rawHigh = Math.max(
+      ...visible.map(c => c.high)
+    );
+
+    const rawRange = Math.max(
+      rawHigh - rawLow,
+      0.000001
+    );
+
+    const pricePadding =
+      rawRange * 0.14;
+
+    const lowest =
+      rawLow - pricePadding;
+
+    const highest =
+      rawHigh + pricePadding;
 
     const range =
-      highest - lowest || 1;
+      highest - lowest;
 
     const y = price =>
-      padding.top +
+      top +
       ((highest - price) / range) *
       plotHeight;
 
+    const priceAtY = pixelY =>
+      highest -
+      ((pixelY - top) / plotHeight) *
+      range;
+
+    // PRICE FORMATTING
+
+    const formatPrice = price => {
+      if (scenario.asset === "EUR/USD") {
+        return price.toFixed(4);
+      }
+
+      return price.toLocaleString(
+        "en-US",
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }
+      );
+    };
+
+    // CANDLE POSITIONS
+
     const candleSpacing =
-      (
-        width -
-        padding.left -
-        padding.right
-      ) / 53;
+      plotWidth / 53;
 
     const candleWidth = Math.max(
       2,
       Math.min(
-        10,
-        candleSpacing * 0.64
+        11,
+        candleSpacing * 0.66
       )
     );
 
-    // Grid
+    const x = index =>
+      left +
+      (index + 0.5) * candleSpacing;
 
-    ctx.strokeStyle =
-      "rgba(255,255,255,0.07)";
+    // GRID
 
     ctx.lineWidth = 1;
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i <= 5; i++) {
       const gridY =
-        padding.top +
-        (i * plotHeight) / 4;
+        top +
+        (plotHeight / 5) * i;
 
       ctx.beginPath();
-      ctx.moveTo(0, gridY);
-      ctx.lineTo(width, gridY);
+      ctx.moveTo(left, gridY);
+      ctx.lineTo(right, gridY);
+
+      ctx.strokeStyle = C.grid;
       ctx.stroke();
     }
 
-    // Candles
+    for (let i = 0; i <= 6; i++) {
+      const gridX =
+        left +
+        (plotWidth / 6) * i;
+
+      ctx.beginPath();
+      ctx.moveTo(gridX, top);
+      ctx.lineTo(gridX, bottom);
+
+      ctx.strokeStyle = C.grid;
+      ctx.stroke();
+    }
+
+    // PRICE AXIS
+
+    ctx.fillStyle = C.axisBg;
+
+    ctx.fillRect(
+      right,
+      0,
+      axisWidth,
+      height
+    );
+
+    ctx.strokeStyle = C.border;
+
+    ctx.beginPath();
+    ctx.moveTo(right, 0);
+    ctx.lineTo(right, height);
+    ctx.stroke();
+
+    ctx.font = mobile
+      ? "10px system-ui, sans-serif"
+      : "11px system-ui, sans-serif";
+
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = C.axis;
+
+    for (let i = 0; i <= 5; i++) {
+      const gridY =
+        top +
+        (plotHeight / 5) * i;
+
+      ctx.fillText(
+        formatPrice(priceAtY(gridY)),
+        right + 7,
+        gridY
+      );
+    }
+
+    // FUTURE AREA
+
+    const futureStart =
+      x(48) - candleSpacing / 2;
+
+    if (revealedCandles < 5) {
+      ctx.fillStyle =
+        "rgba(124,255,178,0.025)";
+
+      ctx.fillRect(
+        futureStart,
+        top,
+        right - futureStart,
+        plotHeight
+      );
+
+      ctx.save();
+
+      ctx.setLineDash([5, 5]);
+
+      ctx.strokeStyle =
+        "rgba(124,255,178,0.36)";
+
+      ctx.beginPath();
+      ctx.moveTo(futureStart, top);
+      ctx.lineTo(futureStart, bottom);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    // CANDLESTICKS
+
+    ctx.save();
+
+    ctx.beginPath();
+
+    ctx.rect(
+      left,
+      top,
+      plotWidth,
+      plotHeight
+    );
+
+    ctx.clip();
 
     for (
       let i = 0;
@@ -458,64 +638,204 @@
     ) {
       const candle = candles[i];
 
-      const x =
-        padding.left +
-        (i + 0.5) * candleSpacing;
+      const candleX = x(i);
+
+      const bullish =
+        candle.close >= candle.open;
 
       const color =
-        candle.close >= candle.open
-          ? "#7cffb2"
-          : "#e87777";
+        bullish ? C.green : C.red;
 
-      ctx.strokeStyle = color;
-      ctx.fillStyle = color;
+      const openY = y(candle.open);
+      const closeY = y(candle.close);
 
-      // Wick
+      const highY = y(candle.high);
+      const lowY = y(candle.low);
+
+      // WICK
 
       ctx.beginPath();
-      ctx.moveTo(x, y(candle.high));
-      ctx.lineTo(x, y(candle.low));
+
+      ctx.moveTo(
+        Math.round(candleX) + 0.5,
+        highY
+      );
+
+      ctx.lineTo(
+        Math.round(candleX) + 0.5,
+        lowY
+      );
+
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1.2;
       ctx.stroke();
 
-      // Body
+      // BODY
 
-      const top = Math.min(
-        y(candle.open),
-        y(candle.close)
-      );
+      const bodyTop =
+        Math.min(openY, closeY);
 
-      const bodyHeight = Math.max(
-        1,
-        Math.abs(
-          y(candle.open) -
-          y(candle.close)
-        )
-      );
+      const bodyHeight =
+        Math.max(
+          1.5,
+          Math.abs(openY - closeY)
+        );
+
+      ctx.fillStyle = color;
 
       ctx.fillRect(
-        x - candleWidth / 2,
-        top,
+        candleX - candleWidth / 2,
+        bodyTop,
         candleWidth,
         bodyHeight
       );
     }
 
-    // Synthetic data label
+    ctx.restore();
 
-    ctx.fillStyle = "#929b97";
+    // CURRENT PRICE LINE
 
-    ctx.font =
-      "11px Inter, system-ui, sans-serif";
+    const currentCandle =
+      visible[visible.length - 1];
+
+    const currentPrice =
+      currentCandle.close;
+
+    const currentY =
+      y(currentPrice);
+
+    const priceColor =
+      currentCandle.close >=
+      currentCandle.open
+        ? C.green
+        : C.red;
+
+    ctx.save();
+
+    ctx.setLineDash([4, 4]);
+
+    ctx.strokeStyle = priceColor;
+    ctx.globalAlpha = 0.65;
+
+    ctx.beginPath();
+    ctx.moveTo(left, currentY);
+    ctx.lineTo(right, currentY);
+    ctx.stroke();
+
+    ctx.restore();
+
+    // CURRENT PRICE LABEL
+
+    const labelHeight = 24;
+
+    const labelY = Math.max(
+      top,
+      Math.min(
+        bottom - labelHeight,
+        currentY - labelHeight / 2
+      )
+    );
+
+    ctx.fillStyle = priceColor;
+
+    ctx.fillRect(
+      right,
+      labelY,
+      axisWidth,
+      labelHeight
+    );
+
+    ctx.fillStyle = "#07110b";
+
+    ctx.font = mobile
+      ? "bold 10px system-ui, sans-serif"
+      : "bold 11px system-ui, sans-serif";
+
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
 
     ctx.fillText(
-      "SYNTHETIC DATA · DEMO",
-      14,
-      height - 9
+      formatPrice(currentPrice),
+      right + 7,
+      labelY + labelHeight / 2
     );
+
+    // BOTTOM AXIS
+
+    ctx.fillStyle = "#0c1510";
+
+    ctx.fillRect(
+      0,
+      bottom,
+      right,
+      height - bottom
+    );
+
+    ctx.strokeStyle = "#263b2c";
+
+    ctx.beginPath();
+    ctx.moveTo(0, bottom);
+    ctx.lineTo(right, bottom);
+    ctx.stroke();
+
+    ctx.font =
+      "10px system-ui, sans-serif";
+
+    ctx.fillStyle = C.muted;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    // Synthetic candle indices:
+    // these labels represent relative positions,
+    // not actual market timestamps.
+
+    const labels = mobile
+      ? [
+          [5, "-42h"],
+          [23, "-24h"],
+          [41, "-6h"]
+        ]
+      : [
+          [5, "-42h"],
+          [15, "-32h"],
+          [25, "-22h"],
+          [35, "-12h"],
+          [45, "-2h"]
+        ];
+
+    labels.forEach(([index, label]) => {
+      ctx.fillText(
+        label,
+        x(index),
+        bottom + 15
+      );
+    });
+
+    // WATERMARK
+
+    ctx.save();
+
+    ctx.font = mobile
+      ? "600 10px system-ui, sans-serif"
+      : "600 11px system-ui, sans-serif";
+
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+
+    ctx.fillStyle =
+      "rgba(153,184,163,0.48)";
+
+    ctx.fillText(
+      "TRADING ISLAND",
+      left + 9,
+      top + 10
+    );
+
+    ctx.restore();
   }
 
   // ========================================================
-  // UPDATE GAME DISPLAY
+  // UPDATE DISPLAY
   // ========================================================
 
   function updateDisplay() {
@@ -542,7 +862,7 @@
   }
 
   // ========================================================
-  // STOP TIMERS
+  // TIMERS
   // ========================================================
 
   function stopTimers() {
@@ -625,7 +945,7 @@
   }
 
   // ========================================================
-  // SUBMIT ROUND PREDICTION
+  // SUBMIT PREDICTION
   // ========================================================
 
   function submitPrediction(choice) {
@@ -685,7 +1005,7 @@
       .querySelector(".cg-future")
       ?.classList.add("revealed");
 
-    // Reveal 5 future candles
+    // Reveal 5 candles, one by one.
 
     revealInterval = setInterval(() => {
       revealedCandles++;
@@ -703,7 +1023,7 @@
             ? "View Results →"
             : "Next Round →";
       }
-    }, 190);
+    }, 300);
   }
 
   // ========================================================
@@ -741,22 +1061,23 @@
   }
 
   // ========================================================
-  // PERCENTILE ELEMENT
+  // PERCENTILE
   // ========================================================
 
   function percentageElement() {
     let element = $("cgPercentile");
 
     if (!element) {
-      element = document.createElement("p");
+      element =
+        document.createElement("p");
 
       element.id = "cgPercentile";
 
       element.style.cssText = `
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: #7cffb2;
-        margin: 12px 0;
+        font-size:1.1rem;
+        font-weight:700;
+        color:#7cffb2;
+        margin:12px 0;
       `;
 
       const parent =
@@ -770,7 +1091,7 @@
   }
 
   // ========================================================
-  // SHOW FINAL RESULTS
+  // SHOW RESULTS
   // ========================================================
 
   function showResults(
@@ -784,8 +1105,6 @@
 
     $("game").hidden = true;
     $("results").hidden = false;
-
-     loadLeaderboard();
 
     $("finalScore").textContent =
       `${result.score} / 300`;
@@ -824,9 +1143,8 @@
       ...resultElements
     );
 
-    // Real Supabase player comparison
-
-    const percentile = percentageElement();
+    const percentile =
+      percentageElement();
 
     if (
       result.better_than_percent === null ||
@@ -840,14 +1158,10 @@
         "of players today";
     }
 
-    // No permanent streak history
-
     if ($("streak")) {
       $("streak").textContent =
         "New challenge every day";
     }
-
-    // Countdown
 
     const refreshCountdown = () => {
       $("countdown").textContent =
@@ -866,11 +1180,12 @@
       1000
     );
 
-    // Perfect score animation
-
     if (
       result.score === 300 &&
-      $("finalScore").animate
+      $("finalScore").animate &&
+      !window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches
     ) {
       $("finalScore").animate(
         [
@@ -892,10 +1207,12 @@
         }
       );
     }
+
+    loadLeaderboard();
   }
 
   // ========================================================
-  // SAVE FINAL SCORE TO SUPABASE
+  // SAVE SCORE
   // ========================================================
 
   async function finishGame() {
@@ -906,6 +1223,7 @@
     stopTimers();
 
     $("next").disabled = true;
+
     $("next").textContent =
       "Saving score...";
 
@@ -917,8 +1235,6 @@
         "submit",
         predictions
       );
-
-      // Use server-verified score
 
       score = result.score;
 
@@ -948,14 +1264,13 @@
 
     } catch (error) {
       if (error.status === 409) {
-        // Score was already submitted
-
         try {
           const status =
             await callScoreApi("status");
 
           if (status.completed) {
-            const previous = loadResult();
+            const previous =
+              loadResult();
 
             showResults(
               {
@@ -985,6 +1300,7 @@
       );
 
       $("next").disabled = false;
+
       $("next").textContent =
         "Retry saving score →";
 
@@ -993,7 +1309,7 @@
   }
 
   // ========================================================
-  // BUTTON EVENTS
+  // GAME BUTTON EVENTS
   // ========================================================
 
   $("long").addEventListener(
@@ -1018,20 +1334,12 @@
     }
   );
 
-  
-  /* =======================================================
-     CANDLEGUESS — SOCIAL SHARING
-     Trading Island
-     ======================================================= */
+  // ========================================================
+  // SOCIAL SHARING
+  // ========================================================
 
-  const SHARE_URL =
-    "https://www.tradingisland.net/candle-guess/";
-
+  const SHARE_URL = GAME_URL;
   const SHARE_SIZE = 1080;
-
-  // ========================================================
-  // GET TODAY'S RESULT
-  // ========================================================
 
   function getShareResult() {
     const saved = loadResult();
@@ -1048,10 +1356,6 @@
       date: saved.date
     };
   }
-
-  // ========================================================
-  // CREATE SHARE TEXT
-  // ========================================================
 
   function createShareText(result) {
     const squares = result.answers
@@ -1076,7 +1380,7 @@
   }
 
   // ========================================================
-  // CANVAS HELPERS
+  // SHARE CARD HELPERS
   // ========================================================
 
   function roundedRect(
@@ -1089,6 +1393,7 @@
     fill
   ) {
     ctx.beginPath();
+
     ctx.roundRect(
       x,
       y,
@@ -1120,7 +1425,7 @@
   }
 
   // ========================================================
-  // CREATE PROFESSIONAL SHARE CARD
+  // CREATE SHARE CARD
   // ========================================================
 
   function createShareCanvas(result) {
@@ -1138,50 +1443,37 @@
       );
     }
 
-    // Background
+    // BACKGROUND
 
     const gradient =
       ctx.createLinearGradient(
-        0,
-        0,
-        1080,
-        1350
+        0, 0, 1080, 1350
       );
 
     gradient.addColorStop(
-      0,
-      "#111c17"
+      0, "#111c17"
     );
 
     gradient.addColorStop(
-      0.5,
-      "#09110d"
+      0.5, "#09110d"
     );
 
     gradient.addColorStop(
-      1,
-      "#050807"
+      1, "#050807"
     );
 
     ctx.fillStyle = gradient;
 
     ctx.fillRect(
-      0,
-      0,
-      1080,
-      1350
+      0, 0, 1080, 1350
     );
 
-    // Decorative glow
+    // GLOW
 
     const glow =
       ctx.createRadialGradient(
-        540,
-        470,
-        40,
-        540,
-        470,
-        600
+        540, 470, 40,
+        540, 470, 600
       );
 
     glow.addColorStop(
@@ -1197,20 +1489,15 @@
     ctx.fillStyle = glow;
 
     ctx.fillRect(
-      0,
-      0,
-      1080,
-      1050
+      0, 0, 1080, 1050
     );
 
-    // Outer card
+    // MAIN CARD
 
     roundedRect(
       ctx,
-      70,
-      75,
-      940,
-      1200,
+      70, 75,
+      940, 1200,
       38,
       "#101914"
     );
@@ -1221,28 +1508,22 @@
     ctx.beginPath();
 
     ctx.roundRect(
-      70,
-      75,
-      940,
-      1200,
+      70, 75,
+      940, 1200,
       38
     );
 
     ctx.stroke();
 
-    // Logo icon
+    // LOGO
 
     roundedRect(
       ctx,
-      125,
-      130,
-      90,
-      90,
+      125, 130,
+      90, 90,
       22,
       "#7cffb2"
     );
-
-    // Candlestick logo
 
     ctx.strokeStyle = "#08120c";
     ctx.fillStyle = "#08120c";
@@ -1259,23 +1540,16 @@
     ctx.stroke();
 
     ctx.fillRect(
-      145,
-      165,
-      16,
-      23
+      145, 165, 16, 23
     );
 
     ctx.fillRect(
-      175,
-      157,
-      16,
-      24
+      175, 157, 16, 24
     );
 
-    // Branding
+    // BRANDING
 
     ctx.textAlign = "left";
-
     ctx.fillStyle = "#f3fff7";
 
     ctx.font =
@@ -1283,8 +1557,7 @@
 
     ctx.fillText(
       "TRADING ISLAND",
-      240,
-      171
+      240, 171
     );
 
     ctx.fillStyle = "#91a99a";
@@ -1294,11 +1567,10 @@
 
     ctx.fillText(
       "CANDLEGUESS",
-      242,
-      209
+      242, 209
     );
 
-    // Divider
+    // DIVIDER
 
     ctx.strokeStyle = "#284536";
 
@@ -1307,7 +1579,7 @@
     ctx.lineTo(955, 265);
     ctx.stroke();
 
-    // Challenge date
+    // DATE
 
     centeredText(
       ctx,
@@ -1317,7 +1589,7 @@
       "#9eb6a6"
     );
 
-    // Score label
+    // SCORE
 
     centeredText(
       ctx,
@@ -1326,8 +1598,6 @@
       "bold 29px Arial, sans-serif",
       "#9eb6a6"
     );
-
-    // Main score
 
     centeredText(
       ctx,
@@ -1345,7 +1615,7 @@
       "#a0b5a7"
     );
 
-    // Round result cards
+    // ROUND CARDS
 
     const positions = [
       255,
@@ -1364,10 +1634,8 @@
 
       roundedRect(
         ctx,
-        x,
-        775,
-        170,
-        160,
+        x, 775,
+        170, 160,
         25,
         correct
           ? "#173c29"
@@ -1383,10 +1651,8 @@
       ctx.beginPath();
 
       ctx.roundRect(
-        x,
-        775,
-        170,
-        160,
+        x, 775,
+        170, 160,
         25
       );
 
@@ -1419,15 +1685,13 @@
       );
     }
 
-    // Player comparison
+    // PERCENTILE
 
     if (result.percentile !== null) {
       roundedRect(
         ctx,
-        180,
-        980,
-        720,
-        86,
+        180, 980,
+        720, 86,
         22,
         "#1a3325"
       );
@@ -1449,7 +1713,7 @@
       );
     }
 
-    // Bottom divider
+    // FOOTER
 
     ctx.strokeStyle = "#284536";
 
@@ -1457,8 +1721,6 @@
     ctx.moveTo(125, 1115);
     ctx.lineTo(955, 1115);
     ctx.stroke();
-
-    // Call to action
 
     centeredText(
       ctx,
@@ -1480,7 +1742,7 @@
   }
 
   // ========================================================
-  // CONVERT CANVAS TO IMAGE
+  // CANVAS TO BLOB
   // ========================================================
 
   function canvasToBlob(canvas) {
@@ -1594,9 +1856,7 @@
       }
 
     } catch (error) {
-      if (
-        error.name !== "AbortError"
-      ) {
+      if (error.name !== "AbortError") {
         console.error(error);
 
         alert(
@@ -1652,7 +1912,7 @@
   }
 
   // ========================================================
-  // CREATE SOCIAL BUTTONS
+  // SOCIAL BUTTONS
   // ========================================================
 
   function setupSocialSharing() {
@@ -1660,30 +1920,23 @@
 
     if (!oldShareButton) return;
 
-    // Prevent duplicate buttons
-
     if ($("cgSocialButtons")) {
       return;
     }
 
-    // Container
-
     const container =
       document.createElement("div");
 
-    container.id =
-      "cgSocialButtons";
+    container.id = "cgSocialButtons";
 
     container.style.cssText = `
-      display: grid;
+      display:grid;
       grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      width: 100%;
-      margin-top: 18px;
+        repeat(2,minmax(0,1fr));
+      gap:12px;
+      width:100%;
+      margin-top:18px;
     `;
-
-    // Share image button
 
     const shareButton =
       document.createElement("button");
@@ -1694,20 +1947,16 @@
       "Share Result";
 
     shareButton.style.cssText = `
-      background: #7cffb2;
-      color: #07120b;
-      border: 0;
-      border-radius: 14px;
-      padding: 16px 12px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      transition:
-        transform .2s,
-        opacity .2s;
+      background:#7cffb2;
+      color:#07120b;
+      border:0;
+      border-radius:14px;
+      padding:16px 12px;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .2s,opacity .2s;
     `;
-
-    // Copy text button
 
     const copyButton =
       document.createElement("button");
@@ -1718,17 +1967,15 @@
       "Copy Score";
 
     copyButton.style.cssText = `
-      background: #18251d;
-      color: #e7f7ec;
-      border: 1px solid #365441;
-      border-radius: 14px;
-      padding: 16px 12px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      transition:
-        transform .2s,
-        opacity .2s;
+      background:#18251d;
+      color:#e7f7ec;
+      border:1px solid #365441;
+      border-radius:14px;
+      padding:16px 12px;
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .2s,opacity .2s;
     `;
 
     shareButton.addEventListener(
@@ -1746,98 +1993,14 @@
       copyButton
     );
 
-    // Replace original share button
-
     oldShareButton.replaceWith(
       container
     );
   }
 
-  setupSocialSharing();
-
   // ========================================================
-  // RESPONSIVE CHART
+  // GLOBAL LEADERBOARD
   // ========================================================
-
-  window.addEventListener(
-    "resize",
-    drawChart
-  );
-
-  // ========================================================
-  // INITIALIZE GAME
-  // ========================================================
-
-  async function initialize() {
-    clearOldResults();
-
-    $("long").disabled = true;
-    $("short").disabled = true;
-
-    $("next").hidden = true;
-
-    showNotice(
-      "Checking today's challenge..."
-    );
-
-    try {
-      const status =
-        await callScoreApi("status");
-
-      // Already completed today
-
-      if (status.completed) {
-        const saved = loadResult();
-
-        showResults(
-          {
-            score: status.score,
-
-            correct_predictions:
-              status.correct_predictions,
-
-            better_than_percent:
-              saved?.better_than_percent ??
-              null
-          },
-          saved?.answers || []
-        );
-
-        return;
-      }
-
-      // Server has no result yet.
-      // Clear stale local result.
-
-      try {
-        localStorage.removeItem(
-          storageKey(date)
-        );
-      } catch {
-        // Storage may be unavailable.
-      }
-
-      playRound();
-
-    } catch (error) {
-      console.error(
-        "CandleGuess initialization failed:",
-        error
-      );
-
-      showNotice(
-        "Unable to start: " +
-        error.message +
-        ". Refresh to retry."
-      );
-    }
-  }
-
-  initialize();
-   
-  /* =====================================================
-     GLOBAL DAILY LEADERBOARD
-     ===================================================== */
 
   function createLeaderboard() {
     let container = $("cgLeaderboard");
@@ -1846,19 +2009,20 @@
       return container;
     }
 
-    container = document.createElement("section");
+    container =
+      document.createElement("section");
 
     container.id = "cgLeaderboard";
 
     container.style.cssText = `
-      background: #101914;
-      border: 1px solid #284536;
-      border-radius: 20px;
-      padding: 24px;
-      margin-top: 28px;
-      color: #f3fff7;
-      width: 100%;
-      box-sizing: border-box;
+      background:#101914;
+      border:1px solid #284536;
+      border-radius:20px;
+      padding:24px;
+      margin-top:28px;
+      color:#f3fff7;
+      width:100%;
+      box-sizing:border-box;
     `;
 
     container.innerHTML = `
@@ -1875,7 +2039,7 @@
             font-size:22px;
             font-weight:800;
           ">
-             Global Leaderboard
+            Global Leaderboard
           </h2>
 
           <p style="
@@ -1888,8 +2052,10 @@
         </div>
       </div>
 
-      <div id="cgLeaderboardContent"
-           aria-live="polite">
+      <div
+        id="cgLeaderboardContent"
+        aria-live="polite"
+      >
         Loading leaderboard...
       </div>
     `;
@@ -1899,12 +2065,18 @@
     return container;
   }
 
+  // ========================================================
+  // LEADERBOARD ROW
+  // ========================================================
+
   function leaderboardRow(player) {
-    const row = document.createElement("div");
+    const row =
+      document.createElement("div");
 
     row.style.cssText = `
       display:grid;
-      grid-template-columns:52px minmax(0,1fr) 80px;
+      grid-template-columns:
+        52px minmax(0,1fr) 80px;
       align-items:center;
       gap:10px;
       padding:14px 10px;
@@ -1918,7 +2090,8 @@
       }
     `;
 
-    const rank = document.createElement("span");
+    const rank =
+      document.createElement("span");
 
     rank.textContent =
       player.rank === 1
@@ -1931,7 +2104,8 @@
 
     rank.style.fontWeight = "700";
 
-    const name = document.createElement("span");
+    const name =
+      document.createElement("span");
 
     name.textContent =
       player.is_you
@@ -1950,7 +2124,8 @@
       };
     `;
 
-    const points = document.createElement("span");
+    const points =
+      document.createElement("span");
 
     points.textContent =
       player.score + "/300";
@@ -1961,10 +2136,18 @@
       color:#7cffb2;
     `;
 
-    row.append(rank, name, points);
+    row.append(
+      rank,
+      name,
+      points
+    );
 
     return row;
   }
+
+  // ========================================================
+  // LOAD LEADERBOARD
+  // ========================================================
 
   async function loadLeaderboard() {
     createLeaderboard();
@@ -1981,7 +2164,8 @@
 
       content.replaceChildren();
 
-      const stats = document.createElement("p");
+      const stats =
+        document.createElement("p");
 
       stats.style.cssText = `
         color:#a1b6a8;
@@ -1994,8 +2178,12 @@
 
       content.appendChild(stats);
 
-      if (!data.leaderboard.length) {
-        const empty = document.createElement("p");
+      if (
+        !Array.isArray(data.leaderboard) ||
+        !data.leaderboard.length
+      ) {
+        const empty =
+          document.createElement("p");
 
         empty.textContent =
           "No scores yet. Be the first!";
@@ -2005,11 +2193,13 @@
         return;
       }
 
-      const header = document.createElement("div");
+      const header =
+        document.createElement("div");
 
       header.style.cssText = `
         display:grid;
-        grid-template-columns:52px minmax(0,1fr) 80px;
+        grid-template-columns:
+          52px minmax(0,1fr) 80px;
         gap:10px;
         padding:8px 10px;
         color:#92a99b;
@@ -2025,7 +2215,8 @@
       ];
 
       labels.forEach((label, index) => {
-        const cell = document.createElement("span");
+        const cell =
+          document.createElement("span");
 
         cell.textContent = label;
 
@@ -2044,8 +2235,12 @@
         );
       });
 
-      if (data.your_rank !== null) {
-        const yourRank = document.createElement("div");
+      if (
+        data.your_rank !== null &&
+        data.your_rank !== undefined
+      ) {
+        const yourRank =
+          document.createElement("div");
 
         yourRank.style.cssText = `
           margin-top:18px;
@@ -2073,5 +2268,90 @@
     }
   }
 
+  // ========================================================
+  // RESPONSIVE CHART
+  // ========================================================
+
+  let resizeFrame = null;
+
+  window.addEventListener(
+    "resize",
+    () => {
+      if (resizeFrame !== null) {
+        cancelAnimationFrame(resizeFrame);
+      }
+
+      resizeFrame = requestAnimationFrame(() => {
+        resizeFrame = null;
+        drawChart();
+      });
+    }
+  );
+
+  // ========================================================
+  // INITIALIZE
+  // ========================================================
+
+  async function initialize() {
+    clearOldResults();
+
+    setupSocialSharing();
+
+    $("long").disabled = true;
+    $("short").disabled = true;
+
+    $("next").hidden = true;
+
+    showNotice(
+      "Checking today's challenge..."
+    );
+
+    try {
+      const status =
+        await callScoreApi("status");
+
+      if (status.completed) {
+        const saved = loadResult();
+
+        showResults(
+          {
+            score: status.score,
+
+            correct_predictions:
+              status.correct_predictions,
+
+            better_than_percent:
+              saved?.better_than_percent ??
+              null
+          },
+          saved?.answers || []
+        );
+
+        return;
+      }
+
+      try {
+        localStorage.removeItem(
+          storageKey(date)
+        );
+      } catch {}
+
+      playRound();
+
+    } catch (error) {
+      console.error(
+        "CandleGuess initialization failed:",
+        error
+      );
+
+      showNotice(
+        "Unable to start: " +
+        error.message +
+        ". Refresh to retry."
+      );
+    }
+  }
+
+  initialize();
 
 })();
