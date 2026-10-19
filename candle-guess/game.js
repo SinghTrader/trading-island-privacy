@@ -1832,5 +1832,244 @@
   }
 
   initialize();
+   
+  /* =====================================================
+     GLOBAL DAILY LEADERBOARD
+     ===================================================== */
+
+  function createLeaderboard() {
+    let container = $("cgLeaderboard");
+
+    if (container) {
+      return container;
+    }
+
+    container = document.createElement("section");
+
+    container.id = "cgLeaderboard";
+
+    container.style.cssText = `
+      background: #101914;
+      border: 1px solid #284536;
+      border-radius: 20px;
+      padding: 24px;
+      margin-top: 28px;
+      color: #f3fff7;
+      width: 100%;
+      box-sizing: border-box;
+    `;
+
+    container.innerHTML = `
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:12px;
+        margin-bottom:20px;
+      ">
+        <div>
+          <h2 style="
+            margin:0;
+            font-size:22px;
+            font-weight:800;
+          ">
+            🏆 Global Leaderboard
+          </h2>
+
+          <p style="
+            color:#9aafa0;
+            font-size:13px;
+            margin:7px 0 0;
+          ">
+            Today's best traders
+          </p>
+        </div>
+      </div>
+
+      <div id="cgLeaderboardContent"
+           aria-live="polite">
+        Loading leaderboard...
+      </div>
+    `;
+
+    $("results").appendChild(container);
+
+    return container;
+  }
+
+  function leaderboardRow(player) {
+    const row = document.createElement("div");
+
+    row.style.cssText = `
+      display:grid;
+      grid-template-columns:52px minmax(0,1fr) 80px;
+      align-items:center;
+      gap:10px;
+      padding:14px 10px;
+      border-bottom:1px solid #26382c;
+      border-radius:10px;
+      font-size:14px;
+      ${
+        player.is_you
+          ? "background:#173b28;"
+          : ""
+      }
+    `;
+
+    const rank = document.createElement("span");
+
+    rank.textContent =
+      player.rank === 1
+        ? "🥇"
+        : player.rank === 2
+        ? "🥈"
+        : player.rank === 3
+        ? "🥉"
+        : "#" + player.rank;
+
+    rank.style.fontWeight = "700";
+
+    const name = document.createElement("span");
+
+    name.textContent =
+      player.is_you
+        ? "You"
+        : player.name;
+
+    name.style.cssText = `
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      font-weight:600;
+      color:${
+        player.is_you
+          ? "#7cffb2"
+          : "#eaf4ee"
+      };
+    `;
+
+    const points = document.createElement("span");
+
+    points.textContent =
+      player.score + "/300";
+
+    points.style.cssText = `
+      text-align:right;
+      font-weight:800;
+      color:#7cffb2;
+    `;
+
+    row.append(rank, name, points);
+
+    return row;
+  }
+
+  async function loadLeaderboard() {
+    createLeaderboard();
+
+    const content =
+      $("cgLeaderboardContent");
+
+    content.textContent =
+      "Loading leaderboard...";
+
+    try {
+      const data =
+        await callScoreApi("leaderboard");
+
+      content.replaceChildren();
+
+      const stats = document.createElement("p");
+
+      stats.style.cssText = `
+        color:#a1b6a8;
+        font-size:13px;
+        margin:0 0 16px;
+      `;
+
+      stats.textContent =
+        `${data.total_players} players today`;
+
+      content.appendChild(stats);
+
+      if (!data.leaderboard.length) {
+        const empty = document.createElement("p");
+
+        empty.textContent =
+          "No scores yet. Be the first!";
+
+        content.appendChild(empty);
+
+        return;
+      }
+
+      const header = document.createElement("div");
+
+      header.style.cssText = `
+        display:grid;
+        grid-template-columns:52px minmax(0,1fr) 80px;
+        gap:10px;
+        padding:8px 10px;
+        color:#92a99b;
+        font-size:11px;
+        font-weight:700;
+        text-transform:uppercase;
+      `;
+
+      const labels = [
+        "Rank",
+        "Player",
+        "Score"
+      ];
+
+      labels.forEach((label, index) => {
+        const cell = document.createElement("span");
+
+        cell.textContent = label;
+
+        if (index === 2) {
+          cell.style.textAlign = "right";
+        }
+
+        header.appendChild(cell);
+      });
+
+      content.appendChild(header);
+
+      data.leaderboard.forEach(player => {
+        content.appendChild(
+          leaderboardRow(player)
+        );
+      });
+
+      if (data.your_rank !== null) {
+        const yourRank = document.createElement("div");
+
+        yourRank.style.cssText = `
+          margin-top:18px;
+          padding:15px;
+          border:1px solid #347d54;
+          background:#153323;
+          border-radius:12px;
+          text-align:center;
+          color:#7cffb2;
+          font-weight:800;
+        `;
+
+        yourRank.textContent =
+          `Your global rank: #${data.your_rank}` +
+          ` · ${data.your_score}/300`;
+
+        content.appendChild(yourRank);
+      }
+
+    } catch (error) {
+      console.error(error);
+
+      content.textContent =
+        "Leaderboard unavailable. Please try again.";
+    }
+  }
+
 
 })();
