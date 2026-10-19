@@ -1,33 +1,52 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <meta
     name="description"
-    content="CandleGuess: three daily candlestick predictions on Trading Island."
+    content="Play CandleGuess, the free daily trading prediction game by Trading Island. Predict the next five candles, earn points and compete on the global leaderboard."
   >
+
+  <meta name="theme-color" content="#080d0b">
 
   <title>CandleGuess | Trading Island</title>
 
   <link rel="icon" href="/logo2.png">
+
   <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/candle-guess/game.css">
+
+  <link
+    rel="stylesheet"
+    href="/candle-guess/game.css?v=3"
+  >
 </head>
 
 <body>
 
+  <!-- NAVIGATION -->
+
   <header class="navbar">
+
     <div class="container nav-inner">
 
       <a class="brand" href="/">
+
         <img
           class="cg-logo"
           src="/logo2.png"
-          alt=""
+          alt="Trading Island logo"
         >
+
         Trading Island
+
       </a>
 
       <div class="nav-right">
@@ -39,100 +58,275 @@
         </nav>
 
         <div class="nav-account">
+
           <a
             class="nav-dashboard-button"
             href="/app/"
           >
             Open Dashboard
           </a>
+
         </div>
 
       </div>
 
     </div>
+
   </header>
+
+  <!-- MAIN -->
 
   <main class="container cg-wrap">
 
-    <div class="cg-heading">
+    <!-- HERO -->
 
-      <div>
-        <p class="cg-eyebrow">
-          DAILY MARKET CHALLENGE · SYNTHETIC DEMO
+    <section class="cg-hero">
+
+      <div class="cg-hero-content">
+
+        <div class="cg-hero-badge">
+
+          <span class="cg-live-dot"></span>
+
+          DAILY TRADING CHALLENGE
+
+        </div>
+
+        <h1>
+          Candle<span>Guess</span>
+        </h1>
+
+        <p class="cg-hero-description">
+          Read the chart. Predict the move.
+          Prove your trading instincts.
         </p>
 
-        <h1>CandleGuess</h1>
+        <div class="cg-hero-features">
 
-        <p>
-          Can You Predict the Next Move?
-        </p>
+          <span>3 Rounds</span>
+
+          <span class="cg-feature-dot"></span>
+
+          <span>20 Seconds</span>
+
+          <span class="cg-feature-dot"></span>
+
+          <span>300 Points</span>
+
+        </div>
+
       </div>
 
-      <span id="challenge" class="cg-pill">
-        Daily Challenge
-      </span>
+      <div class="cg-challenge-badge">
 
-    </div>
+        <span class="cg-challenge-label">
+          TODAY'S CHALLENGE
+        </span>
+
+        <strong id="challenge">
+          Daily Challenge
+        </strong>
+
+      </div>
+
+    </section>
 
     <!-- GAME -->
 
     <section id="game" class="cg-panel">
 
-      <div class="cg-stats">
+      <!-- GAME HEADER -->
 
-        <div>
-          <small>ROUND</small>
-          <strong id="round">1 / 3</strong>
+      <div class="cg-game-header">
+
+        <div class="cg-game-title">
+
+          <div class="cg-game-icon">
+            ↗
+          </div>
+
+          <div>
+
+            <strong>
+              Market Prediction
+            </strong>
+
+            <span>
+              Analyze the chart and make your call
+            </span>
+
+          </div>
+
         </div>
 
-        <div>
-          <small>TIME LEFT</small>
-          <strong id="timer">20s</strong>
-        </div>
+        <span class="cg-game-status">
 
-        <div>
-          <small>SCORE</small>
-          <strong id="score">0 / 300</strong>
-        </div>
+          <span class="cg-status-dot"></span>
 
-      </div>
+          CHALLENGE ACTIVE
 
-      <div class="cg-chart-heading">
-
-        <div>
-          <strong id="asset">BTC/USD</strong>
-          <span id="timeframe">
-            1H · Synthetic demo
-          </span>
-        </div>
-
-        <span class="cg-pill cg-muted">
-          Next 5 candles hidden
         </span>
 
       </div>
 
-      <div class="cg-chart-shell">
+      <!-- STATS -->
 
-        <div
-          id="chart"
-          role="img"
-          aria-label="Candlestick chart"
-        ></div>
+      <div class="cg-stats">
 
-        <div class="cg-future" aria-hidden="true">
-          <span>?</span>
+        <div class="cg-stat-card">
+
+          <div class="cg-stat-label">
+            <span class="cg-stat-icon">◈</span>
+            ROUND
+          </div>
+
+          <strong id="round">
+            1 / 3
+          </strong>
+
+          <span class="cg-stat-description">
+            Daily rounds
+          </span>
+
+        </div>
+
+        <div class="cg-stat-card cg-timer-card">
+
+          <div class="cg-stat-label">
+            <span class="cg-stat-icon">◷</span>
+            TIME LEFT
+          </div>
+
+          <strong id="timer">
+            20s
+          </strong>
+
+          <div class="cg-timer-track">
+
+            <div
+              id="cgTimerProgress"
+              class="cg-timer-progress"
+            ></div>
+
+          </div>
+
+        </div>
+
+        <div class="cg-stat-card">
+
+          <div class="cg-stat-label">
+            <span class="cg-stat-icon">✦</span>
+            YOUR SCORE
+          </div>
+
+          <strong id="score">
+            0 / 300
+          </strong>
+
+          <span class="cg-stat-description">
+            Maximum 300 pts
+          </span>
+
         </div>
 
       </div>
 
-      <div id="question">
+      <!-- CHART SECTION -->
 
-        <h2>What happens next?</h2>
+      <div class="cg-market-section">
+
+        <div class="cg-chart-heading">
+
+          <div class="cg-market-info">
+
+            <div class="cg-market-icon">
+              ▥
+            </div>
+
+            <div>
+
+              <strong id="asset">
+                BTC/USD
+              </strong>
+
+              <span id="timeframe">
+                1H · Synthetic demo
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="cg-hidden-badge">
+
+            <span class="cg-hidden-dot"></span>
+
+            NEXT 5 CANDLES HIDDEN
+
+          </div>
+
+        </div>
+
+        <div class="cg-chart-shell">
+
+          <div
+            id="chart"
+            role="img"
+            aria-label="Synthetic candlestick chart for the daily trading prediction game"
+          ></div>
+
+          <div
+            class="cg-future"
+            aria-hidden="true"
+          >
+
+            <div class="cg-future-content">
+
+              <div class="cg-question-mark">
+                ?
+              </div>
+
+              <span>
+                NEXT MOVE
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="cg-chart-footer">
+
+          <span>
+            <span class="cg-chart-footer-dot"></span>
+            SYNTHETIC MARKET DATA
+          </span>
+
+          <span>
+            5-CANDLE PREDICTION
+          </span>
+
+        </div>
+
+      </div>
+
+      <!-- PREDICTION -->
+
+      <div id="question" class="cg-question">
+
+        <div class="cg-question-label">
+          MAKE YOUR PREDICTION
+        </div>
+
+        <h2>
+          Where will the price go?
+        </h2>
 
         <p>
-          Predict where the close will be
-          after five more candles.
+          Predict whether the closing price will
+          be higher or lower after the next
+          five candles.
         </p>
 
         <div class="cg-actions">
@@ -142,8 +336,25 @@
             class="cg-button cg-long"
             type="button"
           >
-            ↑ LONG
-            <small>Price goes up</small>
+
+            <span class="cg-button-icon">
+              ↗
+            </span>
+
+            <span class="cg-button-text">
+
+              <strong>LONG</strong>
+
+              <small>
+                Price goes up
+              </small>
+
+            </span>
+
+            <span class="cg-button-arrow">
+              →
+            </span>
+
           </button>
 
           <button
@@ -151,19 +362,40 @@
             class="cg-button cg-short"
             type="button"
           >
-            ↓ SHORT
-            <small>Price goes down</small>
+
+            <span class="cg-button-icon">
+              ↘
+            </span>
+
+            <span class="cg-button-text">
+
+              <strong>SHORT</strong>
+
+              <small>
+                Price goes down
+              </small>
+
+            </span>
+
+            <span class="cg-button-arrow">
+              →
+            </span>
+
           </button>
 
         </div>
 
       </div>
 
+      <!-- FEEDBACK -->
+
       <div
         id="feedback"
         class="cg-feedback"
         aria-live="polite"
       ></div>
+
+      <!-- NEXT ROUND -->
 
       <button
         id="next"
@@ -178,57 +410,181 @@
 
     <!-- RESULTS -->
 
-    <section id="results" class="cg-panel" hidden>
+    <section
+      id="results"
+      class="cg-panel cg-results-panel"
+      hidden
+    >
 
-      <p class="cg-eyebrow">
-        CHALLENGE COMPLETE
-      </p>
+      <div class="cg-results-header">
 
-      <h2>Your CandleGuess results</h2>
+        <div class="cg-complete-icon">
+          ✓
+        </div>
 
-      <div
-        class="cg-big-score"
-        id="finalScore"
-      >
-        0 / 300
+        <p class="cg-eyebrow">
+          CHALLENGE COMPLETE
+        </p>
+
+        <h2>
+          Today's Results
+        </h2>
+
+        <p class="cg-results-subtitle">
+          Your trading instincts have been tested.
+          Here's how you performed.
+        </p>
+
       </div>
 
-      <p id="finalDetails"></p>
+      <div class="cg-score-container">
+
+        <span class="cg-score-label">
+          YOUR FINAL SCORE
+        </span>
+
+        <div
+          id="finalScore"
+          class="cg-big-score"
+        >
+          0 / 300
+        </div>
+
+        <p id="finalDetails"></p>
+
+      </div>
+
+      <div class="cg-results-section-title">
+        ROUND BREAKDOWN
+      </div>
 
       <div
         id="roundResults"
         class="cg-results"
       ></div>
 
-      <p id="streak"></p>
+      <div class="cg-results-bottom">
 
-      <p id="countdown"></p>
+        <p id="streak"></p>
 
-      <button
-        id="share"
-        class="cg-button cg-next"
-        type="button"
-      >
-        Share Score
-      </button>
+        <p id="countdown"></p>
+
+      </div>
+
+      <div class="cg-share-section">
+
+        <h3>
+          Challenge your friends
+        </h3>
+
+        <p>
+          Share your results and see who can
+          beat your score.
+        </p>
+
+        <button
+          id="share"
+          class="cg-button cg-next"
+          type="button"
+        >
+          Share Score
+        </button>
+
+      </div>
 
       <p class="cg-footnote">
-        This is a synthetic-data demo.
-        Scores are stored on this device only.
+        Results are recorded for today's
+        challenge and reset daily.
+        All charts use synthetic data.
       </p>
 
     </section>
 
-    <p class="cg-footnote">
-      Educational prediction game only.
-      No live prices, real trading or financial advice.
-      Demo candles are generated, not historical market data.
-    </p>
+    <!-- DISCLAIMER -->
+
+    <div class="cg-disclaimer">
+
+      <span class="cg-disclaimer-icon">
+        ⓘ
+      </span>
+
+      <p>
+        CandleGuess is an educational prediction
+        game. Charts use generated synthetic
+        candles, not live or historical prices.
+        No real trading or financial advice.
+      </p>
+
+    </div>
 
   </main>
 
+  <!-- TIMER UI -->
+  <!-- Does not change the game scoring logic -->
+
+  <script>
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        const timer =
+          document.getElementById("timer");
+
+        const progress =
+          document.getElementById("cgTimerProgress");
+
+        const timerCard =
+          document.querySelector(".cg-timer-card");
+
+        if (
+          !timer ||
+          !progress ||
+          !timerCard
+        ) {
+          return;
+        }
+
+        function updateTimerUI() {
+
+          const value =
+            parseInt(timer.textContent, 10);
+
+          if (Number.isNaN(value)) {
+            return;
+          }
+
+          const remaining =
+            Math.max(0, Math.min(20, value));
+
+          progress.style.width =
+            (remaining / 20 * 100) + "%";
+
+          timerCard.classList.toggle(
+            "cg-timer-warning",
+            remaining <= 5
+          );
+
+        }
+
+        const observer =
+          new MutationObserver(updateTimerUI);
+
+        observer.observe(timer, {
+          childList: true,
+          characterData: true,
+          subtree: true
+        });
+
+        updateTimerUI();
+
+      }
+    );
+  </script>
+
+  <!-- EXISTING GAME JAVASCRIPT -->
+
   <script
-    src="/candle-guess/game.js"
+    src="/candle-guess/game.js?v=3"
     defer
   ></script>
 
