@@ -785,6 +785,8 @@
     $("game").hidden = true;
     $("results").hidden = false;
 
+     loadLeaderboard();
+
     $("finalScore").textContent =
       `${result.score} / 300`;
 
