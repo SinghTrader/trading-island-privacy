@@ -1448,3 +1448,104 @@
   }
 
 }
+
+/* =====================================================
+   CANDLEGUESS — PROFESSIONAL CHART ENHANCEMENTS
+   ===================================================== */
+
+.cg-chart-shell {
+  background: #080f0b;
+  border: 1px solid #2a4231;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    0 12px 32px rgba(0,0,0,.16);
+}
+
+#chart {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#chart canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Future candles overlay */
+
+.cg-future {
+  background: transparent;
+  border-left: none;
+
+  /* The price axis remains visible */
+  right: 86px;
+  width: calc((100% - 86px - 18px) * 5 / 53);
+
+  display: grid;
+  place-items: center;
+
+  transition: opacity .4s ease;
+}
+
+.cg-future-content {
+  opacity: .9;
+}
+
+.cg-question-mark {
+  width: 38px;
+  height: 38px;
+
+  background: rgba(20,47,30,.85);
+
+  border: 1px solid rgba(124,255,178,.3);
+  border-radius: 10px;
+
+  color: #7cffb2;
+
+  font-size: 24px;
+}
+
+.cg-future-content span {
+  font-size: 8px;
+  letter-spacing: .07em;
+}
+
+.cg-future.revealed {
+  opacity: 0;
+}
+
+/* Chart animation */
+
+.cg-market-section {
+  transition: border-color .25s ease;
+}
+
+.cg-market-section:hover {
+  border-color: #385d42;
+}
+
+@media (max-width: 540px) {
+
+  .cg-future {
+    right: 64px;
+    width: calc((100% - 64px - 8px) * 5 / 53);
+  }
+
+  .cg-question-mark {
+    width: 27px;
+    height: 27px;
+    font-size: 19px;
+  }
+
+  .cg-future-content span {
+    display: none;
+  }
+
+}
