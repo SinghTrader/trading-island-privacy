@@ -1,0 +1,1083 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>How to Calculate Position Size in Trading | Trading Island</title>
+  <meta name="description" content="Learn how to calculate position size using account balance, risk percentage and stop-loss distance. Try the free Trading Island position size calculator.">
+  <link rel="canonical" href="https://www.tradingisland.net/learn/position-size/">
+  <link rel="icon" type="image/png" href="/logo2.png">
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- Google AdSense: site-wide script.
+       Replace the publisher ID only if your account changes.
+       Ad units can be added to the marked slots below after approval. -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8344719265580653"
+    crossorigin="anonymous"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Calculate Position Size in Trading",
+    "description": "A beginner-friendly guide to position sizing and risk management, with an interactive calculator.",
+    "author": {
+      "@type": "Organization",
+      "name": "Trading Island"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Trading Island"
+    },
+    "mainEntityOfPage": "https://www.tradingisland.net/learn/position-size/"
+  }
+  </script>
+
+  <style>
+    .position-tool {
+      margin: 30px 0;
+      padding: 30px;
+      border: 1px solid rgba(124,255,178,.2);
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 100% 0%,rgba(124,255,178,.07),transparent 50%),
+        #111515;
+    }
+
+    .tool-eyebrow {
+      color: #7cffb2;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .position-tool h3 {
+      margin: 10px 0 8px;
+      font-size: 27px;
+      letter-spacing: -.035em;
+    }
+
+    .position-tool .tool-description {
+      margin: 0 0 25px;
+      color: #929b97;
+      font-size: 14px;
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 17px;
+    }
+
+    .calculator-field label {
+      display: block;
+      margin-bottom: 8px;
+      color: #c7d0ca;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .calculator-field input,
+    .calculator-field select {
+      width: 100%;
+      min-height: 49px;
+      padding: 0 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px;
+      outline: none;
+      background: #0a0e0c;
+      color: #f4f7f5;
+      font: inherit;
+      font-size: 15px;
+      transition: border-color .2s,box-shadow .2s;
+    }
+
+    .calculator-field input:focus,
+    .calculator-field select:focus {
+      border-color: #7cffb2;
+      box-shadow: 0 0 0 3px rgba(124,255,178,.07);
+    }
+
+    .calculator-field input:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    .calculator-field .field-hint {
+      display: block;
+      margin-top: 6px;
+      color: #77817b;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .calculator-results {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .calculator-result {
+      padding: 19px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 13px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .calculator-result.primary-result {
+      grid-column: 1 / -1;
+      border-color: rgba(124,255,178,.18);
+      background: rgba(124,255,178,.055);
+    }
+
+    .calculator-result span {
+      display: block;
+      margin-bottom: 7px;
+      color: #929b97;
+      font-size: 12px;
+    }
+
+    .calculator-result strong {
+      display: block;
+      color: #f4f7f5;
+      font-size: 25px;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .calculator-result.primary-result strong {
+      color: #7cffb2;
+      font-size: clamp(30px,5vw,43px);
+    }
+
+    .calculator-note {
+      margin-top: 18px;
+      color: #87918a;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .calculator-error {
+      margin: 15px 0 0;
+      color: #ffaaa5;
+      font-size: 13px;
+    }
+
+    .calculator-error[hidden] {
+      display: none;
+    }
+
+    .calculator-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 19px;
+    }
+
+    .calculator-actions button {
+      cursor: pointer;
+    }
+
+    .calculator-reset {
+      padding: 0 18px;
+      min-height: 46px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 11px;
+      background: transparent;
+      color: #c7d0ca;
+      font-weight: 700;
+    }
+
+    .article-ad-slot {
+      margin: 45px 0;
+      min-height: 115px;
+      padding: 17px;
+      border: 1px dashed rgba(255,255,255,.12);
+      border-radius: 13px;
+      background: rgba(255,255,255,.015);
+      text-align: center;
+    }
+
+    .article-ad-slot .ad-label {
+      display: block;
+      color: #68736c;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .article-ad-slot .ad-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 75px;
+      color: #59635d;
+      font-size: 12px;
+    }
+
+    .learning-table {
+      width: 100%;
+      margin: 25px 0;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .learning-table th,
+    .learning-table td {
+      padding: 13px;
+      border-bottom: 1px solid rgba(255,255,255,.09);
+      text-align: left;
+    }
+
+    .learning-table th {
+      color: #7cffb2;
+      font-size: 12px;
+    }
+
+    .learning-table td {
+      color: #bac3be;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+    }
+
+    .article-small-note {
+      margin: 20px 0;
+      padding: 15px 18px;
+      border-left: 3px solid #7cffb2;
+      background: rgba(124,255,178,.04);
+      color: #bac3be;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .article-next {
+      margin-top: 45px;
+      padding-top: 25px;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+
+    .article-next a {
+      color: #7cffb2;
+      font-weight: 700;
+    }
+
+    @media(max-width:650px) {
+      .position-tool {padding:20px;}
+      .calculator-grid {grid-template-columns:1fr;}
+      .calculator-results {grid-template-columns:1fr;}
+      .calculator-result.primary-result {grid-column:auto;}
+      .calculator-result strong {font-size:22px;}
+      .learning-table {min-width:480px;}
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="container nav">
+    <a class="brand" href="/">
+      <img src="/logo2.png" alt="Trading Island" class="brand-logo">
+      Trading Island
+    </a>
+
+    <div class="links">
+      <a href="/learn/" class="active-link">Learn</a>
+      <a href="/#features">Features</a>
+      <a href="/app/">Dashboard</a>
+    </div>
+
+    <a class="button primary" href="/app/login.html">
+      Start for free
+    </a>
+  </div>
+</header>
+
+<main>
+
+<section class="article-hero">
+  <div class="container">
+    <div class="crumbs">
+      <a href="/">Trading Island</a> /
+      <a href="/learn/">Learn</a> /
+      Position Sizing
+    </div>
+
+    <span class="eyebrow">Risk Management</span>
+
+    <h1>How to Calculate Position Size in Trading</h1>
+
+    <p class="deck">
+      Position sizing determines how much of an asset you trade
+      based on your account balance, risk tolerance and stop-loss
+      distance. Learn the calculation and try it yourself.
+    </p>
+
+    <div class="meta">
+      <span>Trading Island Learn</span>
+      <span>Beginner guide</span>
+      <span>Approx. 9 min read</span>
+    </div>
+  </div>
+</section>
+
+<div class="layout">
+
+  <aside class="toc">
+    <strong>On this page</strong>
+    <a href="#what">What is position sizing?</a>
+    <a href="#why">Why it matters</a>
+    <a href="#formula">The formula</a>
+    <a href="#calculator">Free calculator</a>
+    <a href="#example">Calculation example</a>
+    <a href="#markets">Different markets</a>
+    <a href="#stoploss">Stop-loss placement</a>
+    <a href="#mistakes">Common mistakes</a>
+    <a href="#faq">FAQ</a>
+  </aside>
+
+  <article class="body">
+
+    <h2 id="what">What is position sizing in trading?</h2>
+
+    <p>
+      Position sizing is the process of deciding how many shares,
+      units or contracts to buy or sell in a trade.
+      Rather than choosing a position based only on how much
+      money is available, a risk-based approach starts with
+      the amount a trader is prepared to lose.
+    </p>
+
+    <p>
+      For example, two traders may both have a $10,000 account,
+      but one may purchase 50 shares while the other purchases
+      200 shares. Their exposure and potential losses can be
+      very different, even when they trade the same instrument.
+    </p>
+
+    <p>
+      A position size should account for the distance between
+      the planned entry price and the stop loss, the value
+      of each price movement and the characteristics of
+      the instrument being traded.
+    </p>
+
+    <h2 id="why">Why position sizing matters</h2>
+
+    <p>
+      Every trading strategy experiences uncertainty.
+      Even a setup that has performed well historically
+      can produce consecutive losing trades.
+      Position sizing helps define the amount at risk
+      before entering a position.
+    </p>
+
+    <p>
+      Consider a $10,000 trading account. A loss of 10%
+      reduces the balance to $9,000. A loss of 1%
+      reduces it to $9,900. These are very different
+      outcomes from a single trade.
+    </p>
+
+    <div class="example">
+      <strong>Example: five consecutive losing trades</strong>
+      <p>
+        Starting account balance: $10,000
+      </p>
+      <p>
+        Risking 1% of the remaining balance per trade
+        results in approximately $9,509.90 after five
+        full-risk losses, excluding costs.
+      </p>
+      <p>
+        Risking 5% of the remaining balance per trade
+        results in approximately $7,737.81.
+      </p>
+      <p>
+        This illustrates how position sizing influences
+        drawdowns. It does not mean that either percentage
+        is appropriate for every trader.
+      </p>
+    </div>
+
+    <h2 id="formula">How to calculate position size</h2>
+
+    <p>
+      For a simple stock trade where the account and
+      stock prices use the same currency, the calculation
+      involves three main inputs:
+    </p>
+
+    <ul>
+      <li><strong>Account balance:</strong> the amount in the trading account.</li>
+      <li><strong>Risk percentage:</strong> the planned fraction of the account at risk.</li>
+      <li><strong>Stop-loss distance:</strong> the difference between entry and stop-loss prices.</li>
+    </ul>
+
+    <div class="formula">
+      Risk amount = Account balance × (Risk percentage ÷ 100)
+      <br><br>
+      Position size = Risk amount ÷ |Entry price − Stop-loss price|
+    </div>
+
+    <p>
+      The result is the theoretical number of shares or
+      units for instruments where a one-unit price movement
+      changes the value of one held unit by one unit of
+      the account currency.
+    </p>
+
+    <p>
+      For derivatives, forex pairs and instruments with
+      contract multipliers, the calculation also needs
+      the correct contract value and potentially a
+      currency conversion.
+    </p>
+
+    <div class="article-small-note">
+      <strong>Important:</strong> A stop-loss order does not
+      guarantee execution at its specified price. Gaps,
+      slippage, fees and other costs can make realized
+      losses greater than the amount calculated.
+    </div>
+
+    <!-- AD SLOT 1: replace placeholder with an AdSense unit later -->
+    <div class="article-ad-slot" aria-label="Advertisement area">
+      <span class="ad-label">Advertisement</span>
+      <div class="ad-placeholder">Advertising space reserved</div>
+    </div>
+
+    <h2 id="calculator">Free position size calculator</h2>
+
+    <p>
+      Use this calculator to estimate a risk-based position
+      size for stocks or other simple unit-priced assets
+      where the account currency matches the quote currency.
+      The calculator does not account for leverage,
+      transaction costs or contract multipliers.
+    </p>
+
+    <div class="position-tool" id="positionCalculator">
+      <span class="tool-eyebrow">Trading Island Tools</span>
+      <h3>Position Size Calculator</h3>
+      <p class="tool-description">
+        Enter your trading account details to calculate
+        a theoretical position size.
+      </p>
+
+      <div class="calculator-grid">
+
+        <div class="calculator-field">
+          <label for="currency">Currency</label>
+          <select id="currency">
+            <option value="USD">USD — US Dollar</option>
+            <option value="EUR">EUR — Euro</option>
+            <option value="GBP">GBP — British Pound</option>
+          </select>
+          <span class="field-hint">
+            Account and instrument prices must use the same currency.
+          </span>
+        </div>
+
+        <div class="calculator-field">
+          <label for="accountBalance">Account balance</label>
+          <input id="accountBalance" type="number" min="0" step="any" value="10000" inputmode="decimal">
+        </div>
+
+        <div class="calculator-field">
+          <label for="riskPercentage">Risk per trade (%)</label>
+          <input id="riskPercentage" type="number" min="0" max="100" step="any" value="1" inputmode="decimal">
+        </div>
+
+        <div class="calculator-field">
+          <label for="tradeDirection">Trade direction</label>
+          <select id="tradeDirection">
+            <option value="long">Long (Buy)</option>
+            <option value="short">Short (Sell)</option>
+          </select>
+        </div>
+
+        <div class="calculator-field">
+          <label for="entryPrice">Entry price</label>
+          <input id="entryPrice" type="number" min="0" step="any" value="100" inputmode="decimal">
+        </div>
+
+        <div class="calculator-field">
+          <label for="stopPrice">Stop-loss price</label>
+          <input id="stopPrice" type="number" min="0" step="any" value="98" inputmode="decimal">
+        </div>
+
+        <div class="calculator-field">
+          <label for="wholeShares">Position units</label>
+          <select id="wholeShares">
+            <option value="whole">Whole shares only</option>
+            <option value="fractional">Fractional units allowed</option>
+          </select>
+        </div>
+
+        <div class="calculator-field">
+          <label for="buyingPower">Maximum buying power (optional)</label>
+          <input id="buyingPower" type="number" min="0" step="any" placeholder="Leave empty for no cap" inputmode="decimal">
+          <span class="field-hint">
+            For long trades, optionally cap position size by available buying power.
+          </span>
+        </div>
+
+      </div>
+
+      <p class="calculator-error" id="calculatorError" role="alert" hidden></p>
+
+      <div class="calculator-results" aria-live="polite">
+        <div class="calculator-result primary-result">
+          <span>Estimated position size</span>
+          <strong id="resultSize">50 shares</strong>
+        </div>
+
+        <div class="calculator-result">
+          <span>Planned risk budget</span>
+          <strong id="resultRisk">$100.00</strong>
+        </div>
+
+        <div class="calculator-result">
+          <span>Risk per share</span>
+          <strong id="resultPerShare">$2.00</strong>
+        </div>
+
+        <div class="calculator-result">
+          <span>Estimated position notional</span>
+          <strong id="resultNotional">$5,000.00</strong>
+        </div>
+
+        <div class="calculator-result">
+          <span>Estimated loss at stop</span>
+          <strong id="resultActualRisk">$100.00</strong>
+        </div>
+      </div>
+
+      <div class="calculator-actions">
+        <button type="button" class="button primary" id="calculateButton">
+          Calculate position →
+        </button>
+        <button type="button" class="calculator-reset" id="resetButton">
+          Reset
+        </button>
+      </div>
+
+      <p class="calculator-note" id="calculatorNote">
+        Estimates assume execution at the specified stop-loss
+        price and exclude spreads, commissions, financing and slippage.
+        Position notional is not the same as margin required.
+      </p>
+    </div>
+
+    <h2 id="example">Position sizing example</h2>
+
+    <p>
+      Suppose a trader has a $10,000 account and plans
+      to risk 1% on a stock trade.
+    </p>
+
+    <div class="example">
+      <strong>Example long trade</strong>
+      <br><br>
+      Account balance: $10,000
+      <br>
+      Risk percentage: 1%
+      <br>
+      Entry price: $100
+      <br>
+      Stop loss: $98
+      <br><br>
+      Risk budget = $10,000 × 0.01 = $100
+      <br>
+      Risk per share = $100 − $98 = $2
+      <br>
+      Position size = $100 ÷ $2 = 50 shares
+      <br><br>
+      <strong>Estimated position size: 50 shares</strong>
+    </div>
+
+    <p>
+      The position has a notional value of $5,000
+      at the entry price. If all 50 shares are sold
+      at $98, the price-based loss is $100 before
+      fees and other execution costs.
+    </p>
+
+    <p>
+      Notice that risking $100 does not mean buying
+      only $100 worth of shares. The amount at risk
+      depends on the price movement to the planned
+      exit, not just the total purchase value.
+    </p>
+
+    <h2 id="markets">Position sizing across different markets</h2>
+
+    <p>
+      The underlying risk principle is similar across
+      markets, but the units and contract specifications
+      can differ substantially.
+    </p>
+
+    <div class="table-scroll">
+      <table class="learning-table">
+        <thead>
+          <tr>
+            <th>Market</th>
+            <th>Position unit</th>
+            <th>Additional consideration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Stocks</td>
+            <td>Shares</td>
+            <td>Share price and available buying power</td>
+          </tr>
+          <tr>
+            <td>Forex</td>
+            <td>Currency units or lots</td>
+            <td>Pip value, lot size and currency conversion</td>
+          </tr>
+          <tr>
+            <td>Futures</td>
+            <td>Contracts</td>
+            <td>Tick size, tick value and contract multiplier</td>
+          </tr>
+          <tr>
+            <td>CFDs</td>
+            <td>Broker-defined contracts</td>
+            <td>Contract size, financing and margin requirements</td>
+          </tr>
+          <tr>
+            <td>Options</td>
+            <td>Option contracts</td>
+            <td>Premium, multiplier and nonlinear price behavior</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      For example, a futures contract may represent
+      many units of an underlying asset. A $1 movement
+      in the quoted price may therefore create a
+      profit or loss substantially larger than $1.
+    </p>
+
+    <p>
+      Similarly, forex traders need to understand
+      the value of a pip for their particular
+      position size and account currency.
+    </p>
+
+    <div class="article-small-note">
+      The calculator above is intended for simple
+      share or unit calculations. Do not interpret
+      its output as a valid forex lot size, futures
+      contract count, CFD position size or options
+      position size without the relevant contract
+      specifications and risk model.
+    </div>
+
+    <!-- AD SLOT 2 -->
+    <div class="article-ad-slot" aria-label="Advertisement area">
+      <span class="ad-label">Advertisement</span>
+      <div class="ad-placeholder">Advertising space reserved</div>
+    </div>
+
+    <h2 id="stoploss">Position sizing and stop-loss placement</h2>
+
+    <p>
+      Position sizing and stop-loss placement are
+      connected, but they serve different purposes.
+      The stop-loss level defines where a trade
+      is intended to be exited if the market
+      moves against the position.
+    </p>
+
+    <p>
+      The position size determines the number
+      of units that can be traded within the
+      selected risk budget.
+    </p>
+
+    <p>
+      A wider stop-loss distance generally requires
+      a smaller position size to maintain the same
+      planned monetary risk. A tighter stop-loss
+      distance generally permits a larger position
+      size under the same calculation.
+    </p>
+
+    <div class="example">
+      <strong>Same risk budget, different stop distances</strong>
+      <br><br>
+      Risk budget: $100
+      <br><br>
+      $1 stop distance → 100 shares
+      <br>
+      $2 stop distance → 50 shares
+      <br>
+      $4 stop distance → 25 shares
+    </div>
+
+    <p>
+      However, a trader should not move a stop loss
+      closer to the entry merely to increase position
+      size. Stop placement should reflect the trade
+      setup and market conditions.
+    </p>
+
+    <h2 id="mistakes">Common position sizing mistakes</h2>
+
+    <ul>
+      <li>
+        <strong>Using the same number of shares for every trade.</strong>
+        Different prices and stop-loss distances can create
+        very different levels of risk.
+      </li>
+
+      <li>
+        <strong>Confusing position value with money at risk.</strong>
+        A $5,000 position does not necessarily mean
+        that $5,000 is the planned stop-loss risk.
+      </li>
+
+      <li>
+        <strong>Ignoring leverage.</strong>
+        Leverage changes the capital required to hold
+        a position but does not eliminate market exposure
+        or potential losses.
+      </li>
+
+      <li>
+        <strong>Ignoring fees and slippage.</strong>
+        Actual losses may exceed the theoretical
+        price-based estimate.
+      </li>
+
+      <li>
+        <strong>Using the wrong contract multiplier.</strong>
+        A calculation suitable for shares may be
+        incorrect for futures, CFDs or options.
+      </li>
+
+      <li>
+        <strong>Increasing risk after losing trades.</strong>
+        Emotional changes to position sizing can
+        produce losses inconsistent with a trading plan.
+      </li>
+    </ul>
+
+    <div class="article-cta">
+      <span class="eyebrow">Trading Island</span>
+      <h3>Turn risk management into a repeatable process.</h3>
+      <p>
+        Use your Trading Island journal to record position
+        size, entry price, stop loss and realized outcomes.
+        Compare planned risk with actual performance over time.
+      </p>
+      <a class="button primary" href="/app/login.html">
+        Open your free journal →
+      </a>
+    </div>
+
+    <h2 id="faq">Frequently asked questions</h2>
+
+    <div class="faq">
+
+      <div class="faq-item">
+        <h3>What is the 1% rule in trading?</h3>
+        <p>
+          The 1% rule is a risk-management guideline
+          under which a trader plans to risk no more
+          than 1% of their account on a single trade.
+          It is not a universal requirement or a
+          guarantee against larger realized losses.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How do I calculate position size with a stop loss?</h3>
+        <p>
+          First calculate the monetary risk budget.
+          Then divide that budget by the price difference
+          between entry and stop loss, adjusted for
+          the instrument's unit value and currency.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Does leverage change my position size calculation?</h3>
+        <p>
+          Leverage affects margin and buying power.
+          The monetary exposure to price movement
+          still depends on the position size and
+          instrument specifications. Leverage can
+          amplify losses relative to deposited capital.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Can I use this calculator for forex?</h3>
+        <p>
+          Not directly. Forex lot sizing requires
+          the correct pip value, lot specifications
+          and sometimes currency conversion.
+          This calculator assumes simple unit-priced
+          assets in the account currency.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Can I lose more than the calculated risk?</h3>
+        <p>
+          Yes. Price gaps, slippage, transaction costs
+          and other market conditions may result
+          in a loss greater than the planned amount.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="article-next">
+      <a href="/learn/">← Back to all Trading Island guides</a>
+    </div>
+
+  </article>
+</div>
+
+</main>
+
+<footer>
+  <div class="container footer">
+    <div>
+      <a class="brand" href="/">
+        <img src="/logo2.png" alt="Trading Island" class="brand-logo">
+        Trading Island
+      </a>
+      <p>Learn. Journal. Improve.</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/learn/">Learn</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="mailto:supporttraderisland@gmail.com">Support</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  const defaults = {
+    currency: "USD",
+    accountBalance: "10000",
+    riskPercentage: "1",
+    tradeDirection: "long",
+    entryPrice: "100",
+    stopPrice: "98",
+    wholeShares: "whole",
+    buyingPower: ""
+  };
+
+  const ids = Object.keys(defaults);
+  const fields = Object.fromEntries(
+    ids.map(id => [id, document.getElementById(id)])
+  );
+
+  const resultSize = document.getElementById("resultSize");
+  const resultRisk = document.getElementById("resultRisk");
+  const resultPerShare = document.getElementById("resultPerShare");
+  const resultNotional = document.getElementById("resultNotional");
+  const resultActualRisk = document.getElementById("resultActualRisk");
+  const errorBox = document.getElementById("calculatorError");
+  const note = document.getElementById("calculatorNote");
+
+  function money(value, currency) {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: currency,
+      maximumFractionDigits: 2
+    }).format(value);
+  }
+
+  function preciseMoney(value, currency) {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: currency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 6
+    }).format(value);
+  }
+
+  function units(value, fractional) {
+    return new Intl.NumberFormat("en-US", {
+      maximumFractionDigits: fractional ? 6 : 0
+    }).format(value);
+  }
+
+  function clearResults() {
+    resultSize.textContent = "—";
+    resultRisk.textContent = "—";
+    resultPerShare.textContent = "—";
+    resultNotional.textContent = "—";
+    resultActualRisk.textContent = "—";
+  }
+
+  function showError(message) {
+    errorBox.textContent = message;
+    errorBox.hidden = false;
+    clearResults();
+  }
+
+  function calculate() {
+    errorBox.hidden = true;
+    errorBox.textContent = "";
+
+    const currency = fields.currency.value;
+    const balance = Number(fields.accountBalance.value);
+    const riskPct = Number(fields.riskPercentage.value);
+    const direction = fields.tradeDirection.value;
+    const entry = Number(fields.entryPrice.value);
+    const stop = Number(fields.stopPrice.value);
+    const fractional = fields.wholeShares.value === "fractional";
+    const buyingPowerText = fields.buyingPower.value.trim();
+    const hasBuyingPower = buyingPowerText !== "";
+    const buyingPower = hasBuyingPower
+      ? Number(buyingPowerText)
+      : null;
+
+    if (
+      !fields.accountBalance.value.trim() ||
+      !fields.riskPercentage.value.trim() ||
+      !fields.entryPrice.value.trim() ||
+      !fields.stopPrice.value.trim() ||
+      !Number.isFinite(balance) ||
+      !Number.isFinite(riskPct) ||
+      !Number.isFinite(entry) ||
+      !Number.isFinite(stop) ||
+      balance <= 0 ||
+      riskPct <= 0 ||
+      riskPct > 100 ||
+      entry <= 0 ||
+      stop < 0
+    ) {
+      showError("Enter valid positive values. Risk must be above 0% and no greater than 100%.");
+      return;
+    }
+
+    if (direction === "long" && stop >= entry) {
+      showError("For a long trade, the stop-loss price must be below the entry price.");
+      return;
+    }
+
+    if (direction === "short" && stop <= entry) {
+      showError("For a short trade, the stop-loss price must be above the entry price.");
+      return;
+    }
+
+    if (
+      hasBuyingPower &&
+      (!Number.isFinite(buyingPower) || buyingPower <= 0)
+    ) {
+      showError("Buying power must be a positive amount, or left empty.");
+      return;
+    }
+
+    const riskBudget = balance * (riskPct / 100);
+    const riskPerUnit = Math.abs(entry - stop);
+    const rawSize = riskBudget / riskPerUnit;
+
+    // Displayed fractional positions use a six-decimal unit precision.
+    // Always round down so display precision cannot increase planned risk.
+    const precision = fractional ? 1e6 : 1;
+    let size = Math.floor(rawSize * precision) / precision;
+
+    let capped = false;
+
+    // Buying-power cap is applicable to long positions only.
+    if (hasBuyingPower && direction === "long") {
+      const affordable = Math.floor(
+        (buyingPower / entry) * precision
+      ) / precision;
+
+      if (affordable < size) {
+        size = affordable;
+        capped = true;
+      }
+    }
+
+    if (!Number.isFinite(size) || size < 0) {
+      showError("Unable to calculate a valid position size.");
+      return;
+    }
+
+    const estimatedRisk = size * riskPerUnit;
+    const notional = size * entry;
+
+    resultSize.textContent =
+      units(size, fractional) +
+      (fractional ? " units" : " shares");
+
+    resultRisk.textContent = money(riskBudget, currency);
+    resultPerShare.textContent = preciseMoney(riskPerUnit, currency);
+    resultNotional.textContent = money(notional, currency);
+    resultActualRisk.textContent = money(estimatedRisk, currency);
+
+    if (size === 0) {
+      note.textContent =
+        "The calculated size is below the minimum selected unit size. " +
+        "A zero-unit position is shown rather than rounding risk upward.";
+    } else if (capped) {
+      note.textContent =
+        "Position size was reduced by the optional buying-power limit. " +
+        "Estimates exclude fees, spreads and slippage. " +
+        "A stop-loss order does not guarantee the calculated loss.";
+    } else if (hasBuyingPower && direction === "short") {
+      note.textContent =
+        "The optional buying-power cap is not applied to short trades. " +
+        "Short selling has separate broker requirements and potentially " +
+        "unlimited losses if a position remains open without an effective exit.";
+    } else {
+      note.textContent =
+        "This is a theoretical estimate before transaction costs and slippage. " +
+        "Stop-loss execution is not guaranteed at the specified price. " +
+        "Notional value is not the same as required margin.";
+    }
+  }
+
+  function reset() {
+    ids.forEach(id => {
+      fields[id].value = defaults[id];
+    });
+    calculate();
+  }
+
+  ids.forEach(id => {
+    fields[id].addEventListener("input", calculate);
+    fields[id].addEventListener("change", calculate);
+  });
+
+  document.getElementById("calculateButton")
+    .addEventListener("click", calculate);
+
+  document.getElementById("resetButton")
+    .addEventListener("click", reset);
+
+  calculate();
+})();
+</script>
+
+</body>
+</html>
